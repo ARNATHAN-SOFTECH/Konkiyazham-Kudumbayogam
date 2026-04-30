@@ -1,0 +1,278 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Finance - konkiyazhikamkudumbayogam</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <link href="{% static 'assets/img/favicon.png' %}" rel="icon">
+  <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@400;600&family=Raleway:wght@400;600&display=swap" rel="stylesheet">
+
+  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/aos/aos.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/css/main.css' %}" rel="stylesheet">
+
+  <style>
+    /* Header container */
+    .site-header {
+      background: #c2b3d9;
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 30px;
+    }
+
+    /* Navigation */
+    .nav-wrapper {
+      flex: 1 1 auto;
+    }
+
+    .nav-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .nav-list li {
+      position: relative;
+    }
+
+    .nav-list a {
+      display: inline-block;
+      text-decoration: none;
+      color: #000;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      font-size: 15px;
+      padding: 6px 0;
+    }
+
+    .dropdown .drop-toggle {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .dropdown .caret {
+      font-size: 12px;
+      line-height: 1;
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      display: none;
+      min-width: 190px;
+      background: #fff;
+      padding: 6px 0;
+      margin: 0;
+      border-radius: 6px;
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12);
+      z-index: 9999;
+    }
+
+    .dropdown-menu li {
+      margin: 0;
+    }
+
+    .dropdown-menu a {
+      display: block;
+      padding: 10px 14px;
+      color: #222;
+      font-weight: 600;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .dropdown-menu a:hover,
+    .dropdown-menu a:focus {
+      background: #f3f3f3;
+      color: #000;
+    }
+
+    .dropdown:hover>.dropdown-menu,
+    .dropdown:focus-within>.dropdown-menu {
+      display: block;
+    }
+
+    .cta-button {
+      background: #ff6600;
+      display: inline-block;
+      background-color: #ff6f00;
+      font-size: 13px;
+      font-weight: bold;
+      padding: 6px 16px;
+      text-decoration: none;
+      border: none;
+      border-radius: 0;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      white-space: nowrap;
+      color: white !important;
+    }
+
+    .header .cta-button:hover {
+      background-color: rgb(222, 125, 6);
+    }
+
+    :focus {
+      outline: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header id="header" class="site-header">
+    <div class="container-fluid header-inner">
+      <nav class="nav-wrapper" aria-label="Main navigation">
+        <ul class="nav-list">
+          <li><a href="{% url 'home' %}">HOME</a></li>
+          <li><a href="{% url 'donations' %}">DONATIONS</a></li>
+          <li><a href="{% url 'finance' %}">FINANCE</a></li>
+          <li><a href="{% url 'vision' %}">VISION</a></li>
+          <li><a href="{% url 'community-updates' %}">COMMUNITY UPDATES</a></li>
+          <li><a href="{% url 'contact' %}">CONTACT</a></li>
+
+          <li class="dropdown">
+            <a href="#" class="drop-toggle" aria-haspopup="true" aria-expanded="false">
+              REGIONS <span class="caret">▾</span>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+              <li><a role="menuitem" href="{% url 'chathanoor' %}">CHATHANOOR</a></li>
+              <li><a role="menuitem" href="{% url 'kollam' %}">KOLLAM</a></li>
+              <li><a role="menuitem" href="{% url 'kottiyam' %}">KOTTIYAM</a></li>
+              <li><a role="menuitem" href="{% url 'veliyam' %}">VELIYAM</a></li>
+              <li><a role="menuitem" href="{% url 'attingal' %}">ATTINGAL</a></li>
+              <li><a role="menuitem" href="{% url 'trivandrum' %}">TRIVANDRUM</a></li>
+              <li><a role="menuitem" href="{% url 'bangalore' %}">BANGALORE</a></li>
+            </ul>
+          </li>
+
+          <li><a href="{% url 'familytree' %}">FAMILY TREE</a></li>
+          <li><a href="{% url 'register' %}">REGISTER</a></li>
+          <li><a href="{% url 'login' %}">LOGIN</a></li>
+        </ul>
+      </nav>
+      <a href="#" class="cta-button">CALL TO ACTION</a>
+    </div>
+  </header>
+
+  <div style="background-color:#ffeedc; padding:50px 0;">
+    <main class="main" style="text-align:center; padding:50px; background-color:#f0f0f0; width:90%; max-width:1200px; margin:0 auto; border-radius:10px;">
+
+      <h1 style="margin-bottom:50px; color:#1a1a2e;">FINANCIAL YEARS</h1>
+
+      <div style="display:flex; justify-content:center; gap:30px; flex-wrap:wrap;">
+
+        <div style="background-color:#f9f9f9; text-align:center; width:300px; border-radius:5px; overflow:hidden;">
+          <div>
+            <img src="{% static 'assets/img/team1.jpg' %}" alt="2026-2027" style="width:100%; display:block;">
+          </div>
+          <div style="background-color:#fff; padding:15px; text-align:left;">
+            <div style="font-size:20px; font-weight:500; margin-bottom:5px;">2026-2027</div>
+            <div style="font-size:14px; color:#333;">UPCOMING</div>
+          </div>
+        </div>
+
+        <div style="background-color:#f9f9f9; text-align:center; width:300px; border-radius:5px; overflow:hidden; display:flex; flex-direction:column-reverse;">
+          <div>
+            <img src="{% static 'assets/img/team2.jpg' %}" alt="2025-2026" style="width:100%; display:block;">
+          </div>
+          <div style="background-color:#fff; padding:15px; text-align:left;">
+            <div style="font-size:20px; font-weight:500; margin-bottom:5px;">2025-2026</div>
+            <div style="font-size:14px; color:#333;">ONGOING</div>
+          </div>
+        </div>
+
+        <div style="background-color:#f9f9f9; text-align:center; width:300px; border-radius:5px; overflow:hidden;">
+          <div>
+            <img src="{% static 'assets/img/team3.jpg' %}" alt="2027-2028" style="width:100%; display:block;">
+          </div>
+          <div style="background-color:#fff; padding:15px; text-align:left;">
+            <div style="font-size:20px; font-weight:500; margin-bottom:5px;">2027-2028</div>
+            <div style="font-size:14px; color:#333;">UPCOMING</div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <footer style="background-color: white; color: black; text-align: center; font-size: 12px; padding: 10px 0;">
+    Copyright © 2025 konkiyazhikamkudumbayogam
+  </footer>
+
+  <script>
+    (function() {
+      // Toggle dropdown for touch devices / click
+      document.querySelectorAll('.drop-toggle').forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+          e.preventDefault();
+          var menu = btn.nextElementSibling;
+          var isOpen = btn.getAttribute('aria-expanded') === 'true';
+
+          // Close other open menus
+          document.querySelectorAll('.dropdown .dropdown-menu').forEach(function(m) {
+            if (m !== menu) {
+              m.style.display = 'none';
+              m.previousElementSibling.setAttribute('aria-expanded', 'false');
+            }
+          });
+
+          if (!isOpen) {
+            menu.style.display = 'block';
+            btn.setAttribute('aria-expanded', 'true');
+          } else {
+            menu.style.display = 'none';
+            btn.setAttribute('aria-expanded', 'false');
+          }
+        });
+      });
+
+      // Click outside to close
+      document.addEventListener('click', function(e) {
+        if (!e.target.closest('.dropdown')) {
+          document.querySelectorAll('.dropdown .dropdown-menu').forEach(function(m) {
+            m.style.display = 'none';
+            if (m.previousElementSibling) m.previousElementSibling.setAttribute('aria-expanded', 'false');
+          });
+        }
+      });
+
+      // Escape key closes any open dropdown
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          document.querySelectorAll('.dropdown .dropdown-menu').forEach(function(m) {
+            m.style.display = 'none';
+            if (m.previousElementSibling) m.previousElementSibling.setAttribute('aria-expanded', 'false');
+          });
+        }
+      });
+    })();
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,760 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Family Tree - </title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <!-- Favicons -->
+  <link href="{% static 'assets/img/favicon.png' %}" rel="icon">
+  <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@400;600&family=Raleway:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/aos/aos.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+  <link href="{% static 'assets/css/main.css' %}" rel="stylesheet">
+   
+
+  
+
+
+<header id="header" class="site-header">
+  <div class="container-fluid header-inner">
+    <nav class="nav-wrapper" aria-label="Main navigation">
+      <ul class="nav-list">
+        <li><a href="{% url 'home' %}">HOME</a></li>
+        <li><a href="{% url 'donations' %}">DONATIONS</a></li>
+        <li><a href="{% url 'finance' %}">FINANCE</a></li>
+        <li><a href="{% url 'vision' %}">VISION</a></li>
+        <li><a href="{% url 'community-updates' %}">COMMUNITY UPDATES</a></li>
+        <li><a href="{% url 'contact' %}">CONTACT</a></li>
+
+        
+        <li class="dropdown">
+          <a href="#" class="drop-toggle" aria-haspopup="true" aria-expanded="false">
+            REGIONS <span class="caret">▾</span>
+          </a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a role="menuitem" href="{% url 'chathanoor' %}">CHATHANOOR</a></li>
+            <li><a role="menuitem" href="{% url 'kollam' %}">KOLLAM</a></li>
+            <li><a role="menuitem" href="{% url 'kottiyam' %}">KOTTIYAM</a></li>
+            <li><a role="menuitem" href="{% url 'veliyam' %}">VELIYAM</a></li>
+            <li><a role="menuitem" href="{% url 'attingal' %}">ATTINGAL</a></li>
+            <li><a role="menuitem" href="{% url 'trivandrum' %}">TRIVANDRUM</a></li>
+            <li><a role="menuitem" href="{% url 'bangalore' %}">BANGALORE</a></li>
+          </ul>
+        </li>
+
+        <li><a href="{% url 'familytree' %}">FAMILY TREE</a></li>
+          <li><a href="{% url 'register' %}">REGISTER</a></li>
+          <li><a href="{% url 'login' %}">LOGIN</a></li>
+      </ul>
+    </nav>
+
+    <a href="#" class="cta-button">CALL TO ACTION</a>
+  </div>
+</header>
+
+
+<style>
+    body {
+    background-color: #fff2e9; 
+    margin: 0;
+    padding: 0;
+}
+ 
+  .site-header {
+    background: #c2b3d9;
+  }
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 30px;
+  }
+
+ 
+  .nav-wrapper { flex: 1 1 auto; }
+  .nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;       
+    align-items: center;
+    gap: 20px;                    
+  }
+  .nav-list li { position: relative; }
+  .nav-list a {
+    display: inline-block;
+    text-decoration: none;
+    color: #000;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    font-size: 15px;
+    padding: 6px 0;                
+  }
+
+  
+  .dropdown .drop-toggle { cursor: pointer; display:flex; align-items:center; gap:6px; }
+  .dropdown .caret { font-size: 12px; line-height:1; }
+
+  .dropdown-menu {
+    position: absolute;
+    top: calc(100% + 8px);        
+    left: 50%;                     
+    transform: translateX(-50%);
+    display: none;
+    min-width: 190px;
+    background: #fff;
+    padding: 6px 0;
+    margin: 0;
+    border-radius: 6px;
+    box-shadow: 0 8px 22px rgba(0,0,0,0.12);
+    z-index: 9999;
+  }
+
+  .dropdown-menu li { margin: 0; }
+  .dropdown-menu a {
+    display: block;
+    padding: 10px 14px;
+    color: #222;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .dropdown-menu a:hover,
+  .dropdown-menu a:focus {
+    background: #f3f3f3;
+    color: #000;
+  }
+
+  /* Show on hover and on keyboard focus */
+  .dropdown:hover > .dropdown-menu,
+  .dropdown:focus-within > .dropdown-menu {
+    display: block;
+  }
+
+  /* CTA */
+  
+.cta-button {
+      background: #ff6600;
+      display: inline-block;
+      background-color: #ff6f00;   
+      font-size: 13px;
+      font-weight: bold;
+      padding: 6px 16px;
+      text-decoration: none;
+      border: none;
+      border-radius: 0;           
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      white-space: nowrap;
+      color: white !important;
+}
+
+
+ .header .cta-button:hover {
+      background-color: rgb(222, 125, 6);
+    }
+
+  
+  :focus { outline: none; }
+
+
+.section{
+padding:40px 0;
+}
+
+.page-title{
+text-align:center;
+font-size:38px;
+font-weight:700;
+color:black;
+margin-bottom:10px;
+}
+
+.page-subtitle{
+text-align:center;
+margin-bottom:50px;
+color:#666;
+}
+
+
+/* =========================
+TREE STRUCTURE
+========================= */
+
+.tree ul {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap:5px;
+  padding-top: 20px;
+  position: relative;
+  flex-wrap: nowrap; /* important */
+}
+
+/* vertical from parent */
+.tree ul::after{
+content:"";
+position:absolute;
+top:0;
+left:50%;
+width:2px;
+height:10px;
+background:#444;
+transform:translateX(-50%);
+}
+
+/* horizontal connector */
+.tree ul::before{
+content:"";
+position:absolute;
+top:20px;
+left:10%;
+right:10%;
+height:2px;
+background:#444;
+}
+
+/* child node wrapper */
+.tree li{
+list-style:none;
+position:relative;
+text-align:center;
+padding-top:15px;
+}
+
+/* vertical drop to child */
+.tree li::before{
+content:"";
+position:absolute;
+top:20px;
+left:50%;
+width:2px;
+height:15px;
+background:#444;
+transform:translateX(-50%);
+}
+
+/* remove connectors above root */
+.tree > ul::before,
+.tree > ul::after{
+display:none;
+}
+
+.tree > ul > li::before{
+display:none;
+}
+
+
+/* =========================
+COLLAPSIBLE MAIN BRANCHES
+========================= */
+
+#children1,
+#children2,
+#children3{
+display:none;
+}
+
+#children1.show,
+#children2.show,
+#children3.show{
+display:flex;
+}
+
+
+/* =========================
+VERTICAL DESCENDANT BRANCHES
+(children4 to children9)
+========================= */
+
+#children4,
+#children5,
+#children6,
+#children7,
+#children8,
+#children9{
+display:none;
+flex-direction:column;
+align-items:center;
+gap:5px;
+padding-top:15px;
+margin-top:15px;
+position:relative;
+}
+
+#children4.show,
+#children5.show,
+#children6.show,
+#children7.show,
+#children8.show,
+#children9.show{
+display:flex;
+}
+
+/* vertical trunk */
+#children4::before,
+#children5::before,
+#children6::before,
+#children7::before,
+#children8::before,
+#children9::before{
+content:"";
+position:absolute;
+top:0;
+left:50%;
+width:2px;
+height:100%;
+background:#444;
+transform:translateX(-50%);
+}
+
+#children4 > li,
+#children5 > li,
+#children6 > li,
+#children7 > li,
+#children8 > li,
+#children9 > li{
+position:relative;
+padding-top:0;
+}
+
+
+/* =========================
+PAPPU CHANNAR SPOUSE BRANCHES
+========================= */
+
+#children2a,
+#children2b{
+display:none;
+flex-direction:column;
+align-items:center;
+gap:10px;
+padding-top:25px;
+margin-top:10px;
+position:relative;
+}
+
+#children2a.show,
+#children2b.show{
+display:flex;
+}
+
+#children2a::before,
+#children2b::before{
+content:"";
+position:absolute;
+top:0;
+left:50%;
+width:2px;
+height:100%;
+background:#444;
+transform:translateX(-50%);
+}
+
+
+/* =========================
+NODES
+========================= */
+
+.node{
+display:inline-block;
+padding:10px 20px;
+border:2px solid #ff6b00;
+border-radius:20px;
+background:#fff;
+cursor:pointer;
+font-weight:500;
+transition:.3s;
+position:relative;
+z-index:2;
+font-size: 12px;
+}
+
+.node:hover{
+background:#ff6b00;
+color:#fff;
+}
+
+
+/* expand arrows */
+.root-toggle::after,
+.child-toggle::after{
+content:" ▼";
+font-size:10px;
+}
+
+.root-toggle.open::after,
+.child-toggle.open::after{
+content:" ▲";
+}
+
+
+/* spouse text */
+.spouse{
+display:block;
+font-weight:400;
+margin-top:4px;
+color:#555;
+}
+
+
+
+.note{
+display:block;
+font-size:10px;
+font-style:italic;
+color:#888;
+margin-top:4px;
+}
+
+
+/* =========================
+MOBILE
+========================= */
+
+@media(max-width:768px){
+
+.tree{
+justify-content:flex-start;
+overflow-x:auto;
+}
+
+.tree ul{
+min-width:950px;
+}
+
+.page-title{
+font-size:30px;
+}
+
+}
+
+
+
+</style>
+
+</head>
+
+<body>
+<section class="section">
+<div class="container">
+    <h2 class="page-title">Family Tree</h2>
+
+    <p class="page-subtitle">Konkiyazhikam Kudumbayogam</p>
+    <div class="tree-container">
+    <div class="tree">
+
+      <ul>
+          <li>
+
+              <!-- ROOT -->
+              <div class="node root-toggle"
+              data-target="children1">
+              Narayanan
+              </div>
+
+                  <ul id="children1">
+
+                  <!-- KRISHNAN -->
+                  <li>
+
+                      <div class="node child-toggle" data-target="children4"> Krishnan <span class="spouse">Kochali</span></div>
+
+                          <ul id="children4">
+
+                              <li><div class="node">Kunjupilla <span class="spouse">Parukutty</span></div></li>
+
+                              <li><div class="node">Gopalan <span class="spouse">Janaki</span></div></li>
+
+                              <li><div class="node">Lekshmikutty <span class="spouse">Raghavan</span></div></li>
+
+                              <li><div class="node">Bhavani <span class="spouse">K Mahadevan &</span><span class="spouse">K Sekharan</span></div></li>
+
+                              <li><div class="node">Karunakaran <span class="spouse">Karthiyayini</span></div></li>
+
+                              <li><div class="node">Raghavan<span class="note">(Died Young)</span></div></li>
+
+                              <li><div class="node">Karthiyayini<span class="note">(Died Young)</span></div></li>
+
+                              <li><div class="node">Kochu Karthiyani <span class="spouse">Madhayan</span><span class="note">(Madhenkonam)</span></div></li>
+
+                          </ul>
+
+                  </li>
+
+
+                  <li>
+
+                    <div class="node child-toggle"data-target="children2">Pappu Channar</div>
+
+                        <ul id="children2">
+
+                              <!-- Wife 1 -->
+                              <li>
+
+                              <div class="node child-toggle" data-target="children2a">Kunjukunjamma</div>
+
+                                  <ul id="children2a">
+
+                                  <li><div class="node">K P Sankaran<span class="note">(Died Young)</span></div></li>
+
+                                  <li><div class="node">K P Sukumaran<span class="spouse">G Sumathi</span></div></li>
+
+                                  <li><div class="node">K P Bhaskaran<span class="spouse">M Bhavani</span></div></li>
+
+                                  <li><div class="node">K P Vasudevan<span class="note">(Died Young)</span></div></li>
+
+                                  <li><div class="node">K P Karunakaran<span class="note">(Died Young)</span></div></li>
+
+                                  <li><div class="node">K P Kunjunni<span class="spouse">G Rajamma</span></div></li>
+
+                                  <li><div class="node">K Malathi<span class="spouse">K Kunjukrishnan</span></div></li>
+
+                                  <li><div class="node">K P Ramachandran<span class="spouse">P Syamalakumari</span></div></li>
+
+                                  </ul>
+
+                              </li>
+
+
+                              <!-- Wife 2 -->
+                              <li>
+
+                              <div class="node child-toggle" data-target="children2b">Karthiyani</div>
+
+                                  <ul id="children2b">
+
+                                  <li><div class="node">K P Sudheendran<span class="spouse">Sarojini C K</span></div></li>
+
+                                  <li><div class="node">K P Thankamma<span class="spouse">Gopalan K S</span></div></li>
+
+                                  <li><div class="node">K P Sivarajan<span class="spouse">Ananda Bai</span><span class="note">(Baby)</span></div></li>
+
+                                  <li><div class="node">K P Chandrasenan <span class="spouse">Leela R</span></div></li>
+
+                                  <li><div class="node">K P Prabhakaran <span class="spouse">Saraswathy K</span></div></li>
+
+                                  <li><div class="node">K P Gomathi<span class="spouse">Sreedhara Panicker</span></div></li>
+
+                                  </ul>
+
+                              </li>
+
+                        </ul>
+
+                  </li>
+
+
+                  <li>
+
+                        <div class="node child-toggle" data-target="children5">Neelakantan<span class="spouse">Chempakakutty</span></div>
+
+                            <ul id="children5">
+
+                            <li><div class="node">Anandavally<span class="spouse">Sukumaran</span></div></li>
+
+                            <li><div class="node">Rajan<span class="spouse">Prabhavathy</span></div></li>
+
+                            <li><div class="node">Sivaprasad<span class="note">(Died Young)</span></div></li>
+
+                            <li><div class="node">Mani<span class="spouse">Sarala</span></div></li>
+
+                            <li><div class="node">Kanakamma<span class="spouse">Vidyadharan</span></div></li>
+
+                            </ul>
+
+                  </li>
+
+
+                  <li>
+
+                      <div class="node child-toggle" data-target="children6">Narayani<span class="spouse">Govindan</span></div>
+
+                          <ul id="children6">
+
+                          <li><div class="node">G Purushothaman<span class="note">Died Young</span></div></li>
+
+                          <li><div class="node">G Bhargayi<span class="spouse">Sukumaran</span></div></li>
+
+                          <li><div class="node">G Kunjuraman<span class="note">Died Young</span></div></li>
+
+                          <li><div class="node">G Janardhanan & <br> G Lakshmanan<span class="spouse">Indira</span></div></li>
+
+                          <li><div class="node">G Rajamma<span class="spouse">Kunjunni</span></div></li>
+
+                          <li><div class="node">G Sumathi<span class="spouse">K P Sukumaran</span></div></li>
+
+                          <li><div class="node">G Somarajan<span class="note">Died Young</span></div></li>
+
+                          <li><div class="node">G Madhavan<span class="spouse">Lalithambika</span></div></li>
+
+                          <li><div class="node">N G Pushpavally<span class="spouse">Gangadharan</span></div></li>
+
+                          </ul>
+
+                  </li>
+
+                  <li>
+
+                      <div class="node child-toggle" data-target="children7">Kesavan<span class="spouse">Parvathy</span></div>
+
+                          <ul id="children7">
+
+                          <li><div class="node">Raghavan<span class="spouse">Sarojini & </span><span class="spouse">Kamalamma</span></div></li>
+
+                          <li><div class="node">Subhashiuni<span class="spouse">Sukumaran</span></div></li>
+
+                          <li><div class="node">Kamalasanan<span class="note">Died Young</span></div></li>
+
+                          <li><div class="node">Sooryadasan<span class="spouse">Sarasamma</span></div></li>
+
+                          <li><div class="node">Chandrasenan<span class="spouse">Sarasamma</span></div></li>
+
+                          <li><div class="node">Bhasurangi<span class="spouse">Vijayan</span></div></li>
+
+                          <li><div class="node">Sudhakaran<span class="spouse">Vimala</span></div></li>
+
+                          </ul>
+
+                  </li>
+
+<li>
+
+<div class="node child-toggle"
+data-target="children3">
+Appi
+</div>
+
+<ul id="children3">
+
+<!-- spouse 1 -->
+<li>
+
+<div class="node">
+Sankaran
+</div>
+
+</li>
+
+
+<!-- spouse 2 -->
+<li>
+
+<div class="node">
+Krishnan
+</div>
+
+</li>
+
+
+<!-- Children branch -->
+<li>
+
+<div class="node child-toggle"
+data-target="children8">
+Children
+</div>
+
+<ul id="children8">
+
+<li><div class="node">Pankajakshy<span class="spouse">Govindan</span></div></li>
+
+<li><div class="node">Lekshmikutty<span class="spouse">Divakaran Panickar</span></div></li>
+
+<li><div class="node">Thankamma<span class="spouse">Chellappan</span></div></li>
+
+<li><div class="node">Sukumaran<span class="spouse">Santhamma</span></div></li>
+
+<li><div class="node">Prabhakaran<span class="spouse">Suseela & </span><span class="spouse">Vasumathy</span></div></li>
+
+<li><div class="node">Sarasamma</div></li>
+
+<li><div class="node">Vilasini<span class="spouse">Gangadharan</span></div></li>
+
+<li><div class="node">Purushothaman<span class="spouse">Kalavathy</span></div></li>
+
+</ul>
+
+</li>
+
+</ul>
+
+</li>
+
+<li>
+
+<div class="node child-toggle"
+data-target="children9">
+Unni
+<span class="spouse">Kesavan</span>
+</div>
+
+<ul id="children9">
+
+<li><div class="node">Chempakutty<span class="spouse">Kunjupilla</span></div></li>
+
+<li><div class="node">Rasangini<span class="spouse">Gopalan</span></div></li>
+
+
+</ul>
+
+</li>
+
+</ul>
+
+</li>
+</ul>
+</div>
+</div>
+
+</div>
+</section>
+
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+
+document.querySelectorAll(".root-toggle, .child-toggle")
+.forEach(function(node){
+
+node.addEventListener("click", function(e){
+
+e.stopPropagation();
+
+const target=this.dataset.target;
+const branch=document.getElementById(target);
+
+if(branch){
+branch.classList.toggle("show");
+this.classList.toggle("open");
+}
+
+});
+
+});
+
+});
+</script>
+
+
+</body>
+</html>

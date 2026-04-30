@@ -1,0 +1,791 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Donations - </title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <!-- Favicons -->
+  <link href="{% static 'assets/img/favicon.png' %}" rel="icon">
+  <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@400;600&family=Raleway:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/aos/aos.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+  <link href="{% static 'assets/css/main.css' %}" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+
+
+
+  <style>
+    
+ 
+  .site-header {
+    background: #c2b3d9;
+  }
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 30px;
+  }
+
+  
+  .nav-wrapper { flex: 1 1 auto; }
+  .nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;        
+    align-items: center;
+    gap: 20px;                      
+  }
+  .nav-list li { position: relative; }
+  .nav-list a {
+    display: inline-block;
+    text-decoration: none;
+    color: #000;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    font-size: 15px;
+    padding: 6px 0;                 
+  }
+
+  /* Dropdown menu styling */
+  .dropdown .drop-toggle { cursor: pointer; display:flex; align-items:center; gap:6px; }
+  .dropdown .caret { font-size: 12px; line-height:1; }
+
+  .dropdown-menu {
+    position: absolute;
+    top: calc(100% + 8px);         
+    left: 50%;                     
+    transform: translateX(-50%);
+    display: none;
+    min-width: 190px;
+    background: #fff;
+    padding: 6px 0;
+    margin: 0;
+    border-radius: 6px;
+    box-shadow: 0 8px 22px rgba(0,0,0,0.12);
+    z-index: 9999;
+  }
+
+  .dropdown-menu li { margin: 0; }
+  .dropdown-menu a {
+    display: block;
+    padding: 10px 14px;
+    color: #222;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .dropdown-menu a:hover,
+  .dropdown-menu a:focus {
+    background: #f3f3f3;
+    color: #000;
+  }
+
+  
+  .dropdown:hover > .dropdown-menu,
+  .dropdown:focus-within > .dropdown-menu {
+    display: block;
+  }
+
+  
+  
+.cta-button {
+      background: #ff6600;
+      display: inline-block;
+      background-color: #ff6f00;   
+      font-size: 13px;
+      font-weight: bold;
+      padding: 6px 16px;
+      text-decoration: none;
+      border: none;
+      border-radius: 0;           
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      white-space: nowrap;
+      color: white !important;
+}
+
+
+ .header .cta-button:hover {
+      background-color: rgb(222, 125, 6);
+    }
+
+ 
+  :focus { outline: none; }
+
+
+
+
+  #ai-summary-sidebar {
+    position: fixed;
+    right: 20px;
+    top: 100px;
+    width: 300px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    padding: 15px;
+    max-height: 70vh;
+    overflow-y: auto;
+    display: none; /* hidden initially */
+}
+
+#ai-summary-sidebar h3 {
+    margin-bottom: 10px;
+    font-size: 18px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+}
+
+
+.sidebar-box {
+    position: fixed;
+    right: 20px;
+    width: 300px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    padding: 15px;
+    max-height: 70vh;
+    overflow-y: auto;
+    display: none;
+}
+
+#ai-summary-sidebar-country {
+    top: 100px; 
+}
+
+#ai-summary-sidebar-profession {
+    top: 450px;
+}
+
+.sidebar-box h3 {
+    margin-bottom: 10px;
+    font-size: 18px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+}
+
+.user-card {
+    display: flex;
+    align-items: center;
+    background: #f9f9f9;
+    padding: 10px;
+    margin-bottom: 8px;
+    border-radius: 10px;
+}
+
+.user-card img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.user-card .name {
+    font-weight: bold;
+}
+
+.user-card .email {
+    font-size: 13px;
+    color: #777;
+}
+
+
+
+</style>
+   
+</head>
+
+  
+
+ <!-- HEADER -->
+<header id="header" class="site-header">
+  <div class="container-fluid header-inner">
+    <nav class="nav-wrapper" aria-label="Main navigation">
+      <ul class="nav-list">
+        <li><a href="{% url 'home' %}">HOME</a></li>
+        <li><a href="{% url 'donations' %}">DONATIONS</a></li>
+        <li><a href="{% url 'finance' %}">FINANCE</a></li>
+        <li><a href="{% url 'vision' %}">VISION</a></li>
+        <li><a href="{% url 'community-updates' %}">COMMUNITY UPDATES</a></li>
+        <li><a href="{% url 'contact' %}">CONTACT</a></li>
+
+        
+        <li class="dropdown">
+          <a href="#" class="drop-toggle" aria-haspopup="true" aria-expanded="false">
+            REGIONS <span class="caret">▾</span>
+          </a>
+
+          <ul class="dropdown-menu" role="menu">
+            <li><a role="menuitem" href="{% url 'chathanoor' %}">CHATHANOOR</a></li>
+            <li><a role="menuitem" href="{% url 'kollam' %}">KOLLAM</a></li>
+            <li><a role="menuitem" href="{% url 'kottiyam' %}">KOTTIYAM</a></li>
+            <li><a role="menuitem" href="{% url 'veliyam' %}">VELIYAM</a></li>
+            <li><a role="menuitem" href="{% url 'attingal' %}">ATTINGAL</a></li>
+            <li><a role="menuitem" href="{% url 'trivandrum' %}">TRIVANDRUM</a></li>
+            <li><a role="menuitem" href="{% url 'bangalore' %}">BANGALORE</a></li>
+          </ul>
+        </li>
+
+        <li><a href="{% url 'familytree' %}">FAMILY TREE</a></li>
+          <li><a href="{% url 'register' %}">REGISTER</a></li>
+          <li><a href="{% url 'login' %}">LOGIN</a></li>
+      </ul>
+    </nav>
+
+    <a href="#" class="cta-button">CALL TO ACTION</a>
+  </div>
+</header>
+
+
+
+
+
+<body>
+
+<main class="main" style="background-color:#fff2e9; ; min-height:100vh; padding:40px;">
+
+  
+  <h1 style="color:#090808dd; font-size:27px;  font-weight: bold; margin:0;">Register</h1>
+
+    
+    <div style="max-width:500px; margin:0 auto;">
+      <form method="post">
+        {% csrf_token %}
+
+        
+        <div style="margin-bottom:20px;">
+          <label for="username" class="form-label" style="font-weight:500; display:block; margin-bottom:6px;">
+            Username
+          </label>
+          <input type="text" class="form-control" id="username" name="username" required>
+        </div>
+
+       
+        <div style="margin-bottom:20px;">
+          <label for="first_name" class="form-label" style="font-weight:500; display:block; margin-bottom:6px;">
+            First Name
+          </label>
+          <input type="text" class="form-control" id="first_name" name="first_name" required>
+        </div>
+
+        
+        <div style="margin-bottom:20px;">
+          <label for="last_name" class="form-label" style="font-weight:500; display:block; margin-bottom:6px;">
+            Last Name
+          </label>
+          <input type="text" class="form-control" id="last_name" name="last_name" required>
+        </div>
+
+        
+        <div style="margin-bottom:20px;">
+          <label class="form-label" style="font-weight:500; display:block; margin-bottom:6px;">
+            Gender
+          </label>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="gender" id="male" value="Male">
+            <label class="form-check-label" for="male">Male</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="gender" id="female" value="Female">
+            <label class="form-check-label" for="female">Female</label>
+          </div>
+        </div>
+
+        
+        <div style="margin-bottom:20px;">
+          <label for="email" class="form-label" style="font-weight:500; display:block; margin-bottom:6px;">
+            E-mail Address
+          </label>
+          <input type="email" class="form-control" id="email" name="email" required>
+        </div>
+
+
+        <div style="margin-bottom:20px;">
+  <label for="dob" class="form-label" style="font-weight:500; display:block; margin-bottom:6px;">
+    Date of Birth
+  </label>
+  <input type="date" class="form-control" id="dob" name="dob" placeholder="Select Date" required>
+</div>
+
+
+
+        
+
+
+        <div style="margin-bottom:20px;">
+          <label for="country" class="form-label" style="font-weight:500; display:block; margin-bottom:6px;">
+            Country
+          </label>
+          <select class="form-control" id="country" name="country" required>
+            <option value="">-- Select Country --</option>
+            <option value="Afghanistan">Afghanistan</option>
+            <option value="Albania">Albania</option>
+            <option value="Algeria">Algeria</option>
+            <option value="Andorra">Andorra</option>
+            <option value="Angola">Angola</option>
+            <option value="Antigua and Barbuda">Antigua and Barbuda</option>
+            <option value="Argentina">Argentina</option>
+            <option value="Armenia">Armenia</option>
+            <option value="Australia">Australia</option>
+            <option value="Austria">Austria</option>
+            <option value="Azerbaijan">Azerbaijan</option>
+            <option value="Bahamas">Bahamas</option>
+            <option value="Bahrain">Bahrain</option>
+            <option value="Bangladesh">Bangladesh</option>
+            <option value="Barbados">Barbados</option>
+            <option value="Belarus">Belarus</option>
+            <option value="Belgium">Belgium</option>
+            <option value="Belize">Belize</option>
+            <option value="Benin">Benin</option>
+            <option value="Bhutan">Bhutan</option>
+            <option value="Bolivia">Bolivia</option>
+            <option value="Bosnia and Herzegovina">Bosnia and Herzegovina</option>
+            <option value="Botswana">Botswana</option>
+            <option value="Brazil">Brazil</option>
+            <option value="Brunei">Brunei</option>
+            <option value="Bulgaria">Bulgaria</option>
+            <option value="Burkina Faso">Burkina Faso</option>
+            <option value="Burundi">Burundi</option>
+            <option value="Cabo Verde">Cabo Verde</option>
+            <option value="Cambodia">Cambodia</option>
+            <option value="Cameroon">Cameroon</option>
+            <option value="Canada">Canada</option>
+            <option value="Central African Republic">Central African Republic</option>
+            <option value="Chad">Chad</option>
+            <option value="Chile">Chile</option>
+            <option value="China">China</option>
+            <option value="Colombia">Colombia</option>
+            <option value="Comoros">Comoros</option>
+            <option value="Congo (Congo-Brazzaville)">Congo (Congo-Brazzaville)</option>
+            <option value="Costa Rica">Costa Rica</option>
+            <option value="Croatia">Croatia</option>
+            <option value="Cuba">Cuba</option>
+            <option value="Cyprus">Cyprus</option>
+            <option value="Czech Republic">Czech Republic</option>
+            <option value="Democratic Republic of the Congo">Democratic Republic of the Congo</option>
+            <option value="Denmark">Denmark</option>
+            <option value="Djibouti">Djibouti</option>
+            <option value="Dominica">Dominica</option>
+            <option value="Dominican Republic">Dominican Republic</option>
+            <option value="Ecuador">Ecuador</option>
+            <option value="Egypt">Egypt</option>
+            <option value="El Salvador">El Salvador</option>
+            <option value="Equatorial Guinea">Equatorial Guinea</option>
+            <option value="Eritrea">Eritrea</option>
+            <option value="Estonia">Estonia</option>
+            <option value="Eswatini">Eswatini</option>
+            <option value="Ethiopia">Ethiopia</option>
+            <option value="Fiji">Fiji</option>
+            <option value="Finland">Finland</option> 
+            <option value="France">France</option>
+            <option value="Gabon">Gabon</option>
+            <option value="Gambia">Gambia</option>
+            <option value="Georgia">Georgia</option>
+            <option value="Germany">Germany</option>
+            <option value="Ghana">Ghana</option>
+            <option value="Greece">Greece</option>
+            <option value="Grenada">Grenada</option>
+            <option value="Guatemala">Guatemala</option>
+            <option value="Guinea">Guinea</option>
+            <option value="Guinea-Bissau">Guinea-Bissau</option>
+            <option value="Guyana">Guyana</option>
+            <option value="Haiti">Haiti</option>
+            <option value="Honduras">Honduras</option>
+            <option value="Hungary">Hungary</option>
+            <option value="Iceland">Iceland</option>
+            <option value="India">India</option>
+            <option value="Indonesia">Indonesia</option>
+            <option value="Iran">Iran</option>
+            <option value="Iraq">Iraq</option>
+            <option value="Ireland">Ireland</option>
+            <option value="Israel">Israel</option>
+            <option value="Italy">Italy</option>
+            <option value="Jamaica">Jamaica</option>
+            <option value="Japan">Japan</option>
+            <option value="Jordan">Jordan</option>
+            <option value="Kazakhstan">Kazakhstan</option>
+            <option value="Kenya">Kenya</option>
+            <option value="Kiribati">Kiribati</option>
+            <option value="Kuwait">Kuwait</option>
+            <option value="Kyrgyzstan">Kyrgyzstan</option>
+            <option value="Laos">Laos</option>
+            <option value="Latvia">Latvia</option>
+            <option value="Lebanon">Lebanon</option>
+            <option value="Lesotho">Lesotho</option>
+            <option value="Liberia">Liberia</option>
+            <option value="Libya">Libya</option>
+            <option value="Liechtenstein">Liechtenstein</option>
+            <option value="Lithuania">Lithuania</option>
+            <option value="Luxembourg">Luxembourg</option>
+            <option value="Madagascar">Madagascar</option>
+            <option value="Malawi">Malawi</option>
+            <option value="Malaysia">Malaysia</option>
+            <option value="Maldives">Maldives</option>
+            <option value="Mali">Mali</option>
+            <option value="Malta">Malta</option>
+            <option value="Marshall Islands">Marshall Islands</option>
+            <option value="Mauritania">Mauritania</option>
+            <option value="Mauritius">Mauritius</option>
+            <option value="Mexico">Mexico</option>
+            <option value="Micronesia">Micronesia</option>
+            <option value="Moldova">Moldova</option>
+            <option value="Monaco">Monaco</option>
+            <option value="Mongolia">Mongolia</option>
+            <option value="Montenegro">Montenegro</option>
+            <option value="Morocco">Morocco</option>
+            <option value="Mozambique">Mozambique</option>
+            <option value="Myanmar">Myanmar</option>
+            <option value="Namibia">Namibia</option>
+            <option value="Nauru">Nauru</option>
+            <option value="Nepal">Nepal</option>
+            <option value="Netherlands">Netherlands</option>
+            <option value="New Zealand">New Zealand</option>
+            <option value="Nicaragua">Nicaragua</option>
+            <option value="Niger">Niger</option>
+            <option value="Nigeria">Nigeria</option>
+            <option value="North Korea">North Korea</option>
+            <option value="North Macedonia">North Macedonia</option>
+            <option value="Norway">Norway</option>
+            <option value="Oman">Oman</option>
+            <option value="Pakistan">Pakistan</option>
+            <option value="Palau">Palau</option>
+            <option value="Palestine">Palestine</option>
+            <option value="Panama">Panama</option>
+            <option value="Papua New Guinea">Papua New Guinea</option>
+            <option value="Paraguay">Paraguay</option>
+            <option value="Peru">Peru</option>
+            <option value="Philippines">Philippines</option>
+            <option value="Poland">Poland</option>
+            <option value="Portugal">Portugal</option>
+            <option value="Qatar">Qatar</option>
+            <option value="Romania">Romania</option>
+            <option value="Russia">Russia</option>
+            <option value="Rwanda">Rwanda</option>
+            <option value="Saint Kitts and Nevis">Saint Kitts and Nevis</option>
+            <option value="Saint Lucia">Saint Lucia</option>
+            <option value="Saint Vincent and the Grenadines">Saint Vincent and the Grenadines</option>
+            <option value="Samoa">Samoa</option>
+            <option value="San Marino">San Marino</option>
+            <option value="Sao Tome and Principe">Sao Tome and Principe</option>
+            <option value="Saudi Arabia">Saudi Arabia</option>
+            <option value="Senegal">Senegal</option>
+            <option value="Serbia">Serbia</option>
+            <option value="Seychelles">Seychelles</option>
+            <option value="Sierra Leone">Sierra Leone</option>
+            <option value="Singapore">Singapore</option>
+            <option value="Slovakia">Slovakia</option>
+            <option value="Slovenia">Slovenia</option>
+            <option value="Solomon Islands">Solomon Islands</option>
+            <option value="Somalia">Somalia</option>
+            <option value="South Africa">South Africa</option>
+            <option value="South Korea">South Korea</option>
+            <option value="South Sudan">South Sudan</option>
+            <option value="Spain">Spain</option>
+            <option value="Sri Lanka">Sri Lanka</option>
+            <option value="Sudan">Sudan</option>
+            <option value="Suriname">Suriname</option>
+            <option value="Sweden">Sweden</option>
+            <option value="Switzerland">Switzerland</option>
+            <option value="Syria">Syria</option>
+            <option value="Taiwan">Taiwan</option>
+            <option value="Tajikistan">Tajikistan</option>
+            <option value="Tanzania">Tanzania</option>
+            <option value="Thailand">Thailand</option>
+            <option value="Timor-Leste">Timor-Leste</option>
+            <option value="Togo">Togo</option>
+            <option value="Tonga">Tonga</option>
+            <option value="Trinidad and Tobago">Trinidad and Tobago</option>
+            <option value="Tunisia">Tunisia</option>
+            <option value="Turkey">Turkey</option>
+            <option value="Turkmenistan">Turkmenistan</option>
+            <option value="Tuvalu">Tuvalu</option>
+            <option value="Uganda">Uganda</option>
+            <option value="Ukraine">Ukraine</option>
+            <option value="United Arab Emirates">United Arab Emirates</option>
+            <option value="United Kingdom">United Kingdom</option>
+            <option value="United States">United States</option>
+            <option value="Uruguay">Uruguay</option>
+            <option value="Uzbekistan">Uzbekistan</option>
+            <option value="Vanuatu">Vanuatu</option>
+            <option value="Vatican City">Vatican City</option>
+            <option value="Venezuela">Venezuela</option>
+            <option value="Vietnam">Vietnam</option>
+            <option value="Yemen">Yemen</option>
+            <option value="Zambia">Zambia</option>
+            <option value="Zimbabwe">Zimbabwe</option>
+          </select>
+        </div>
+
+        <div id="ai-summary" 
+     style="background:#eef; padding:10px; margin-top:10px; border-radius:5px; display:none;">
+</div>
+
+
+        
+        <div style="margin-bottom:20px;">
+          <label for="password" class="form-label" style="font-weight:500; display:block; margin-bottom:6px;">
+            Password
+          </label> 
+          <input type="password" class="form-control" id="password" name="password" required>
+        </div>
+
+      
+        <div style="margin-bottom:20px;">
+          <label for="confirm_password" class="form-label" style="font-weight:500; display:block; margin-bottom:6px;">
+            Confirm Password
+          </label>
+          <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>    
+        </div>
+
+         
+        <div style="margin-bottom:20px;">
+          <label for="first_name" class="form-label" style="font-weight:500; display:block; margin-bottom:6px;">
+           Which school did you study in?
+          </label>
+          <input type="text" class="form-control" id="school" name="school" required>
+        </div>
+
+
+        <div style="margin-bottom:20px;">
+  <label for="qualifications" class="form-label" style="font-weight:500; display:block; margin-bottom:6px;">
+      What degrees or qualifications do you hold?
+  </label>
+
+  <select class="form-control" id="qualifications" name="qualifications" required>
+      <option value="">-- Select Qualification --</option>
+      <option value="B.Tech">B.Tech</option>
+      <option value="M.Tech">M.Tech</option>
+      <option value="B.Sc">B.Sc</option>
+      <option value="M.Sc">M.Sc</option>
+      <option value="Diploma">Diploma</option>
+      <option value="PhD">PhD</option>
+      <option value="Other">Other</option>
+  </select>
+</div>
+
+
+<div class="col-md-6">
+      <div id="qualification-card"
+           style="display:none; border:1px solid #ddd; padding:12px; border-radius:8px;
+                  max-height:250px; overflow-y:auto;">
+      </div>
+  </div>
+
+
+
+        <div style="margin-bottom:20px;">
+          <label for="first_name" class="form-label" style="font-weight:500; display:block; margin-bottom:6px;">
+            What is your current job/profession?
+          </label>
+          <input type="text" class="form-control" id="profession" name="profession" required>
+        </div>
+
+         
+        <div style="margin-bottom:20px;">
+          <label for="first_name" class="form-label" style="font-weight:500; display:block; margin-bottom:6px;">
+            Who are your parents?
+          </label>
+          <input type="text" class="form-control" id="parents" name="parents" required>
+        </div>
+
+
+        <div style="margin-bottom:20px;">
+          <label for="first_name" class="form-label" style="font-weight:500; display:block; margin-bottom:6px;">
+            What is your relation in the family tree?
+          </label>
+          <input type="text" class="form-control" id="relation" name="relation" required>
+        </div>
+
+
+        <div style="margin-bottom:20px;">
+          <label for="first_name" class="form-label" style="font-weight:500; display:block; margin-bottom:6px;">
+            Are you married? If yes,how many children do you have?
+          </label>
+          <input type="text" class="form-control" id="married" name="married" required>
+        </div>
+
+
+        <div style="margin-bottom:20px;">
+          <label for="first_name" class="form-label" style="font-weight:500; display:block; margin-bottom:6px;">
+            What languages do you speak?
+          </label>
+          <input type="text" class="form-control" id="languages" name="languages" required>
+        </div>
+
+
+        <div style="margin-bottom:20px;">
+          <label for="first_name" class="form-label" style="font-weight:500; display:block; margin-bottom:6px;">
+           Where do you currently live?(Please specify your address)
+          </label>
+          <input type="text" class="form-control" id="address" name="address" required>
+        </div>
+
+
+      <div id="duplicate-warning"
+     style="display:none;
+            background:#fff3cd;
+            color:#856404;
+            padding:12px;
+            border-radius:6px;
+            border:1px solid #ffeeba;
+            margin-bottom:20px;">
+</div>
+
+
+
+      <div style="text-align:center; margin-top:40px;">
+        <button type="submit" class="btn btn-primary" style="min-width:240px; padding:10px 20px;">
+          Register
+        </button>
+        <button type="button" class="btn btn-secondary" style="min-width:240px; padding:10px 20px;">
+          Login
+        </button>
+      </div>
+
+      
+      </form>
+
+      <div id="ai-summary-sidebar">
+        <h3>People from this Country</h3>
+        <div id="ai-summary-content"></div>
+      </div>
+
+      <div id="ai-summary-sidebar-profession" class="sidebar-box">
+    <h3>People with this Profession</h3>
+    <div id="ai-summary-content-profession"></div>
+</div>
+
+
+
+<div id="qualification-box"
+     style="display:none; 
+            background:white; 
+            padding:20px; 
+            border-radius:15px; 
+            box-shadow:0 4px 20px rgba(0,0,0,0.1);
+            width:300px;">
+
+    <h5 id="qualification-title" style="margin-top:0;">People with this Qualification</h5>
+    <hr>
+
+    <div id="qualification-card" style="max-height:250px; overflow-y:auto;"></div>
+</div>
+
+
+
+    </div>
+  </div>
+       
+</main>
+
+
+
+
+<script>
+flatpickr("#dob", {
+    dateFormat: "d/m/Y",  
+    maxDate: "today"      
+});
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const firstName   = document.getElementById("first_name");
+    const lastName    = document.getElementById("last_name");
+    const profession  = document.getElementById("profession");
+    const country     = document.getElementById("country");
+    const address     = document.getElementById("address");
+
+    const warningBox  = document.getElementById("duplicate-warning");
+    const submitBtn   = document.querySelector("button[type='submit']");
+
+    function checkDuplicate() {
+
+        if (
+            firstName.value.trim() === "" ||
+            lastName.value.trim() === "" ||
+            profession.value.trim() === "" ||
+            country.value.trim() === "" ||
+            address.value.trim() === ""
+        ) {
+            warningBox.style.display = "none";
+            submitBtn.disabled = false;
+            return;
+        }
+
+        const url =
+            `/myapp/check-duplicate-member/` +
+            `?first_name=${encodeURIComponent(firstName.value)}` 
+            `&last_name=${encodeURIComponent(lastName.value)}` +
+            `&profession=${encodeURIComponent(profession.value)}` +
+            `&country=${encodeURIComponent(country.value)}` +
+            `&address=${encodeURIComponent(address.value)}`;
+
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                if (data.exists === true) {
+                    warningBox.style.display = "block";
+                    submitBtn.disabled = true;
+                } else {
+                    warningBox.style.display = "none";
+                    submitBtn.disabled = false;
+                }
+            })
+            .catch(error => {+
+                console.error("Duplicate check failed:", error);
+                submitBtn.disabled = false;
+            });
+    }
+
+    [firstName, lastName, profession, country, address].forEach(field => {
+        field.addEventListener("input", checkDuplicate);
+    });
+
+});
+</script>
+
+
+
+
+</body>
+ <!-- Footer -->
+ <footer style="background-color: white; color: black; text-align: center; font-size: 12px; padding: 10px 0;">
+  Copyright © 2025 konkiyazhikamkudumbayogam
+</footer>
+</html>
+ 
+ 
+
+
+
+
+
+
+
+
+

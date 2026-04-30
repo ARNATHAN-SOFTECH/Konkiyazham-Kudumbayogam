@@ -1,0 +1,228 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Donations - </title>
+
+  <!-- Favicons -->
+  <link href="{% static 'assets/img/favicon.png' %}" rel="icon">
+  <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@400;600&family=Raleway:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/aos/aos.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+  <!-- Main CSS -->
+  <link href="{% static 'assets/css/main.css' %}" rel="stylesheet">
+
+  <style>
+    /* Make footer stick to bottom */
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+    }
+
+    main {
+      flex: 1;
+    }
+
+    /* Footer styling */
+    footer {
+      background-color: white;
+      color: black;
+      text-align: center;
+      font-size: 12px;
+      padding: 10px 0;
+    }
+
+    /* Header styling */
+    .site-header { background: #c2b3d9; }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; padding: 15px 30px; }
+
+    /* Navigation */
+    .nav-wrapper { flex: 1 1 auto; }
+    .nav-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+    }
+    .nav-list li { position: relative; }
+    .nav-list a {
+      display: inline-block;
+      text-decoration: none;
+      color: #000;
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 15px;
+      padding: 6px 0;
+    }
+
+    /* Dropdown */
+    .dropdown .drop-toggle { cursor: pointer; display:flex; align-items:center; gap:6px; }
+    .dropdown .caret { font-size: 12px; line-height:1; }
+    .dropdown-menu {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      display: none;
+      min-width: 190px;
+      background: #fff;
+      padding: 6px 0;
+      margin: 0;
+      border-radius: 6px;
+      box-shadow: 0 8px 22px rgba(0,0,0,0.12);
+      z-index: 9999;
+    }
+    .dropdown-menu li { margin: 0; }
+    .dropdown-menu a {
+      display: block;
+      padding: 10px 14px;
+      color: #222;
+      font-weight: 600;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .dropdown-menu a:hover,
+    .dropdown-menu a:focus { background: #f3f3f3; color: #000; }
+
+    .dropdown:hover > .dropdown-menu,
+    .dropdown:focus-within > .dropdown-menu { display: block; }
+
+    /* CTA button */
+    .cta-button {
+      background-color: #ff6f00;
+      font-size: 13px;
+      font-weight: bold;
+      padding: 6px 16px;
+      text-decoration: none;
+      border: none;
+      border-radius: 0;
+      cursor: pointer;
+      color: white !important;
+      transition: background-color 0.3s ease;
+      white-space: nowrap;
+    }
+    .cta-button:hover { background-color: rgb(222, 125, 6); }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header id="header" class="site-header">
+    <div class="container-fluid header-inner">
+      <nav class="nav-wrapper" aria-label="Main navigation">
+        <ul class="nav-list">
+          <li><a href="{% url 'home' %}">HOME</a></li>
+          <li><a href="{% url 'donations' %}">DONATIONS</a></li>
+          <li><a href="{% url 'finance' %}">FINANCE</a></li>
+          <li><a href="{% url 'vision' %}">VISION</a></li>
+          <li><a href="{% url 'community-updates' %}">COMMUNITY UPDATES</a></li>
+          <li><a href="{% url 'contact' %}">CONTACT</a></li>
+          <li class="dropdown">
+            <a href="#" class="drop-toggle" aria-haspopup="true" aria-expanded="false">
+              REGIONS <span class="caret">▾</span>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+              <li><a role="menuitem" href="{% url 'chathanoor' %}">CHATHANOOR</a></li>
+              <li><a role="menuitem" href="{% url 'kollam' %}">KOLLAM</a></li>
+              <li><a role="menuitem" href="{% url 'kottiyam' %}">KOTTIYAM</a></li>
+              <li><a role="menuitem" href="{% url 'veliyam' %}">VELIYAM</a></li>
+              <li><a role="menuitem" href="{% url 'attingal' %}">ATTINGAL</a></li>
+              <li><a role="menuitem" href="{% url 'trivandrum' %}">TRIVANDRUM</a></li>
+              <li><a role="menuitem" href="{% url 'bangalore' %}">BANGALORE</a></li>
+            </ul>
+          </li>
+          <li><a href="{% url 'familytree' %}">FAMILY TREE</a></li>
+          <li><a href="{% url 'register' %}">REGISTER</a></li>
+          <li><a href="{% url 'login' %}">LOGIN</a></li>
+        </ul>
+      </nav>
+      <a href="#" class="cta-button">CALL TO ACTION</a>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main>
+    <section class="region-section py-5">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-md-6 text-start">
+            <h1 class="fw-bold mb-4" style="font-size: 42px; line-height: 1.3; color:#1a1a1a;">
+              Accomplish More With Trusted Expertise By <br>Your Side
+            </h1>
+            <p class="mb-4" style="font-size: 18px; color:#555;">
+              Our expertise and support are designed to elevate your journey to success.
+            </p>
+            <a href="#" class="btn btn-primary px-4 py-2" style="background:#f45d26; border:none; font-weight:600; text-transform:uppercase;">
+              Get Started
+            </a>
+          </div>
+          <div class="col-md-6">
+            <img src="{% static 'assets/img/dp4.jpg' %}" alt="Chathanoor" class="img-fluid rounded shadow">
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    Copyright © 2025 konkiyazhikamkudumbayogam
+  </footer>
+
+  <!-- JS: Dropdown toggle -->
+  <script>
+    (function () {
+      document.querySelectorAll('.drop-toggle').forEach(function(btn){
+        btn.addEventListener('click', function(e){
+          e.preventDefault();
+          var menu = btn.nextElementSibling;
+          var isOpen = btn.getAttribute('aria-expanded') === 'true';
+          document.querySelectorAll('.dropdown .dropdown-menu').forEach(function(m){
+            if (m !== menu) { m.style.display = 'none'; m.previousElementSibling.setAttribute('aria-expanded','false'); }
+          });
+          if (!isOpen) { menu.style.display = 'block'; btn.setAttribute('aria-expanded','true'); }
+          else { menu.style.display = 'none'; btn.setAttribute('aria-expanded','false'); }
+        });
+      });
+      document.addEventListener('click', function(e){
+        if (!e.target.closest('.dropdown')) {
+          document.querySelectorAll('.dropdown .dropdown-menu').forEach(function(m){
+            m.style.display = 'none';
+            if (m.previousElementSibling) m.previousElementSibling.setAttribute('aria-expanded','false');
+          });
+        }
+      });
+      document.addEventListener('keydown', function(e){
+        if (e.key === 'Escape') {
+          document.querySelectorAll('.dropdown .dropdown-menu').forEach(function(m){
+            m.style.display = 'none';
+            if (m.previousElementSibling) m.previousElementSibling.setAttribute('aria-expanded','false');
+          });
+        }
+      });
+    })();
+  </script>
+
+</body>
+</html>

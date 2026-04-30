@@ -1,0 +1,229 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Community Updates</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <link href="{% static 'assets/img/favicon.png' %}" rel="icon">
+  <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@400;600&family=Raleway:wght@400;600&display=swap" rel="stylesheet">
+
+  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/aos/aos.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/css/main.css' %}" rel="stylesheet">
+
+  <style>
+    /* Header container */
+    .site-header { background: #c2b3d9; }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 30px;
+    }
+
+    /* Navigation */
+    .nav-wrapper { flex: 1 1 auto; }
+    .nav-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+    }
+    .nav-list li { position: relative; }
+    .nav-list a {
+      display: inline-block;
+      text-decoration: none;
+      color: #000;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      font-size: 15px;
+      padding: 6px 0;
+    }
+
+    /* Dropdown */
+    .dropdown .drop-toggle { cursor: pointer; display:flex; align-items:center; gap:6px; }
+    .dropdown-menu {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      display: none;
+      min-width: 190px;
+      background: #fff;
+      padding: 6px 0;
+      border-radius: 6px;
+      box-shadow: 0 8px 22px rgba(0,0,0,0.12);
+      z-index: 9999;
+    }
+    .dropdown:hover > .dropdown-menu { display: block; }
+    .dropdown-menu li { list-style: none; }
+    .dropdown-menu a {
+      display: block;
+      padding: 8px 15px;
+      text-transform: none;
+      font-weight: 400;
+      color: #333;
+    }
+
+    /* CTA */
+    .cta-button {
+      background: #ff6f00;
+      font-size: 13px;
+      font-weight: bold;
+      padding: 6px 16px;
+      text-decoration: none;
+      color: white !important;
+      transition: background-color 0.3s ease;
+    }
+    .cta-button:hover { background-color: rgb(222, 125, 6); }
+
+    /* Community Styles */
+    .community-wrapper {
+      background-color: #fff2e9;
+      padding: 40px 0 60px 0; 
+      min-height: calc(100vh - 120px); 
+    }
+
+    .community-section {
+      background: url("{% static 'assets/img/bg1.png' %}") center/cover no-repeat;
+      padding: 40px 20px;
+      text-align: center;
+      max-width: 1000px;
+      margin: 0 auto;
+      border-radius: 4px;
+    }
+
+    .community-section, .community-section * { color: #fff !important; }
+    .community-section h2 { font-size: 26px; font-weight: bold; margin-bottom: 20px; }
+    .community-section p { max-width: 750px; margin: 0 auto 40px; font-size: 14px; }
+
+    .community-boxes { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+    .community-box { border: 1px solid #fff; padding: 30px 20px; width: 280px; }
+    .community-box h3 { font-size: 16px; margin-bottom: 15px; }
+    .community-box a {
+      border: 1px solid #fff;
+      padding: 6px 20px;
+      color: #fff;
+      text-decoration: none;
+      font-size: 12px;
+    }
+    .community-box a:hover { background: #fff; color: #000 !important; }
+
+    /* Footer */
+    .site-footer {
+      background-color: #ffffff; 
+      color: #333 !important; /* Overriding white important from section if nested */
+      text-align: center;
+      font-size: 13px;
+      padding: 20px 0; 
+      width: 100%;
+      border-top: 1px solid rgba(0,0,0,0.05); 
+    }
+  </style>
+</head>
+
+<body>
+
+  <header id="header" class="site-header">
+    <div class="container-fluid header-inner">
+      <nav class="nav-wrapper">
+        <ul class="nav-list">
+          <li><a href="{% url 'home' %}">HOME</a></li>
+          <li><a href="{% url 'donations' %}">DONATIONS</a></li>
+          <li><a href="{% url 'finance' %}">FINANCE</a></li>
+          <li><a href="{% url 'vision' %}">VISION</a></li>
+          <li><a href="{% url 'community-updates' %}">COMMUNITY UPDATES</a></li>
+          <li><a href="{% url 'contact' %}">CONTACT</a></li>
+          <li class="dropdown">
+            <a href="#" class="drop-toggle">REGIONS <span class="caret">▾</span></a>
+            <ul class="dropdown-menu">
+              <li><a href="{% url 'chathanoor' %}">CHATHANOOR</a></li>
+              <li><a href="{% url 'kollam' %}">KOLLAM</a></li>
+              <li><a href="{% url 'kottiyam' %}">KOTTIYAM</a></li>
+              <li><a href="{% url 'veliyam' %}">VELIYAM</a></li>
+              <li><a href="{% url 'attingal' %}">ATTINGAL</a></li>
+              <li><a href="{% url 'trivandrum' %}">TRIVANDRUM</a></li>
+              <li><a href="{% url 'bangalore' %}">BANGALORE</a></li>
+            </ul>
+          </li>
+          <li><a href="{% url 'familytree' %}">FAMILY TREE</a></li>
+          <li><a href="{% url 'register' %}">REGISTER</a></li>
+          <li><a href="{% url 'login' %}">LOGIN</a></li>
+        </ul>
+      </nav>
+      <a href="#" class="cta-button">CALL TO ACTION</a>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="community-wrapper">
+      <section class="community-section">
+        <h2>COMMUNITY UPDATES</h2>
+        <p>
+          This section brings you the latest news, notices, and special messages from our Kudumbayogam. 
+          From upcoming events and celebrations to important announcements and achievements, you’ll always find what’s happening in our community right here.
+        </p>
+
+        <div class="community-boxes">
+          <div class="community-box">
+            <h3>EVENT CALENDAR</h3>
+            <p>“Keep track of upcoming family gatherings, celebrations, and special occasions—all in one place.”</p>
+            <a href="#">MORE</a>
+          </div>
+
+          <div class="community-box">
+            <h3>OUR GALLERY</h3>
+            <p>“Relive precious moments through photos and videos that capture the spirit of our family.”</p>
+            <a href="#">MORE</a>
+          </div>
+
+          <div class="community-box">
+            <h3>ANNOUNCEMENTS</h3>
+            <p>“Stay informed with the latest updates, news, and important notices from our Kudumbayogam.”</p>
+            <a href="#">MORE</a>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    Copyright © 2025 konkiyazhikamkudumbayogam
+  </footer>
+
+  <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
+  <script src="{% static 'assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+
+  <script>
+    // Simple dropdown toggle for mobile
+    document.querySelectorAll('.drop-toggle').forEach(function(btn){
+      btn.addEventListener('click', function(e){
+        if (window.innerWidth < 992) {
+          e.preventDefault();
+          let menu = btn.nextElementSibling;
+          menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

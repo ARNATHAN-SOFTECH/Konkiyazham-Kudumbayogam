@@ -1,0 +1,242 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registration Successful</title>
+  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <style>
+    /* Reset and Base Styles */
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+    }
+
+    body {
+      background: linear-gradient(to right, #6da0d3, #7a6b92);
+      color: white;
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      flex-direction: column; /* Stack header on top of content */
+    }
+
+    /* Header Main Container */
+    .site-header {
+      background: #c2b3d9;
+      width: 100%;
+      position: relative;
+      z-index: 1000;
+      flex-shrink: 0; /* Prevent header from shrinking */
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 30px;
+    }
+
+    /* Navigation Layout */
+    .nav-wrapper { 
+      flex: 1 1 auto; 
+    }
+
+    .nav-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .nav-list li { 
+      position: relative; 
+    }
+
+    .nav-list a {
+      display: inline-block;
+      text-decoration: none;
+      color: #000;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      font-size: 15px;
+      padding: 6px 0;
+      transition: color 0.3s ease;
+    }
+
+    /* Dropdown Styling */
+    .dropdown .drop-toggle { 
+      cursor: pointer; 
+      display: flex; 
+      align-items: center; 
+      gap: 6px; 
+    }
+
+    .dropdown .caret { 
+      font-size: 12px; 
+      line-height: 1; 
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      display: none;
+      min-width: 190px;
+      background: #fff;
+      padding: 6px 0;
+      margin: 0;
+      border-radius: 6px;
+      box-shadow: 0 8px 22px rgba(0,0,0,0.12);
+      z-index: 9999;
+      list-style: none;
+    }
+
+    .dropdown-menu a {
+      display: block;
+      padding: 10px 14px;
+      color: #222;
+      font-weight: 600;
+      text-decoration: none;
+      white-space: nowrap;
+      text-transform: uppercase;
+    }
+
+    .dropdown-menu a:hover,
+    .dropdown-menu a:focus {
+      background: #f3f3f3;
+      color: #000;
+    }
+
+    /* Hover logic for Desktop */
+    .dropdown:hover > .dropdown-menu {
+      display: block;
+    }
+
+    /* Call to Action Button */
+    .cta-button {
+      background-color: #ff6f00; 
+      color: white !important;
+      font-size: 13px;
+      font-weight: bold;
+      padding: 8px 20px;
+      text-decoration: none;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .cta-button:hover {
+      background-color: rgb(222, 125, 6);
+      transform: translateY(-1px);
+    }
+
+    /* Success Content Wrapper */
+    .content-wrapper {
+      flex-grow: 1; /* Takes up all remaining space */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .success-card {
+      background-color: rgba(255, 255, 255, 0.15);
+      border-radius: 15px;
+      padding: 40px 50px;
+      text-align: center;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(8px);
+      max-width: 450px;
+      width: 100%;
+    }
+
+    .success-card h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+      color:rgba(12, 14, 45, 0.97);;
+    }
+
+    .success-card p {
+      font-size: 1rem;
+      margin-bottom: 25px;
+    }
+
+    .btn-home {
+      background-color: white;
+      color: #351b57;
+      font-weight: 600;
+      padding: 10px 30px;
+      border-radius: 30px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      display: inline-block;
+    }
+
+    .btn-home:hover {
+      background-color: #401258;
+      color: white;
+    }
+
+    .success-icon {
+      font-size: 60px;
+      margin-bottom: 20px;
+      color: #00ffb3;
+    }
+  </style>
+</head>
+<body>
+
+  <header id="header" class="site-header">
+    <div class="container-fluid header-inner">
+      <nav class="nav-wrapper" aria-label="Main navigation">
+        <ul class="nav-list">
+          <li><a href="{% url 'home' %}">HOME</a></li>
+          <li><a href="{% url 'donations' %}">DONATIONS</a></li>
+          <li><a href="{% url 'finance' %}">FINANCE</a></li>
+          <li><a href="{% url 'vision' %}">VISION</a></li>
+          <li><a href="{% url 'community-updates' %}">COMMUNITY UPDATES</a></li>
+          <li><a href="{% url 'contact' %}">CONTACT</a></li>
+          <li class="dropdown">
+            <a href="#" class="drop-toggle">
+              REGIONS <span class="caret">▾</span>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+              <li><a role="menuitem" href="{% url 'chathanoor' %}">CHATHANOOR</a></li>
+              <li><a role="menuitem" href="{% url 'kollam' %}">KOLLAM</a></li>
+              <li><a role="menuitem" href="{% url 'kottiyam' %}">KOTTIYAM</a></li>
+              <li><a role="menuitem" href="{% url 'veliyam' %}">VELIYAM</a></li>
+              <li><a role="menuitem" href="{% url 'attingal' %}">ATTINGAL</a></li>
+              <li><a role="menuitem" href="{% url 'trivandrum' %}">TRIVANDRUM</a></li>
+              <li><a role="menuitem" href="{% url 'bangalore' %}">BANGALORE</a></li>
+            </ul>
+          </li>
+          <li><a href="{% url 'familytree' %}">FAMILY TREE</a></li>
+          <li><a href="{% url 'register' %}">REGISTER</a></li>
+          <li><a href="{% url 'login' %}">LOGIN</a></li>
+        </ul>
+      </nav>
+      <a href="#" class="cta-button">CALL TO ACTION</a>
+    </div>
+  </header>
+
+  <div class="content-wrapper">
+    <div class="success-card">
+      <div class="success-icon">✅</div>
+      <h1>Registration Successful!</h1>
+      <p>Thank you for registering.<br>Your information has been saved successfully.</p>
+      <a href="{% url 'home' %}" class="btn-home">Go to Home</a>
+    </div>
+  </div>
+
+</body>
+</html>
