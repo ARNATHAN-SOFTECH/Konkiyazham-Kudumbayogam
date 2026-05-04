@@ -101,20 +101,30 @@ from django.conf import settings
 from .forms import RegisterForm
 
 
+from django.shortcuts import render, redirect
+from django.core.mail import send_mail
+from django.conf import settings
+from .forms import RegisterForm
+
+
 def register(request):
     if request.method == "POST":
-        form = RegisterForm(request.POST)
+        form = RegisterForm(request.POST, request.FILES)
 
         if form.is_valid():
-            user = form.save()
+            user = form.save(commit=False)
 
-            
+            # Optional: handle hobbies if multiple
+            if 'hobbies' in form.cleaned_data:
+                user.hobbies = ",".join(form.cleaned_data['hobbies'])
+
+            user.save()
+
             first_name = user.first_name
             last_name = user.last_name
             email = user.email
             country = user.country
 
-            
             subject = "Registration Successful"
             message = f"""
 Dear {first_name},
@@ -132,7 +142,6 @@ Regards,
 Konkiyazhikam Kudumbayogam
 """
 
-                    
             send_mail(
                 subject,
                 message,
