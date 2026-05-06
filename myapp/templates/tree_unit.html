@@ -1,0 +1,17 @@
+<li class="tree-item">
+    <div class="node couple">
+        <span class="person">{{ unit.husband.name }}</span>
+        <span class="and">&</span>
+        <span class="person">{{ unit.wife.name }}</span>
+    </div>
+
+    {% if unit.children.all %}
+    <ul class="children">
+        {% for child in unit.children.all %}
+            <li class="tree-item">
+                {% include "tree_node.html" with person=child %}
+            </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</li>

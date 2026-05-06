@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Family Tree - </title>
+  <title>Family Tree - Konkiyazham Kudumbayogam</title>
   <meta name="description" content="">
   <meta name="keywords" content="">
 
@@ -17,6 +17,7 @@
   <link href="https://fonts.googleapis.com" rel="preconnect">
   <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@400;600&family=Raleway:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <!-- Vendor CSS Files -->
   <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
@@ -37,7 +38,6 @@
       <ul class="nav-list">
         <li><a href="{% url 'home' %}">HOME</a></li>
         <li><a href="{% url 'donations' %}">DONATIONS</a></li>
-        <li><a href="{% url 'finance' %}">FINANCE</a></li>
         <li><a href="{% url 'vision' %}">VISION</a></li>
         <li><a href="{% url 'community-updates' %}">COMMUNITY UPDATES</a></li>
         <li><a href="{% url 'contact' %}">CONTACT</a></li>
@@ -194,260 +194,169 @@ margin-bottom:50px;
 color:#666;
 }
 
+/* Scroll Top */
+
+#scrollTopBtn{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#ff6b00;
+color:white;
+border:none;
+padding:12px;
+border-radius:50%;
+display:none;
+cursor:pointer;
+font-size: 14px;
+
+width:45px;
+height:45px;
+
+text-decoration:none;
+transition:.3s;
+}
 
 /* =========================
-TREE STRUCTURE
+TREE BASE
 ========================= */
 
+.tree {
+  width: 100%;
+  overflow-x: auto;
+  text-align: center;
+}
+
+/* all ul */
 .tree ul {
+  position: relative;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
-  gap:5px;
-  padding-top: 20px;
+  padding: 20px 40px 0;
+  min-width: max-content;
+}
+
+/* all li */
+.tree li {
+  display: inline-block;
+  vertical-align: top;
+  text-align: center;
+  list-style: none;
   position: relative;
-  flex-wrap: nowrap; /* important */
+  padding: 30px 15px 0;
 }
-
-/* vertical from parent */
-.tree ul::after{
-content:"";
-position:absolute;
-top:0;
-left:50%;
-width:2px;
-height:10px;
-background:#444;
-transform:translateX(-50%);
-}
-
-/* horizontal connector */
-.tree ul::before{
-content:"";
-position:absolute;
-top:20px;
-left:10%;
-right:10%;
-height:2px;
-background:#444;
-}
-
-/* child node wrapper */
-.tree li{
-list-style:none;
-position:relative;
-text-align:center;
-padding-top:15px;
-}
-
-/* vertical drop to child */
-.tree li::before{
-content:"";
-position:absolute;
-top:20px;
-left:50%;
-width:2px;
-height:15px;
-background:#444;
-transform:translateX(-50%);
-}
-
-/* remove connectors above root */
-.tree > ul::before,
-.tree > ul::after{
-display:none;
-}
-
-.tree > ul > li::before{
-display:none;
-}
-
 
 /* =========================
-COLLAPSIBLE MAIN BRANCHES
+CONNECTORS
 ========================= */
 
-#children1,
-#children2,
-#children3{
-display:none;
+/* left + right connector lines */
+.tree li::before,
+.tree li::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 50%;
+  height: 30px;
+  border-top: 2px solid #bbb;
 }
 
-#children1.show,
-#children2.show,
-#children3.show{
-display:flex;
+/* left half */
+.tree li::before {
+  left: 0;
+  border-right: 2px solid #bbb;
 }
 
+/* right half */
+.tree li::after {
+  right: 0;
+}
+
+
+
+/* remove unnecessary lines */
+.tree li:only-child::before,
+.tree li:only-child::after {
+  display: none;
+}
+
+.tree li:first-child::before {
+  border: none;
+}
+
+.tree li:last-child::after {
+  border: none;
+}
+
+/* vertical line from parent to children */
+.tree ul ul::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 2px;
+  height: 20px;
+  background: #bbb;
+  transform: translateX(-50%);
+}
+
+/* keep horizontal line even for childless nodes */
+.tree li:not(:has(ul))::before,
+.tree li:not(:has(ul))::after {
+  display: block;
+}
 
 /* =========================
-VERTICAL DESCENDANT BRANCHES
-(children4 to children9)
+EXPAND / COLLAPSE
 ========================= */
 
-#children4,
-#children5,
-#children6,
-#children7,
-#children8,
-#children9{
-display:none;
-flex-direction:column;
-align-items:center;
-gap:5px;
-padding-top:15px;
-margin-top:15px;
-position:relative;
+.tree li ul {
+  display: none;
 }
 
-#children4.show,
-#children5.show,
-#children6.show,
-#children7.show,
-#children8.show,
-#children9.show{
-display:flex;
+.tree li.open > ul {
+  display: flex;
 }
 
-/* vertical trunk */
-#children4::before,
-#children5::before,
-#children6::before,
-#children7::before,
-#children8::before,
-#children9::before{
-content:"";
-position:absolute;
-top:0;
-left:50%;
-width:2px;
-height:100%;
-background:#444;
-transform:translateX(-50%);
+/* hide vertical line if no children OR not opened */
+.tree li:not(.open) > ul::before {
+  display: none;
 }
 
-#children4 > li,
-#children5 > li,
-#children6 > li,
-#children7 > li,
-#children8 > li,
-#children9 > li{
-position:relative;
-padding-top:0;
+/* hide vertical line for nodes with no child UL */
+.tree li:not(:has(ul)) > ul::before {
+  display: none;
 }
 
+/* hide vertical line unless node is open */
+.tree li > ul::before {
+  display: none;
+}
+
+.tree li.open > ul::before {
+  display: block;
+}
 
 /* =========================
-PAPPU CHANNAR SPOUSE BRANCHES
+NODE
 ========================= */
 
-#children2a,
-#children2b{
-display:none;
-flex-direction:column;
-align-items:center;
-gap:10px;
-padding-top:25px;
-margin-top:10px;
-position:relative;
+.node {
+  display: inline-block;
+  padding: 10px 18px;
+  border-radius: 25px;
+  border: 2px solid #ff6b00;
+  background: #fff;
+  font-size: 13px;
+  min-width: 110px;
+  position: relative;
+  z-index: 2;
+  cursor: pointer;
 }
 
-#children2a.show,
-#children2b.show{
-display:flex;
+.node:hover {
+  background: #ff6b00;
+  color: #fff;
 }
-
-#children2a::before,
-#children2b::before{
-content:"";
-position:absolute;
-top:0;
-left:50%;
-width:2px;
-height:100%;
-background:#444;
-transform:translateX(-50%);
-}
-
-
-/* =========================
-NODES
-========================= */
-
-.node{
-display:inline-block;
-padding:10px 20px;
-border:2px solid #ff6b00;
-border-radius:20px;
-background:#fff;
-cursor:pointer;
-font-weight:500;
-transition:.3s;
-position:relative;
-z-index:2;
-font-size: 12px;
-}
-
-.node:hover{
-background:#ff6b00;
-color:#fff;
-}
-
-
-/* expand arrows */
-.root-toggle::after,
-.child-toggle::after{
-content:" ▼";
-font-size:10px;
-}
-
-.root-toggle.open::after,
-.child-toggle.open::after{
-content:" ▲";
-}
-
-
-/* spouse text */
-.spouse{
-display:block;
-font-weight:400;
-margin-top:4px;
-color:#555;
-}
-
-
-
-.note{
-display:block;
-font-size:10px;
-font-style:italic;
-color:#888;
-margin-top:4px;
-}
-
-
-/* =========================
-MOBILE
-========================= */
-
-@media(max-width:768px){
-
-.tree{
-justify-content:flex-start;
-overflow-x:auto;
-}
-
-.tree ul{
-min-width:950px;
-}
-
-.page-title{
-font-size:30px;
-}
-
-}
-
-
 </style>
 
 </head>
@@ -459,312 +368,59 @@ font-size:30px;
 
     <p class="page-subtitle">Konkiyazhikam Kudumbayogam</p>
     <div class="tree-container">
-    <div class="tree">
-
-      <ul>
-          <li>
-
-              <!-- ROOT -->
-              <div class="node root-toggle"
-              data-target="children1">
-              Narayanan
-              </div>
-
-                  <ul id="children1">
-
-                  <!-- KRISHNAN -->
-                  <li>
-
-                      <div class="node child-toggle" data-target="children4"> Krishnan <span class="spouse">Kochali</span></div>
-
-                          <ul id="children4">
-
-                              <li><div class="node">Kunjupilla <span class="spouse">Parukutty</span></div></li>
-
-                              <li><div class="node">Gopalan <span class="spouse">Janaki</span></div></li>
-
-                              <li><div class="node">Lekshmikutty <span class="spouse">Raghavan</span></div></li>
-
-                              <li><div class="node">Bhavani <span class="spouse">K Mahadevan &</span><span class="spouse">K Sekharan</span></div></li>
-
-                              <li><div class="node">Karunakaran <span class="spouse">Karthiyayini</span></div></li>
-
-                              <li><div class="node">Raghavan<span class="note">(Died Young)</span></div></li>
-
-                              <li><div class="node">Karthiyayini<span class="note">(Died Young)</span></div></li>
-
-                              <li><div class="node">Kochu Karthiyani <span class="spouse">Madhayan</span><span class="note">(Madhenkonam)</span></div></li>
-
-                          </ul>
-
-                  </li>
-
-
-                  <li>
-
-                    <div class="node child-toggle"data-target="children2">Pappu Channar</div>
-
-                        <ul id="children2">
-
-                              <!-- Wife 1 -->
-                              <li>
-
-                              <div class="node child-toggle" data-target="children2a">Kunjukunjamma</div>
-
-                                  <ul id="children2a">
-
-                                  <li><div class="node">K P Sankaran<span class="note">(Died Young)</span></div></li>
-
-                                  <li><div class="node">K P Sukumaran<span class="spouse">G Sumathi</span></div></li>
-
-                                  <li><div class="node">K P Bhaskaran<span class="spouse">M Bhavani</span></div></li>
-
-                                  <li><div class="node">K P Vasudevan<span class="note">(Died Young)</span></div></li>
-
-                                  <li><div class="node">K P Karunakaran<span class="note">(Died Young)</span></div></li>
-
-                                  <li><div class="node">K P Kunjunni<span class="spouse">G Rajamma</span></div></li>
-
-                                  <li><div class="node">K Malathi<span class="spouse">K Kunjukrishnan</span></div></li>
-
-                                  <li><div class="node">K P Ramachandran<span class="spouse">P Syamalakumari</span></div></li>
-
-                                  </ul>
-
-                              </li>
-
-
-                              <!-- Wife 2 -->
-                              <li>
-
-                              <div class="node child-toggle" data-target="children2b">Karthiyani</div>
-
-                                  <ul id="children2b">
-
-                                  <li><div class="node">K P Sudheendran<span class="spouse">Sarojini C K</span></div></li>
-
-                                  <li><div class="node">K P Thankamma<span class="spouse">Gopalan K S</span></div></li>
-
-                                  <li><div class="node">K P Sivarajan<span class="spouse">Ananda Bai</span><span class="note">(Baby)</span></div></li>
-
-                                  <li><div class="node">K P Chandrasenan <span class="spouse">Leela R</span></div></li>
-
-                                  <li><div class="node">K P Prabhakaran <span class="spouse">Saraswathy K</span></div></li>
-
-                                  <li><div class="node">K P Gomathi<span class="spouse">Sreedhara Panicker</span></div></li>
-
-                                  </ul>
-
-                              </li>
-
-                        </ul>
-
-                  </li>
-
-
-                  <li>
-
-                        <div class="node child-toggle" data-target="children5">Neelakantan<span class="spouse">Chempakakutty</span></div>
-
-                            <ul id="children5">
-
-                            <li><div class="node">Anandavally<span class="spouse">Sukumaran</span></div></li>
-
-                            <li><div class="node">Rajan<span class="spouse">Prabhavathy</span></div></li>
-
-                            <li><div class="node">Sivaprasad<span class="note">(Died Young)</span></div></li>
-
-                            <li><div class="node">Mani<span class="spouse">Sarala</span></div></li>
-
-                            <li><div class="node">Kanakamma<span class="spouse">Vidyadharan</span></div></li>
-
-                            </ul>
-
-                  </li>
-
-
-                  <li>
-
-                      <div class="node child-toggle" data-target="children6">Narayani<span class="spouse">Govindan</span></div>
-
-                          <ul id="children6">
-
-                          <li><div class="node">G Purushothaman<span class="note">Died Young</span></div></li>
-
-                          <li><div class="node">G Bhargayi<span class="spouse">Sukumaran</span></div></li>
-
-                          <li><div class="node">G Kunjuraman<span class="note">Died Young</span></div></li>
-
-                          <li><div class="node">G Janardhanan & <br> G Lakshmanan<span class="spouse">Indira</span></div></li>
-
-                          <li><div class="node">G Rajamma<span class="spouse">Kunjunni</span></div></li>
-
-                          <li><div class="node">G Sumathi<span class="spouse">K P Sukumaran</span></div></li>
-
-                          <li><div class="node">G Somarajan<span class="note">Died Young</span></div></li>
-
-                          <li><div class="node">G Madhavan<span class="spouse">Lalithambika</span></div></li>
-
-                          <li><div class="node">N G Pushpavally<span class="spouse">Gangadharan</span></div></li>
-
-                          </ul>
-
-                  </li>
-
-                  <li>
-
-                      <div class="node child-toggle" data-target="children7">Kesavan<span class="spouse">Parvathy</span></div>
-
-                          <ul id="children7">
-
-                          <li><div class="node">Raghavan<span class="spouse">Sarojini & </span><span class="spouse">Kamalamma</span></div></li>
-
-                          <li><div class="node">Subhashiuni<span class="spouse">Sukumaran</span></div></li>
-
-                          <li><div class="node">Kamalasanan<span class="note">Died Young</span></div></li>
-
-                          <li><div class="node">Sooryadasan<span class="spouse">Sarasamma</span></div></li>
-
-                          <li><div class="node">Chandrasenan<span class="spouse">Sarasamma</span></div></li>
-
-                          <li><div class="node">Bhasurangi<span class="spouse">Vijayan</span></div></li>
-
-                          <li><div class="node">Sudhakaran<span class="spouse">Vimala</span></div></li>
-
-                          </ul>
-
-                  </li>
-
-<li>
-
-
-
-
-
-
-
-
-<div class="node child-toggle"
-data-target="children3">
-Appi
-</div>
-
-<ul id="children3">
-
-<!-- spouse 1 -->
-<li>
-
-<div class="node">
-Sankaran
-</div>
-
-</li>
-
-
-<!-- spouse 2 -->
-<li>
-
-<div class="node">
-Krishnan
-</div>
-
-</li>
-
-
-<!-- Children branch -->
-<li>
-
-<div class="node child-toggle"
-data-target="children8">
-Children
-</div>
-
-<ul id="children8">
-
-<li><div class="node">Pankajakshy<span class="spouse">Govindan</span></div></li>
-
-<li><div class="node">Lekshmikutty<span class="spouse">Divakaran Panickar</span></div></li>
-
-<li><div class="node">Thankamma<span class="spouse">Chellappan</span></div></li>
-
-<li><div class="node">Sukumaran<span class="spouse">Santhamma</span></div></li>
-
-<li><div class="node">Prabhakaran<span class="spouse">Suseela & </span><span class="spouse">Vasumathy</span></div></li>
-
-<li><div class="node">Sarasamma</div></li>
-
-<li><div class="node">Vilasini<span class="spouse">Gangadharan</span></div></li>
-
-<li><div class="node">Purushothaman<span class="spouse">Kalavathy</span></div></li>
-
-</ul>
-
-</li>
-
-</ul>
-
-</li>
-
-<li>
-
-<div class="node child-toggle"
-data-target="children9">
-Unni
-<span class="spouse">Kesavan</span>
-</div>
-
-<ul id="children9">
-
-<li><div class="node">Chempakutty<span class="spouse">Kunjupilla</span></div></li>
-
-<li><div class="node">Rasangini<span class="spouse">Gopalan</span></div></li>
-
-
-</ul>
-
-</li>
-
-</ul>
-
-</li>
-</ul>
-</div>
+        <div class="tree">
+            <ul>
+{% for person in roots %}
+    {% include "tree_node.html" with person=person %}
+{% endfor %}
+            </ul>
+        </div>
 </div>
 
 </div>
 </section>
 
 
+  <button id="scrollTopBtn" aria-label="Scroll to top">
+    <i class="fas fa-angles-up"></i></button>
+       <script>
+// ================================
+// SCROLL TO TOP
+// ================================
 
-<script>
-document.addEventListener("DOMContentLoaded", function(){
+document.addEventListener("DOMContentLoaded", () => {
+  const scrollBtn = document.getElementById('scrollTopBtn');
 
-document.querySelectorAll(".root-toggle, .child-toggle")
-.forEach(function(node){
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 200) {
+      scrollBtn.style.display = 'block';
+    } else {
+      scrollBtn.style.display = 'none';
+    }
+  });
 
-node.addEventListener("click", function(e){
-
-e.stopPropagation();
-
-const target=this.dataset.target;
-const branch=document.getElementById(target);
-
-if(branch){
-branch.classList.toggle("show");
-this.classList.toggle("open");
-}
-
+  scrollBtn?.addEventListener('click', () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
 });
-
-});
-
-});
-
-
-
-
 </script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".node").forEach(function(node){
+        node.addEventListener("click", function(e){
+            e.stopPropagation();
 
+            const li = this.closest("li");
+
+            // toggle current branch
+            li.classList.toggle("open");
+        });
+    });
+});
+</script>
 
 </body>
 </html>

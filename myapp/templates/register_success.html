@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Registration Successful</title>
+  <title>Registration Successful - Konkiyazham Kudumbayogam</title>
   <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
   <style>
     
@@ -118,7 +118,27 @@
     .dropdown:hover > .dropdown-menu {
       display: block;
     }
+/* Scroll Top */
 
+#scrollTopBtn{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#ff6b00;
+color:white;
+border:none;
+padding:12px;
+border-radius:50%;
+display:none;
+cursor:pointer;
+font-size: 14px;
+
+width:45px;
+height:45px;
+
+text-decoration:none;
+transition:.3s;
+}
     /* Call to Action Button */
     .cta-button {
       background-color: #ff6f00; 
@@ -239,5 +259,32 @@
     </div>
   </div>
 
+  <button id="scrollTopBtn" aria-label="Scroll to top">
+    <i class="fas fa-angles-up"></i></button>
+
+       <script>
+// ================================
+// SCROLL TO TOP
+// ================================
+
+document.addEventListener("DOMContentLoaded", () => {
+  const scrollBtn = document.getElementById('scrollTopBtn');
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 200) {
+      scrollBtn.style.display = 'block';
+    } else {
+      scrollBtn.style.display = 'none';
+    }
+  });
+
+  scrollBtn?.addEventListener('click', () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+});
+</script>
 </body>
 </html>

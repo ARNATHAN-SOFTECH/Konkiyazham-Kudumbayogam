@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Community Updates</title>
+  <title>Contact Successful - Konkiyazham Kudumbayogam</title>
   <meta name="description" content="">
   <meta name="keywords" content="">
 
@@ -15,6 +15,7 @@
   <link href="https://fonts.googleapis.com" rel="preconnect">
   <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@400;600&family=Raleway:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
   <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
@@ -129,7 +130,27 @@
     p {
         font-size: 18px;
     }
+/* Scroll Top */
 
+#scrollTopBtn{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#ff6b00;
+color:white;
+border:none;
+padding:12px;
+border-radius:50%;
+display:none;
+cursor:pointer;
+font-size: 14px;
+
+width:45px;
+height:45px;
+
+text-decoration:none;
+transition:.3s;
+}
     .home-btn {
         display: inline-block;
         padding: 12px 24px;
@@ -156,7 +177,6 @@
         <ul class="nav-list">
           <li><a href="{% url 'home' %}">HOME</a></li>
           <li><a href="{% url 'donations' %}">DONATIONS</a></li>
-          {% comment %} <li><a href="{% url 'finance' %}">FINANCE</a></li> {% endcomment %}
           <li><a href="{% url 'vision' %}">VISION</a></li>
           <li><a href="{% url 'community-updates' %}">COMMUNITY UPDATES</a></li>
           <li><a href="{% url 'contact' %}">CONTACT</a></li>
@@ -187,5 +207,32 @@
     <p>We appreciate you reaching out. We'll get back to you shortly.</p>
     <a class="home-btn" href="{% url 'home' %}">Go to Home</a>
   </div>
+  
+  <button id="scrollTopBtn" aria-label="Scroll to top">
+    <i class="fas fa-angles-up"></i></button>
+       <script>
+// ================================
+// SCROLL TO TOP
+// ================================
+
+document.addEventListener("DOMContentLoaded", () => {
+  const scrollBtn = document.getElementById('scrollTopBtn');
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 200) {
+      scrollBtn.style.display = 'block';
+    } else {
+      scrollBtn.style.display = 'none';
+    }
+  });
+
+  scrollBtn?.addEventListener('click', () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+});
+</script>
 </body>
 </html>

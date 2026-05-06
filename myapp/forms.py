@@ -27,12 +27,17 @@ class ContactForm(forms.Form):
 
 
 
-from .models import Register
+from .models import Register, FamilyMember
 
 class RegisterForm(forms.ModelForm):
+    parent = forms.ModelChoiceField(
+        queryset=FamilyMember.objects.all(),
+        required=False,
+        empty_label="Select Parent"
+    )
+
     class Meta:
         model = Register
-        fields = "__all__"
-
+        fields = '__all__'
 
 

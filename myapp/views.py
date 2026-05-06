@@ -2,6 +2,13 @@ from django.shortcuts import render, redirect
 from django.core.mail import send_mail
 from django.conf import settings
 from .forms import ContactForm
+<<<<<<< HEAD
+=======
+from django.urls import path
+from . import views
+from .forms import RegisterForm
+from .models import FamilyMember
+>>>>>>> 9a8595b (Family Tree updated)
 
 def contact(request):
     if request.method == 'POST':
@@ -106,6 +113,7 @@ def success(request):
     return render(request, "success.html")
 
 def familytree(request):
+<<<<<<< HEAD
     return render(request, "familytree.html")
 
 
@@ -117,6 +125,14 @@ from django.core.mail import send_mail
 from django.conf import settings
 from .forms import RegisterForm
 from django.contrib import messages
+=======
+    roots = FamilyMember.objects.filter(parent__isnull=True,     wife_units__isnull=True,
+)
+
+    return render(request, "familytree.html", {
+        "roots": roots
+    })
+>>>>>>> 9a8595b (Family Tree updated)
 
 def register(request):
     if request.method == "POST":
@@ -125,6 +141,7 @@ def register(request):
         if form.is_valid():
             user = form.save(commit=False)
 
+<<<<<<< HEAD
             if 'hobbies' in form.cleaned_data:
                 user.hobbies = ",".join(form.cleaned_data['hobbies'])
 
@@ -145,15 +162,59 @@ Dear {first_name},
 Thank you for registering with Konkiyazhikam Kudumbayogam.
 
 We have successfully received your registration.
+=======
+            # Save user first
+            user.save()
+
+            # 🔥 STEP 1: Get parent from form
+            parent_member = user.parent   # FK (already selected)
+
+            # 🔥 STEP 2: Create FamilyMember node
+            full_name = f"{user.first_name} {user.last_name}"
+
+            new_member = FamilyMember.objects.create(
+                name=full_name,
+                parent=parent_member,
+                
+                user=user   # 🔗 link back to Register
+            )
+
+            # (Optional) If you kept family_member field in Register
+            # user.family_member = new_member
+            # user.save()
+
+            # 🔥 EMAIL (same as yours)
+            subject = "Registration Successful"
+            message = f"""
+Dear {user.first_name},
+
+Thank you for registering with Konkiyazhikam Kudumbayogam.
+
+Name: {user.first_name} {user.last_name}
+Email: {user.email}
+Country: {user.country}
+
+Welcome to our family tree 🎉
+>>>>>>> 9a8595b (Family Tree updated)
 
 Regards,
 Konkiyazhikam Kudumbayogam
 """
 
+<<<<<<< HEAD
             
             admin_subject = "New User Registration"
             admin_message = f"""
 New user registered:
+=======
+            send_mail(
+                subject,
+                message,
+                settings.DEFAULT_FROM_EMAIL,
+                [user.email],
+                fail_silently=False,
+            )
+>>>>>>> 9a8595b (Family Tree updated)
 
 Name: {first_name} {last_name}
 Email: {email}

@@ -1,0 +1,44 @@
+<li>
+
+    <!-- 👤 PERSON -->
+    <div class="node">
+        {{ person.name }}
+    </div>
+
+    <!-- 👇 CHILDREN -->
+    {% if person.children.exists %}
+    <ul>
+        {% for child in person.children.all %}
+
+            {% if child.husband_units.exists %}
+                <!-- 👨‍👩‍👧 CHILD HAS MARRIAGE (AS HUSBAND) -->
+                {% for unit in child.husband_units.all %}
+                    {% if unit.husband.id != person.id %}  <!-- 🛑 prevent loop -->
+                        <li>
+                            {% include "tree_unit.html" with unit=unit %}
+                        </li>
+                    {% endif %}
+                {% endfor %}
+
+            {% elif child.wife_units.exists %}
+                <!-- 👨‍👩‍👧 CHILD HAS MARRIAGE (AS WIFE) -->
+                {% for unit in child.wife_units.all %}
+                    {% if unit.wife.id != person.id %}
+                        <li>
+                            {% include "tree_unit.html" with unit=unit %}
+                        </li>
+                    {% endif %}
+                {% endfor %}
+
+            {% else %}
+                <!-- 👤 NORMAL CHILD -->
+                <li>
+                    {% include "tree_node.html" with person=child %}
+                </li>
+            {% endif %}
+
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+</li>
