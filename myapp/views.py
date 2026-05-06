@@ -3,6 +3,12 @@ from django.core.mail import send_mail
 from django.conf import settings
 from .forms import ContactForm
 
+from django.urls import path
+from . import views
+from .forms import RegisterForm
+from .models import FamilyMember
+from django.contrib import messages
+
 def contact(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
@@ -105,18 +111,19 @@ def bangalore(request):
 def success(request):
     return render(request, "success.html")
 
+
 def familytree(request):
-    return render(request, "familytree.html")
+    roots = FamilyMember.objects.filter(parent__isnull=True,     wife_units__isnull=True,
+)
+
+    return render(request, "familytree.html", {
+        "roots": roots
+    })
 
 
 
 
 
-from django.shortcuts import render, redirect
-from django.core.mail import send_mail
-from django.conf import settings
-from .forms import RegisterForm
-from django.contrib import messages
 
 def register(request):
     if request.method == "POST":

@@ -27,11 +27,10 @@ class FamilyUnitAdmin(admin.ModelAdmin):
 # -----------------------------
 @admin.register(FamilyMember)
 class FamilyMemberAdmin(admin.ModelAdmin):
-    list_display = ("name", "parent", "family_unit", "note")  # ✅ added parent
+    list_display = ("name", "parent", "family_unit", "note")  
     search_fields = ("name",)
     list_filter = ("parent", "family_unit")
 
-    # ✅ IMPORTANT: include parent again
     fields = ("name", "parent", "family_unit", "note", "user")
 
 
