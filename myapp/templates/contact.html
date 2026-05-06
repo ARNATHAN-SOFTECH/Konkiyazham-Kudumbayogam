@@ -404,7 +404,7 @@
         <ul class="nav-list">
           <li><a href="{% url 'home' %}">HOME</a></li>
           <li><a href="{% url 'donations' %}">DONATIONS</a></li>
-          <li><a href="{% url 'finance' %}">FINANCE</a></li>
+          {% comment %} <li><a href="{% url 'finance' %}">FINANCE</a></li> {% endcomment %}
           <li><a href="{% url 'vision' %}">VISION</a></li>
           <li><a href="{% url 'community-updates' %}">COMMUNITY UPDATES</a></li>
           <li><a href="{% url 'contact' %}">CONTACT</a></li>
@@ -430,7 +430,7 @@
         </ul>
       </nav>
 
-      <a href="#" class="cta-button">CALL TO ACTION</a>
+      <a href="{% url 'contact' %}#contact-section" class="cta-button">CALL TO ACTION</a>
     </div>
   </header>
 
@@ -442,7 +442,7 @@
       </div>
     </section>
 
-    <section class="contact-section">
+    <section id="contact-section" class="contact-section">
       <div class="contact-info">
         <h2>Contact Us | ബന്ധപ്പെടൂ</h2>
         <p><em>(We are family — whether you have questions, need help, or want to share memories, we’re here for you.)</em><br>
@@ -480,7 +480,7 @@
       <div class="hero-content">
         <h1>Get Involved Today</h1>
         <p>"Join hands, share stories, and strengthen our family bond."</p>
-        <a href="#" class="btn">CALL TO ACTION ➝</a>
+        <a href="{% url 'contact' %}#contact-section"  class="btn">CALL TO ACTION ➝</a>
       </div>
     </section>
   </main>

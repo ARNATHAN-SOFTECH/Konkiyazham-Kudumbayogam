@@ -24,8 +24,10 @@
   <link href="{% static 'assets/css/main.css' %}" rel="stylesheet">
 
   <style>
+     .site-header {
+    background: #c2b3d9;
+  }
     /* Header container */
-    .site-header { background: #c2b3d9; }
     .header-inner {
       display: flex;
       align-items: center;
@@ -90,23 +92,28 @@
       text-decoration: none;
       color: white !important;
       transition: background-color 0.3s ease;
+      text-decoration: none;
+      
     }
     .cta-button:hover { background-color: rgb(222, 125, 6); }
 
-    /* Community Styles */
+   
     .community-wrapper {
       background-color: #fff2e9;
-      padding: 40px 0 60px 0; 
-      min-height: calc(100vh - 120px); 
+      padding:0; 
+       min-height: 100%;
     }
 
     .community-section {
-      background: url("{% static 'assets/img/bg1.png' %}") center/cover no-repeat;
-      padding: 40px 20px;
-      text-align: center;
-      max-width: 1000px;
-      margin: 0 auto;
-      border-radius: 4px;
+      background: url("{% static 'assets/img/bg1.png' %}") no-repeat center center;
+      background-size: cover;
+      width: 100%;          
+      max-width: 100%;      
+      margin: 0;            
+      min-height: 100vh;    
+      padding: 60px 20px;   
+      border-radius: 0;
+      text-align:center;     
     }
 
     .community-section, .community-section * { color: #fff !important; }
@@ -123,18 +130,48 @@
       text-decoration: none;
       font-size: 12px;
     }
-    .community-box a:hover { background: #fff; color: #000 !important; }
 
-    /* Footer */
+    .community-box a:hover { 
+      background: #fff; 
+      color: #000 !important; 
+    }
+
+    
     .site-footer {
       background-color: #ffffff; 
-      color: #333 !important; /* Overriding white important from section if nested */
+      color: #333 !important; 
       text-align: center;
       font-size: 13px;
       padding: 20px 0; 
       width: 100%;
       border-top: 1px solid rgba(0,0,0,0.05); 
     }
+
+    html, body {
+    height: 100%;
+    margin: 0;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .main {
+      flex: 1; /* pushes footer down */
+    }
+
+
+  .copyright-footer {
+    background-color: white;
+    color: black;
+    text-align: center;
+    font-size: 12px;
+    padding: 10px 0;
+  }
+
+
+    
   </style>
 </head>
 
@@ -146,7 +183,7 @@
         <ul class="nav-list">
           <li><a href="{% url 'home' %}">HOME</a></li>
           <li><a href="{% url 'donations' %}">DONATIONS</a></li>
-          <li><a href="{% url 'finance' %}">FINANCE</a></li>
+          {% comment %} <li><a href="{% url 'finance' %}">FINANCE</a></li> {% endcomment %}
           <li><a href="{% url 'vision' %}">VISION</a></li>
           <li><a href="{% url 'community-updates' %}">COMMUNITY UPDATES</a></li>
           <li><a href="{% url 'contact' %}">CONTACT</a></li>
@@ -167,7 +204,7 @@
           <li><a href="{% url 'login' %}">LOGIN</a></li>
         </ul>
       </nav>
-      <a href="#" class="cta-button">CALL TO ACTION</a>
+      <a href="{% url 'contact' %}#contact-section" class="cta-button">CALL TO ACTION</a>
     </div>
   </header>
 
@@ -201,11 +238,10 @@
         </div>
       </section>
     </div>
+    
   </main>
 
-  <footer class="site-footer">
-    Copyright © 2025 konkiyazhikamkudumbayogam
-  </footer>
+  
 
   <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
   <script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
@@ -224,6 +260,8 @@
       });
     });
   </script>
-
+<footer class="copyright-footer">
+  © 2025 konkiyazhikamkudumbayogam. All rights reserved.
+</footer>
 </body>
 </html>

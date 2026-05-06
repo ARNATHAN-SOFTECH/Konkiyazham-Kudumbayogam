@@ -227,7 +227,7 @@
       <ul class="nav-list">
         <li><a href="{% url 'home' %}">HOME</a></li>
         <li><a href="{% url 'donations' %}">DONATIONS</a></li>
-        <li><a href="{% url 'finance' %}">FINANCE</a></li>
+        {% comment %} <li><a href="{% url 'finance' %}">FINANCE</a></li> {% endcomment %}
         <li><a href="{% url 'vision' %}">VISION</a></li>
         <li><a href="{% url 'community-updates' %}">COMMUNITY UPDATES</a></li>
         <li><a href="{% url 'contact' %}">CONTACT</a></li>
@@ -255,7 +255,7 @@
       </ul>
     </nav>
 
-    <a href="#" class="cta-button">CALL TO ACTION</a>
+    <a href="{% url 'contact' %}#contact-section" class="cta-button">CALL TO ACTION</a>
   </div>
 </header>
 
@@ -324,11 +324,11 @@
 
 
         <div style="margin-bottom:20px;">
-  <label for="dob" class="form-label" style="font-weight:500; display:block; margin-bottom:6px;">
-    Date of Birth
-  </label>
-  <input type="date" class="form-control" id="dob" name="dob" placeholder="Select Date" required>
-</div>
+      <label for="dob" class="form-label" style="font-weight:500; display:block; margin-bottom:6px;">
+        Date of Birth
+      </label>
+      <input type="date" class="form-control" id="dob" name="dob" placeholder="Select Date" required>
+    </div>
 
 
 
@@ -587,12 +587,12 @@
 </div>
 
 
-<div class="col-md-6">
-      <div id="qualification-card"
-           style="display:none; border:1px solid #ddd; padding:12px; border-radius:8px;
-                  max-height:250px; overflow-y:auto;">
-      </div>
-  </div>
+  <div class="col-md-6">
+        <div id="qualification-card"
+            style="display:none; border:1px solid #ddd; padding:12px; border-radius:8px;
+                    max-height:250px; overflow-y:auto;">
+        </div>
+    </div>
 
 
 
@@ -617,6 +617,14 @@
             What is your relation in the family tree?
           </label>
           <input type="text" class="form-control" id="relation" name="relation" required>
+        </div>
+
+
+        <div style="margin-bottom:20px;">
+          <label for="spouse_name" class="form-label" style="font-weight:500; display:block; margin-bottom:6px;">
+            Enter your spouse name (if any)?
+          </label>
+          <input type="text" class="form-control" id="spouse" name="spouse">
         </div>
 
 
@@ -668,10 +676,6 @@
       
       </form>
 
-  
-
-
-
 
        
 </main>
@@ -698,48 +702,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const warningBox  = document.getElementById("duplicate-warning");
     const submitBtn   = document.querySelector("button[type='submit']");
 
-    function checkDuplicate() {
-
-        if (
-            firstName.value.trim() === "" ||
-            lastName.value.trim() === "" ||
-            profession.value.trim() === "" ||
-            country.value.trim() === "" ||
-            address.value.trim() === ""
-        ) {
-            warningBox.style.display = "none";
-            submitBtn.disabled = false;
-            return;
-        }
-
-        const url =
-            `/myapp/check-duplicate-member/` +
-            `?first_name=${encodeURIComponent(firstName.value)}` 
-            `&last_name=${encodeURIComponent(lastName.value)}` +
-            `&profession=${encodeURIComponent(profession.value)}` +
-            `&country=${encodeURIComponent(country.value)}` +
-            `&address=${encodeURIComponent(address.value)}`;
-
-        fetch(url)
-            .then(response => response.json())
-            .then(data => {
-                if (data.exists === true) {
-                    warningBox.style.display = "block";
-                    submitBtn.disabled = true;
-                } else {
-                    warningBox.style.display = "none";
-                    submitBtn.disabled = false;
-                }
-            })
-            .catch(error => {+
-                console.error("Duplicate check failed:", error);
-                submitBtn.disabled = false;
-            });
-    }
-
-    [firstName, lastName, profession, country, address].forEach(field => {
-        field.addEventListener("input", checkDuplicate);
-    });
 
 });
 </script>

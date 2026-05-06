@@ -14,6 +14,7 @@ class Register(models.Model):
     profession = models.CharField(max_length=200)
     parents = models.CharField(max_length=200)
     relation = models.CharField(max_length=100)
+    spouse = models.CharField(max_length=100)
     married = models.CharField(max_length=200)
     languages = models.CharField(max_length=200)
     address = models.TextField()

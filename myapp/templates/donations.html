@@ -81,7 +81,6 @@
     .social-icons { display: flex; gap: 20px; justify-content: flex-end; }
     .social-icons a { font-size: 22px; color: #007bff; text-decoration: none; transition: color 0.3s ease; }
     .social-icons a:hover { color: #6c757d; }
-    .bottom-bar { background-color: #3b82f6; color: #fff; text-align: center; padding: 10px; font-size: 14px; }
     .copyright-footer { background-color: white; color: black; text-align: center; font-size: 12px; padding: 10px 0; }
   </style>
 </head>
@@ -94,7 +93,7 @@
         <ul class="nav-list">
           <li><a href="{% url 'home' %}">HOME</a></li>
           <li><a href="{% url 'donations' %}">DONATIONS</a></li>
-          <li><a href="{% url 'finance' %}">FINANCE</a></li>
+          {% comment %} <li><a href="{% url 'finance' %}">FINANCE</a></li> {% endcomment %}
           <li><a href="{% url 'vision' %}">VISION</a></li>
           <li><a href="{% url 'community-updates' %}">COMMUNITY UPDATES</a></li>
           <li><a href="{% url 'contact' %}">CONTACT</a></li>
@@ -119,7 +118,7 @@
           <li><a href="{% url 'login' %}">LOGIN</a></li>
         </ul>
       </nav>
-      <a href="#" class="cta-button">CALL TO ACTION</a>
+      <a href="{% url 'contact' %}#contact-section" class="cta-button">CALL TO ACTION</a>
     </div>
   </header>
 
@@ -197,7 +196,8 @@
       <h2>Make a Donation</h2>
       <p>Every rupee you give goes toward preserving our family<br>
         values, history, and the well-being of future generations.</p>
-      <a href="#" class="btn">GET STARTED</a>
+      <a href="{% url 'contact' %}" class="btn">GET STARTED</a>
+      
     </section>
 
     <div class="custom-footer">
@@ -217,9 +217,6 @@
       </div>
     </div>
 
-    <div class="bottom-bar">
-      © 2025 All Rights Reserved.
-    </div>
 
     <footer class="copyright-footer">
       Copyright © 2025 konkiyazhikamkudumbayogam

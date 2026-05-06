@@ -1,10 +1,7 @@
-
 from django.shortcuts import render, redirect
 from django.core.mail import send_mail
 from django.conf import settings
 from .forms import ContactForm
-from django.urls import path
-from . import views
 
 def contact(request):
     if request.method == 'POST':
@@ -15,20 +12,43 @@ def contact(request):
             email = form.cleaned_data['email']
             message = form.cleaned_data['message']
 
-            full_message = f"""
-            Name: {name}
-            Email: {email}
-            Message: {message}
-            """
+           
+            admin_message = f"""
+New Contact Form Submission
+
+Name: {name}
+Email: {email}
+Message: {message}
+"""
 
             send_mail(
                 subject='New Contact Form Submission',
-                message=full_message,
+                message=admin_message,
                 from_email=settings.EMAIL_HOST_USER,
-                recipient_list=['your_email@gmail.com'],  
+                recipient_list=['arnathansoftech7@gmail.com'],
+                fail_silently=False,
             )
 
-            return redirect('success') 
+           
+            user_message = f"""
+Hi {name},
+
+Thank you for contacting us. We have received your message and will get back to you soon.
+
+
+Regards,
+Team Konkiyazhikam Kudumbayogam
+"""
+
+            send_mail(
+                subject='Thank You for Contacting Us',
+                message=user_message,
+                from_email=settings.EMAIL_HOST_USER,
+                recipient_list=[email], 
+                fail_silently=False,
+            )
+
+            return redirect('success')
 
     else:
         form = ContactForm()
@@ -39,9 +59,6 @@ def contact(request):
 
 
 
-
-def successview(request):
-    return render(request, "success.html")
 
 def finance(request):
     return render(request,"finance.html")
@@ -99,13 +116,7 @@ from django.shortcuts import render, redirect
 from django.core.mail import send_mail
 from django.conf import settings
 from .forms import RegisterForm
-
-
-from django.shortcuts import render, redirect
-from django.core.mail import send_mail
-from django.conf import settings
-from .forms import RegisterForm
-
+from django.contrib import messages
 
 def register(request):
     if request.method == "POST":
@@ -114,70 +125,75 @@ def register(request):
         if form.is_valid():
             user = form.save(commit=False)
 
-            # Optional: handle hobbies if multiple
             if 'hobbies' in form.cleaned_data:
                 user.hobbies = ",".join(form.cleaned_data['hobbies'])
 
             user.save()
 
+           
             first_name = user.first_name
             last_name = user.last_name
             email = user.email
             country = user.country
+            profession = user.profession
 
-            subject = "Registration Successful"
-            message = f"""
+            
+            user_subject = "Registration Successful"
+            user_message = f"""
 Dear {first_name},
 
 Thank you for registering with Konkiyazhikam Kudumbayogam.
 
-Registration Details:
-Name: {first_name} {last_name}
-Email: {email}
-Country: {country}
-
-We are happy to welcome you to our community.
+We have successfully received your registration.
 
 Regards,
 Konkiyazhikam Kudumbayogam
 """
 
-            send_mail(
-                subject,
-                message,
-                settings.DEFAULT_FROM_EMAIL,
-                [email],
-                fail_silently=False,
-            )
+            
+            admin_subject = "New User Registration"
+            admin_message = f"""
+New user registered:
 
-            return redirect('register_success')
+Name: {first_name} {last_name}
+Email: {email}
+Country: {country}
+Profession: {profession}
+"""
+
+            try:
+                
+                send_mail(
+                    user_subject,
+                    user_message,
+                    settings.DEFAULT_FROM_EMAIL,
+                    [email],
+                    fail_silently=False,
+                )
+
+                # Send email to ADMIN
+                send_mail(
+                    admin_subject,
+                    admin_message,
+                    settings.DEFAULT_FROM_EMAIL,
+                    ['arnathansoftech7@gmail.com'],  
+                    fail_silently=False,
+                )
+
+                return redirect('register_success')
+
+            except Exception as e:
+                print("EMAIL ERROR:", e)
+                messages.warning(
+                    request,
+                    "Registered successfully, but email sending failed."
+                )
+                return redirect('register_success')
 
     else:
         form = RegisterForm()
 
     return render(request, "register.html", {'form': form})
 
-
 def register_success(request):
     return render(request, 'register_success.html')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
