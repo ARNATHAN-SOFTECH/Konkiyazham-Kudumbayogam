@@ -28,48 +28,6 @@
 
   <link href="{% static 'assets/css/main.css' %}" rel="stylesheet">
    
-
-  
-
- <!-- HEADER (paste into your template) -->
-<header id="header" class="site-header">
-  <div class="container-fluid header-inner">
-    <nav class="nav-wrapper" aria-label="Main navigation">
-      <ul class="nav-list">
-        <li><a href="{% url 'home' %}">HOME</a></li>
-        <li><a href="{% url 'donations' %}">DONATIONS</a></li>
-        {% comment %} <li><a href="{% url 'finance' %}">FINANCE</a></li> {% endcomment %}
-        <li><a href="{% url 'vision' %}">VISION</a></li>
-        <li><a href="{% url 'community-updates' %}">COMMUNITY UPDATES</a></li>
-        <li><a href="{% url 'contact' %}">CONTACT</a></li>
-
-        <!-- Correct dropdown -->
-        <li class="dropdown">
-          <a href="#" class="drop-toggle" aria-haspopup="true" aria-expanded="false">
-            REGIONS <span class="caret">▾</span>
-          </a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a role="menuitem" href="{% url 'chathanoor' %}">CHATHANOOR</a></li>
-            <li><a role="menuitem" href="{% url 'kollam' %}">KOLLAM</a></li>
-            <li><a role="menuitem" href="{% url 'kottiyam' %}">KOTTIYAM</a></li>
-            <li><a role="menuitem" href="{% url 'veliyam' %}">VELIYAM</a></li>
-            <li><a role="menuitem" href="{% url 'attingal' %}">ATTINGAL</a></li>
-            <li><a role="menuitem" href="{% url 'trivandrum' %}">TRIVANDRUM</a></li>
-            <li><a role="menuitem" href="{% url 'bangalore' %}">BANGALORE</a></li>
-          </ul>
-        </li>
-
-        <li><a href="{% url 'familytree' %}">FAMILY TREE</a></li>
-          <li><a href="{% url 'register' %}">REGISTER</a></li>
-          <li><a href="{% url 'login' %}">LOGIN</a></li>
-      </ul>
-    </nav>
-
-    <a href="{% url 'contact' %}#contact-section" class="cta-button">CALL TO ACTION</a>
-  </div>
-</header>
-
-<!-- INTERNAL CSS (put inside <head> or just above closing </body>) -->
 <style>
   /* Header container */
   .site-header {
@@ -89,9 +47,9 @@
     margin: 0;
     padding: 0;
     display: flex;
-    justify-content: center;        /* center links horizontally */
+    justify-content: center;        
     align-items: center;
-    gap: 20px;                      /* equal spacing between items */
+    gap: 20px;                      
   }
   .nav-list li { position: relative; }
   .nav-list a {
@@ -102,7 +60,7 @@
     text-transform: uppercase;
     letter-spacing: 0.6px;
     font-size: 15px;
-    padding: 6px 0;                 /* vertical alignment baseline */
+    padding: 6px 0;                
   }
 
   /* Dropdown menu styling */
@@ -111,8 +69,8 @@
 
   .dropdown-menu {
     position: absolute;
-    top: calc(100% + 8px);         /* space below parent item */
-    left: 50%;                     /* center under the parent */
+    top: calc(100% + 8px);        
+    left: 50%;                    
     transform: translateX(-50%);
     display: none;
     min-width: 190px;
@@ -188,57 +146,150 @@ transition:.3s;
       background-color: rgb(222, 125, 6);
     }
 
-  /* Small accessibility/UX: close dropdown with Esc */
+  
   :focus { outline: none; }
+  
+
+.menu-toggle{
+  display:none;
+  background:none;
+  border:none;
+  font-size:28px;
+  cursor:pointer;
+  color:#000;
+}
+
+
+@media (max-width: 991px){
+
+  .header-inner{
+    flex-wrap:wrap;
+    padding:15px 20px;
+  }
+
+  .menu-toggle{
+    display:block;
+    margin-left:auto;
+    z-index:10001;
+  }
+
+  .nav-wrapper{
+    width:100%;
+    display:none;
+    margin-top:15px;
+  }
+
+  .nav-wrapper.active{
+    display:block;
+  }
+
+  .nav-list{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:12px;
+    background:#c2b3d9;
+    padding:15px;
+    border-radius:8px;
+  }
+
+  .nav-list li{
+    width:100%;
+  }
+
+  .nav-list a{
+    display:block;
+    width:100%;
+    padding:10px 0;
+  }
+
+ 
+  .dropdown-menu{
+    position:static;
+    transform:none;
+    box-shadow:none;
+    border-radius:0;
+    background:#d7cbe8;
+    margin-top:8px;
+    width:100%;
+  }
+
+  .dropdown-menu a{
+    padding-left:20px;
+  }
+
+  .cta-button{
+    margin-top:15px;
+    width:100%;
+    text-align:center;
+  }
+}
+
+
+@media (max-width:576px){
+
+  h1{
+    font-size:30px !important;
+    line-height:1.2 !important;
+  }
+
+  .region-section{
+    text-align:center;
+  }
+
+  .region-section .text-start{
+    text-align:center !important;
+  }
+
+  .region-section img{
+    margin-top:30px;
+  }
+}
 </style>
+</head>
+  
 
-<!-- JS: click-to-toggle for touch devices + close-on-outside-click + Esc to close -->
-<script>
-  (function () {
-    // Toggle dropdown for touch devices / click
-    document.querySelectorAll('.drop-toggle').forEach(function(btn){
-      btn.addEventListener('click', function(e){
-        e.preventDefault();
-        var menu = btn.nextElementSibling;
-        var isOpen = btn.getAttribute('aria-expanded') === 'true';
 
-        // Close other open menus
-        document.querySelectorAll('.dropdown .dropdown-menu').forEach(function(m){
-          if (m !== menu) { m.style.display = 'none'; m.previousElementSibling.setAttribute('aria-expanded','false'); }
-        });
+<header id="header" class="site-header">
+  <div class="container-fluid header-inner">
+     <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">
+  <i class="fas fa-bars"></i>
+</button>
+    <nav class="nav-wrapper" aria-label="Main navigation">
+      <ul class="nav-list">
+        <li><a href="{% url 'home' %}">HOME</a></li>
+        <li><a href="{% url 'donations' %}">DONATIONS</a></li>
+        {% comment %} <li><a href="{% url 'finance' %}">FINANCE</a></li> {% endcomment %}
+        <li><a href="{% url 'vision' %}">VISION</a></li>
+        <li><a href="{% url 'community-updates' %}">COMMUNITY UPDATES</a></li>
+        <li><a href="{% url 'contact' %}">CONTACT</a></li>
 
-        if (!isOpen) {
-          menu.style.display = 'block';
-          btn.setAttribute('aria-expanded','true');
-        } else {
-          menu.style.display = 'none';
-          btn.setAttribute('aria-expanded','false');
-        }
-      });
-    });
+        
+        <li class="dropdown">
+          <a href="#" class="drop-toggle" aria-haspopup="true" aria-expanded="false">
+            REGIONS <span class="caret">▾</span>
+          </a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a role="menuitem" href="{% url 'chathanoor' %}">CHATHANOOR</a></li>
+            <li><a role="menuitem" href="{% url 'kollam' %}">KOLLAM</a></li>
+            <li><a role="menuitem" href="{% url 'kottiyam' %}">KOTTIYAM</a></li>
+            <li><a role="menuitem" href="{% url 'veliyam' %}">VELIYAM</a></li>
+            <li><a role="menuitem" href="{% url 'attingal' %}">ATTINGAL</a></li>
+            <li><a role="menuitem" href="{% url 'trivandrum' %}">TRIVANDRUM</a></li>
+            <li><a role="menuitem" href="{% url 'bangalore' %}">BANGALORE</a></li>
+          </ul>
+        </li>
 
-    // Click outside to close
-    document.addEventListener('click', function(e){
-      if (!e.target.closest('.dropdown')) {
-        document.querySelectorAll('.dropdown .dropdown-menu').forEach(function(m){
-          m.style.display = 'none';
-          if (m.previousElementSibling) m.previousElementSibling.setAttribute('aria-expanded','false');
-        });
-      }
-    });
+        <li><a href="{% url 'familytree' %}">FAMILY TREE</a></li>
+          <li><a href="{% url 'register' %}">REGISTER</a></li>
+          <li><a href="{% url 'login' %}">LOGIN</a></li>
+      </ul>
+    </nav>
 
-    // Escape key closes any open dropdown
-    document.addEventListener('keydown', function(e){
-      if (e.key === 'Escape') {
-        document.querySelectorAll('.dropdown .dropdown-menu').forEach(function(m){
-          m.style.display = 'none';
-          if (m.previousElementSibling) m.previousElementSibling.setAttribute('aria-expanded','false');
-        });
-      }
-    });
-  })();
-</script>
+    <a href="{% url 'contact' %}#contact-section" class="cta-button">CALL TO ACTION</a>
+  </div>
+</header>
 
+<body>
 <section class="region-section py-5">
   <div class="container">
     <div class="row align-items-center">
@@ -278,10 +329,52 @@ transition:.3s;
      Copyright © 2025 konkiyazhikamkudumbayogam
 </footer>
 
-   <script>
-// ================================
-// SCROLL TO TOP
-// ================================
+<script>
+  (function () {
+    
+    document.querySelectorAll('.drop-toggle').forEach(function(btn){
+      btn.addEventListener('click', function(e){
+        e.preventDefault();
+        var menu = btn.nextElementSibling;
+        var isOpen = btn.getAttribute('aria-expanded') === 'true';
+
+        
+        document.querySelectorAll('.dropdown .dropdown-menu').forEach(function(m){
+          if (m !== menu) { m.style.display = 'none'; m.previousElementSibling.setAttribute('aria-expanded','false'); }
+        });
+
+        if (!isOpen) {
+          menu.style.display = 'block';
+          btn.setAttribute('aria-expanded','true');
+        } else {
+          menu.style.display = 'none';
+          btn.setAttribute('aria-expanded','false');
+        }
+      });
+    });
+
+    
+    document.addEventListener('click', function(e){
+      if (!e.target.closest('.dropdown')) {
+        document.querySelectorAll('.dropdown .dropdown-menu').forEach(function(m){
+          m.style.display = 'none';
+          if (m.previousElementSibling) m.previousElementSibling.setAttribute('aria-expanded','false');
+        });
+      }
+    });
+
+    
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape') {
+        document.querySelectorAll('.dropdown .dropdown-menu').forEach(function(m){
+          m.style.display = 'none';
+          if (m.previousElementSibling) m.previousElementSibling.setAttribute('aria-expanded','false');
+        });
+      }
+    });
+  })();
+
+
 
 document.addEventListener("DOMContentLoaded", () => {
   const scrollBtn = document.getElementById('scrollTopBtn');
@@ -301,4 +394,18 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  const menuToggle = document.getElementById("menuToggle");
+  const navWrapper = document.querySelector(".nav-wrapper");
+
+  menuToggle.addEventListener("click", () => {
+    navWrapper.classList.toggle("active");
+  });
+
+});
 </script>
+
+</body>
+</html>

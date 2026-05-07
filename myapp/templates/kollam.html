@@ -34,6 +34,9 @@
  <!-- HEADER (paste into your template) -->
 <header id="header" class="site-header">
   <div class="container-fluid header-inner">
+     <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">
+  <i class="fas fa-bars"></i>
+</button>
     <nav class="nav-wrapper" aria-label="Main navigation">
       <ul class="nav-list">
         <li><a href="{% url 'home' %}">HOME</a></li>
@@ -69,7 +72,7 @@
   </div>
 </header>
 
-<!-- INTERNAL CSS (put inside <head> or just above closing </body>) -->
+
 <style>
   /* Header container */
   .site-header {
@@ -89,9 +92,9 @@
     margin: 0;
     padding: 0;
     display: flex;
-    justify-content: center;        /* center links horizontally */
+    justify-content: center;        
     align-items: center;
-    gap: 20px;                      /* equal spacing between items */
+    gap: 20px;                      
   }
   .nav-list li { position: relative; }
   .nav-list a {
@@ -102,7 +105,7 @@
     text-transform: uppercase;
     letter-spacing: 0.6px;
     font-size: 15px;
-    padding: 6px 0;                 /* vertical alignment baseline */
+    padding: 6px 0;                
   }
 
   /* Dropdown menu styling */
@@ -111,8 +114,8 @@
 
   .dropdown-menu {
     position: absolute;
-    top: calc(100% + 8px);         /* space below parent item */
-    left: 50%;                     /* center under the parent */
+    top: calc(100% + 8px);         
+    left: 50%;                     
     transform: translateX(-50%);
     display: none;
     min-width: 190px;
@@ -188,11 +191,107 @@ transition:.3s;
       background-color: rgb(222, 125, 6);
     }
 
-  /* Small accessibility/UX: close dropdown with Esc */
+  
   :focus { outline: none; }
+  
+
+.menu-toggle{
+  display:none;
+  background:none;
+  border:none;
+  font-size:28px;
+  cursor:pointer;
+  color:#000;
+}
+
+/* Tablet & Mobile */
+@media (max-width: 991px){
+
+  .header-inner{
+    flex-wrap:wrap;
+    padding:15px 20px;
+  }
+
+  .menu-toggle{
+    display:block;
+    margin-left:auto;
+    z-index:10001;
+  }
+
+  .nav-wrapper{
+    width:100%;
+    display:none;
+    margin-top:15px;
+  }
+
+  .nav-wrapper.active{
+    display:block;
+  }
+
+  .nav-list{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:12px;
+    background:#c2b3d9;
+    padding:15px;
+    border-radius:8px;
+  }
+
+  .nav-list li{
+    width:100%;
+  }
+
+  .nav-list a{
+    display:block;
+    width:100%;
+    padding:10px 0;
+  }
+
+  /* Dropdown Mobile */
+  .dropdown-menu{
+    position:static;
+    transform:none;
+    box-shadow:none;
+    border-radius:0;
+    background:#d7cbe8;
+    margin-top:8px;
+    width:100%;
+  }
+
+  .dropdown-menu a{
+    padding-left:20px;
+  }
+
+  .cta-button{
+    margin-top:15px;
+    width:100%;
+    text-align:center;
+  }
+}
+
+/* Small Mobile */
+@media (max-width:576px){
+
+  h1{
+    font-size:30px !important;
+    line-height:1.2 !important;
+  }
+
+  .region-section{
+    text-align:center;
+  }
+
+  .region-section .text-start{
+    text-align:center !important;
+  }
+
+  .region-section img{
+    margin-top:30px;
+  }
+}
 </style>
 
-<!-- JS: click-to-toggle for touch devices + close-on-outside-click + Esc to close -->
+
 <script>
   (function () {
     // Toggle dropdown for touch devices / click
@@ -202,7 +301,7 @@ transition:.3s;
         var menu = btn.nextElementSibling;
         var isOpen = btn.getAttribute('aria-expanded') === 'true';
 
-        // Close other open menus
+       
         document.querySelectorAll('.dropdown .dropdown-menu').forEach(function(m){
           if (m !== menu) { m.style.display = 'none'; m.previousElementSibling.setAttribute('aria-expanded','false'); }
         });
@@ -227,7 +326,7 @@ transition:.3s;
       }
     });
 
-    // Escape key closes any open dropdown
+    
     document.addEventListener('keydown', function(e){
       if (e.key === 'Escape') {
         document.querySelectorAll('.dropdown .dropdown-menu').forEach(function(m){
@@ -281,9 +380,7 @@ transition:.3s;
 </footer>
 
    <script>
-// ================================
-// SCROLL TO TOP
-// ================================
+
 
 document.addEventListener("DOMContentLoaded", () => {
   const scrollBtn = document.getElementById('scrollTopBtn');
@@ -303,4 +400,18 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  const menuToggle = document.getElementById("menuToggle");
+  const navWrapper = document.querySelector(".nav-wrapper");
+
+  menuToggle.addEventListener("click", () => {
+    navWrapper.classList.toggle("active");
+  });
+
+});
 </script>
+</body>
+</html>
