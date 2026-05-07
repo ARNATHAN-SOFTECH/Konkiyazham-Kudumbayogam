@@ -317,7 +317,7 @@ transition:.3s;
           <label for="last_name" class="form-label" style="font-weight:500; display:block; margin-bottom:6px;">
             Last Name
           </label>
-          <input type="text" class="form-control" id="last_name" name="last_name" required>
+          <input type="text" class="form-control" id="last_name" name="last_name" >
         </div>
 
         
@@ -344,11 +344,18 @@ transition:.3s;
         </div>
 
 
-        <div style="margin-bottom:20px;">
-      <label for="dob" class="form-label" style="font-weight:500; display:block; margin-bottom:6px;">
+    <div style="margin-bottom:20px;">
+      <label for="dob" class="form-label"
+            style="font-weight:500; display:block; margin-bottom:6px;">
         Date of Birth
       </label>
-      <input type="date" class="form-control" id="dob" name="dob" placeholder="Select Date" required>
+
+      <input type="text"
+            class="form-control"
+            id="dob"
+            name="dob"
+            placeholder="Select Date"
+            required>
     </div>
 
 
@@ -586,7 +593,7 @@ transition:.3s;
           <label for="first_name" class="form-label" style="font-weight:500; display:block; margin-bottom:6px;">
            Which school did you study in?
           </label>
-          <input type="text" class="form-control" id="school" name="school" required>
+          <input type="text" class="form-control" id="school" name="school" >
         </div>
 
 
@@ -595,7 +602,7 @@ transition:.3s;
       What degrees or qualifications do you hold?
   </label>
 
-  <select class="form-control" id="qualifications" name="qualifications" required>
+  <select class="form-control" id="qualifications" name="qualifications" >
       <option value="">-- Select Qualification --</option>
       <option value="B.Tech">B.Tech</option>
       <option value="M.Tech">M.Tech</option>
@@ -608,36 +615,39 @@ transition:.3s;
 </div>
 
 
-  <div class="col-md-6">
-        <div id="qualification-card"
-            style="display:none; border:1px solid #ddd; padding:12px; border-radius:8px;
-                    max-height:250px; overflow-y:auto;">
-        </div>
-    </div>
-
-
-
         <div style="margin-bottom:20px;">
           <label for="first_name" class="form-label" style="font-weight:500; display:block; margin-bottom:6px;">
             What is your current job/profession?
           </label>
-          <input type="text" class="form-control" id="profession" name="profession" required>
+          <input type="text" class="form-control" id="profession" name="profession" >
         </div>
 
          
-        <div style="margin-bottom:20px;">
-          <label for="first_name" class="form-label" style="font-weight:500; display:block; margin-bottom:6px;">
-            Who are your parents?
-          </label>
-          <input type="text" class="form-control" id="parents" name="parents" required>
-        </div>
+<div style="margin-bottom:20px;">
+  <label for="parent" class="form-label"
+         style="font-weight:500; display:block; margin-bottom:6px;">
+    Select Parent
+  </label>
+
+  <select class="form-control" id="parent" name="parent">
+
+    <option value="">-- Select Parent --</option>
+
+    {% for member in form.parent.field.queryset %}
+      <option value="{{ member.id }}">
+        {{ member.name }}
+      </option>
+    {% endfor %}
+
+  </select>
+</div>
 
 
         <div style="margin-bottom:20px;">
           <label for="first_name" class="form-label" style="font-weight:500; display:block; margin-bottom:6px;">
             What is your relation in the family tree?
           </label>
-          <input type="text" class="form-control" id="relation" name="relation" required>
+          <input type="text" class="form-control" id="relation" name="relation" >
         </div>
 
 
@@ -661,7 +671,7 @@ transition:.3s;
           <label for="first_name" class="form-label" style="font-weight:500; display:block; margin-bottom:6px;">
             What languages do you speak?
           </label>
-          <input type="text" class="form-control" id="languages" name="languages" required>
+          <input type="text" class="form-control" id="languages" name="languages" >
         </div>
 
 
@@ -669,19 +679,9 @@ transition:.3s;
           <label for="first_name" class="form-label" style="font-weight:500; display:block; margin-bottom:6px;">
            Where do you currently live?(Please specify your address)
           </label>
-          <input type="text" class="form-control" id="address" name="address" required>
+          <input type="text" class="form-control" id="address" name="address" >
         </div>
 
-
-      <div id="duplicate-warning"
-     style="display:none;
-            background:#fff3cd;
-            color:#856404;
-            padding:12px;
-            border-radius:6px;
-            border:1px solid #ffeeba;
-            margin-bottom:20px;">
-</div>
 
 
 
@@ -731,12 +731,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
 <script>
 flatpickr("#dob", {
-    dateFormat: "d/m/Y",  
-    maxDate: "today"      
+    dateFormat: "Y-m-d",
+    maxDate: "today"
 });
+</script>
 
-
-
+<script>
 document.addEventListener("DOMContentLoaded", function () {
 
     const firstName   = document.getElementById("first_name");

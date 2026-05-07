@@ -6,7 +6,7 @@ from .forms import ContactForm
 from django.urls import path
 from . import views
 from .forms import RegisterForm
-from .models import FamilyMember
+from .models import FamilyMember, FamilyUnit
 from django.contrib import messages
 
 def contact(request):
@@ -126,50 +126,124 @@ def familytree(request):
 
 
 def register(request):
+
     if request.method == "POST":
-        form = RegisterForm(request.POST, request.FILES)
+
+        form = RegisterForm(request.POST)
 
         if form.is_valid():
-            user = form.save(commit=False)
 
-            if 'hobbies' in form.cleaned_data:
-                user.hobbies = ",".join(form.cleaned_data['hobbies'])
+            user = form.save(commit=False)
 
             user.save()
 
-           
+            # =========================
+            # AUTO ADD TO FAMILY TREE
+            # =========================
+
+            parent_member = user.parent
+
+            if parent_member:
+
+                full_name = f"{user.first_name} {user.last_name or ''}".strip()
+
+                # MAIN MEMBER
+                member = FamilyMember.objects.create(
+                    name=full_name,
+                    parent=parent_member,
+                    note=user.profession or "",
+                    user=user
+                )
+
+                # =========================
+                # CREATE SPOUSE
+                # =========================
+
+                if user.spouse:
+
+                    spouse_member = FamilyMember.objects.create(
+                        name=user.spouse,
+                        note="Spouse"
+                    )
+
+                    # =========================
+                    # CREATE FAMILY UNIT
+                    # =========================
+
+                    if user.gender == "Male":
+
+                        FamilyUnit.objects.create(
+                            husband=member,
+                            wife=spouse_member
+                        )
+
+                    else:
+
+                        FamilyUnit.objects.create(
+                            husband=spouse_member,
+                            wife=member
+                        )
+
+            # =========================
+            # EMAIL SECTION
+            # =========================
+
             first_name = user.first_name
             last_name = user.last_name
             email = user.email
             country = user.country
             profession = user.profession
 
-            
-            user_subject = "Registration Successful"
-            user_message = f"""
-Dear {first_name},
+            if parent_member:
 
-Thank you for registering with Konkiyazhikam Kudumbayogam.
+                user_subject = "Successfully Added to Family Tree"
 
-We have successfully received your registration.
+                user_message = f"""
+            Dear {first_name},
 
-Regards,
-Konkiyazhikam Kudumbayogam
-"""
+            Thank you for registering with Konkiyazhikam Kudumbayogam.
 
-            
+            Your registration has been successfully completed and your profile has been connected to the Family Tree.
+
+            We are happy to welcome you to our family community.
+
+            Regards,
+            Konkiyazhikam Kudumbayogam
+            """
+
+            else:
+
+                user_subject = "Registration Completed"
+
+                user_message = f"""
+            Dear {first_name},
+
+            Thank you for registering with Konkiyazhikam Kudumbayogam.
+
+            Your registration has been received successfully.
+
+            However, your profile has not yet been connected to the Family Tree because a parent/member connection was not selected during registration.
+
+            You may register again later with proper family connection details, or contact the admin for assistance in connecting your family branch.
+
+            Regards,
+            Konkiyazhikam Kudumbayogam
+            """
+
             admin_subject = "New User Registration"
+
             admin_message = f"""
 New user registered:
 
-Name: {first_name} {last_name}
+Name: {first_name} {last_name or ""}
 Email: {email}
 Country: {country}
 Profession: {profession}
+Parent Name: {parent_member.name if parent_member else "Not Selected"}
 """
 
             try:
-                
+
                 send_mail(
                     user_subject,
                     user_message,
@@ -178,26 +252,21 @@ Profession: {profession}
                     fail_silently=False,
                 )
 
-                # Send email to ADMIN
                 send_mail(
                     admin_subject,
                     admin_message,
                     settings.DEFAULT_FROM_EMAIL,
-                    ['arnathansoftech7@gmail.com'],  
+                    ['arnathansoftech7@gmail.com'],
                     fail_silently=False,
                 )
 
-                return redirect('register_success')
-
             except Exception as e:
                 print("EMAIL ERROR:", e)
-                messages.warning(
-                    request,
-                    "Registered successfully, but email sending failed."
-                )
-                return redirect('register_success')
+
+            return redirect('register_success')
 
     else:
+
         form = RegisterForm()
 
     return render(request, "register.html", {'form': form})

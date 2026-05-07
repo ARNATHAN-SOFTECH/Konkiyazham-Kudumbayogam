@@ -31,7 +31,7 @@ from .models import Register, FamilyMember
 
 class RegisterForm(forms.ModelForm):
     parent = forms.ModelChoiceField(
-        queryset=FamilyMember.objects.all(),
+        queryset=FamilyMember.objects.all().order_by('name'),
         required=False,
         empty_label="Select Parent"
     )
