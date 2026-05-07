@@ -64,7 +64,7 @@ Team Konkiyazhikam Kudumbayogam
 
 
 
-
+def gallery(request): return render(request, "gallery.html")
 
 def finance(request):
     return render(request,"finance.html")
