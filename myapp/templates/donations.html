@@ -72,43 +72,78 @@ Donations - Konkiyazham Kudumbayogam
     border-radius:5px;
   }
 
-  /* FAQ */
+/* FAQ */
 
-  .faq-section{
-    background:rgb(236,232,214);
-    padding:60px 20px;
-    text-align:center;
-  }
+.faq-section{
+  background:rgb(236,232,214);
+  padding:60px 20px;
+  text-align:center;
+}
 
-  .faq-title{
-    font-size:40px;
-    font-weight:700;
-    margin-bottom:40px;
-    color:#1a1a40;
-  }
+.faq-title{
+  font-size:40px;
+  font-weight:700;
+  margin-bottom:40px;
+  color:#1a1a40;
+}
 
-  .faq-grid{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:40px;
-    text-align:left;
-    max-width:1100px;
-    margin:0 auto;
-  }
+.faq-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:30px;
+  max-width:1100px;
+  margin:auto;
+}
 
-  .faq-column{
-    display:flex;
-    flex-direction:column;
-    gap:20px;
-  }
+.faq-column{
+  display:flex;
+  flex-direction:column;
+  gap:15px;
+}
 
-  .faq-item{
-    font-size:18px;
-    padding-bottom:15px;
-    border-bottom:1px solid #ccc;
-    color:#222;
-    margin:0;
-  }
+.faq-item{
+  background:#fff;
+  border-radius:10px;
+  overflow:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,0.08);
+}
+
+.faq-question{
+  width:100%;
+  border:none;
+  background:none;
+  padding:18px 20px;
+  font-size:16px;
+  font-weight:600;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  cursor:pointer;
+  text-align:left;
+}
+
+.faq-question i{
+  transition:.3s;
+}
+
+.faq-answer{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height .4s ease;
+  padding:0 20px;
+  text-align:left;
+  color:#555;
+  line-height:1.6;
+}
+
+.faq-item.active .faq-answer{
+  max-height:200px;
+  padding:0 20px 18px;
+}
+
+.faq-item.active .faq-question i{
+  transform:rotate(180deg);
+}
 
   /* CTA */
 
@@ -331,50 +366,190 @@ Donations - Konkiyazham Kudumbayogam
       FAQ
     </h2>
 
-    <div class="faq-grid">
+<div class="faq-grid">
 
-      <div class="faq-column">
+  <div class="faq-column">
 
-        <p class="faq-item">
+    <!-- FAQ ITEM -->
+    <div class="faq-item">
+
+      <button class="faq-question">
+
+        <span>
           Who Can Join The Reunion Or Register On The Website?
-        </p>
+        </span>
 
-        <p class="faq-item">
-          Is There Any Cost Or Contribution Involved In Attending The Event?
-        </p>
+        <i class="fas fa-chevron-down"></i>
 
-        <p class="faq-item">
-          Can I Submit Photos Or Stories For The Gallery?
-        </p>
+      </button>
 
-        <p class="faq-item">
-          How Do I Add Or Update My Profile?
-        </p>
+      <div class="faq-answer">
 
-      </div>
-
-      <div class="faq-column">
-
-        <p class="faq-item">
-          What Is The Purpose Of This Website?
-        </p>
-
-        <p class="faq-item">
-          Where Will The Reunion Take Place?
-        </p>
-
-        <p class="faq-item">
-          How Is My Personal Data Protected On This Site?
-        </p>
-
-        <p class="faq-item">
-          How Can I Help Or Volunteer In Organizing?
-        </p>
+        Any family member connected to Konkiyazham
+        Kudumbayogam can register and participate
+        in reunions and community activities.
 
       </div>
 
     </div>
 
+    <!-- FAQ ITEM -->
+    <div class="faq-item">
+
+      <button class="faq-question">
+
+        <span>
+          Is There Any Cost Or Contribution Involved?
+        </span>
+
+        <i class="fas fa-chevron-down"></i>
+
+      </button>
+
+      <div class="faq-answer">
+
+        Some events may include voluntary
+        contributions for food, venue, or
+        charitable activities.
+
+      </div>
+
+    </div>
+
+    <!-- FAQ ITEM -->
+    <div class="faq-item">
+
+      <button class="faq-question">
+
+        <span>
+          Why should I donate?
+        </span>
+
+        <i class="fas fa-chevron-down"></i>
+
+      </button>
+
+      <div class="faq-answer">
+
+        Your donation helps support community welfare programs, educational assistance, medical aid, and cultural events for our members in Kollam and beyond.
+
+      </div>
+
+    </div>
+
+    <!-- FAQ ITEM -->
+    <div class="faq-item">
+
+      <button class="faq-question">
+
+        <span>
+          What Is The Purpose Of This Website?
+        </span>
+
+        <i class="fas fa-chevron-down"></i>
+
+      </button>
+
+      <div class="faq-answer">
+
+        This website preserves family history,
+        strengthens connections, and shares
+        community activities.
+
+      </div>
+
+    </div>
+  </div>
+
+  <div class="faq-column">
+
+    <!-- FAQ ITEM -->
+    <div class="faq-item">
+
+      <button class="faq-question">
+
+        <span>
+          Where Will The Reunion Take Place?
+        </span>
+
+        <i class="fas fa-chevron-down"></i>
+
+      </button>
+
+      <div class="faq-answer">
+
+        Reunion details will be announced through
+        the Events and Announcements sections.
+
+      </div>
+
+    </div>
+
+    <!-- FAQ ITEM -->
+    <div class="faq-item">
+
+      <button class="faq-question">
+
+        <span>
+          How Can I Help Or Volunteer?
+        </span>
+
+        <i class="fas fa-chevron-down"></i>
+
+      </button>
+
+      <div class="faq-answer">
+
+        You can contact the organizing committee
+        through the Contact page to volunteer.
+
+      </div>
+
+    </div>
+
+
+
+    <!-- FAQ ITEM -->
+    <div class="faq-item">
+
+      <button class="faq-question">
+
+        <span>
+        Is my donation secure?
+        </span>
+
+        <i class="fas fa-chevron-down"></i>
+
+      </button>
+
+      <div class="faq-answer">
+
+        Yes, all transactions are processed through secure and trusted payment methods to ensure your safety and privacy.
+
+      </div>
+
+    </div>
+
+    <!-- FAQ ITEM -->
+    <div class="faq-item">
+
+      <button class="faq-question">
+
+        <span>
+          Can I make donations regularly?
+        </span>
+
+        <i class="fas fa-chevron-down"></i>
+
+      </button>
+
+      <div class="faq-answer">
+
+        Yes, you can choose to support us monthly or whenever you wish. Regular contributions help us plan long-term initiatives.
+
+      </div>
+
+    </div>
   </div>
 
 </section>
@@ -442,4 +617,32 @@ Donations - Konkiyazham Kudumbayogam
 
 </div>
 
+{% endblock %}
+
+{% block extra_js %}
+<script>
+
+document.querySelectorAll(".faq-question")
+.forEach(button => {
+
+  button.addEventListener("click", () => {
+
+    const faqItem = button.parentElement;
+
+    document.querySelectorAll(".faq-item")
+    .forEach(item => {
+
+      if(item !== faqItem){
+        item.classList.remove("active");
+      }
+
+    });
+
+    faqItem.classList.toggle("active");
+
+  });
+
+});
+
+</script>
 {% endblock %}

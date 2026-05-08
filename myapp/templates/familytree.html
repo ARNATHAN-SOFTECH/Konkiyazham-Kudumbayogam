@@ -169,7 +169,10 @@ NODE
 ========================= */
 
 .node{
-  display:inline-block;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
   padding:10px 18px;
   border-radius:25px;
   border:2px solid #ff6b00;
@@ -186,6 +189,25 @@ NODE
   background:#ff6b00;
   color:#fff;
 }
+
+/* =========================
+ARROW
+========================= */
+
+.arrow{
+  font-size:10px;
+  transition:transform .3s ease;
+  display:inline-flex;
+  align-items:center;
+}
+
+/* rotate arrow */
+
+li.open > .node .arrow{
+  transform:rotate(180deg);
+}
+
+
 
 /* =========================
 RESPONSIVE
@@ -255,21 +277,21 @@ RESPONSIVE
 
 <script>
 
-document.addEventListener("DOMContentLoaded", function () {
+document.querySelectorAll(".node").forEach(function(node){
 
-  document.querySelectorAll(".node").forEach(function(node){
+  node.addEventListener("click", function(e){
 
-    node.addEventListener("click", function(e){
+    e.stopPropagation();
 
-      e.stopPropagation();
+    const li = this.closest("li");
 
-      const li = this.closest("li");
+    // only toggle if children exist
 
-      // toggle current branch
+    if(li.querySelector(":scope > ul")){
 
       li.classList.toggle("open");
 
-    });
+    }
 
   });
 
