@@ -23,6 +23,7 @@ urlpatterns = [
     path('success/', views.success, name='success'),
     path('registersuccess/', views.register_success, name='register_success'), 
     path('familytree/', views.familytree, name='familytree'),
+    path('calendar/', views.calendar, name='calendar'),
    
 
     

@@ -111,6 +111,9 @@ def bangalore(request):
 def success(request):
     return render(request, "success.html")
 
+def calendar(request):
+    return render(request, 'calendar.html')
+
 
 def familytree(request):
     roots = FamilyMember.objects.filter(parent__isnull=True,     wife_units__isnull=True,

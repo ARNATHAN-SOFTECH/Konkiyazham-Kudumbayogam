@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>2026 Kudumbasangam Event Calendar</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+  *{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+  }
+
+  html, body{
+    height:100%;
+  }
+
+  body{
+    font-family:'Poppins',sans-serif;
+    background:linear-gradient(135deg,#f7f3ea,#efe6d5);
+    color:#2d2d2d;
+    display:flex;
+    flex-direction:column;
+    min-height:100vh;
+  }
+
+  .main-content{
+    flex:1;
+    padding:12px 10px;
+  }
+
+  
+  .calendar-container{
+    max-width:1000px;
+    margin:auto;
+    background:#fff;
+    border-radius:14px;
+    overflow:hidden;
+    box-shadow:0 6px 18px rgba(0,0,0,0.12);
+    max-width:1000px;
+  }
+
+  .calendar-header{
+    background:linear-gradient(135deg,#7b1e1e,#b8860b);
+    color:white;
+    padding:16px;
+    text-align:center;
+  }
+
+  .calendar-header h1{
+    font-size:24px;
+    font-weight:700;
+  }
+
+  .calendar-header p{
+    margin-top:4px;
+    opacity:0.9;
+    font-size:12px;
+  }
+
+  .month-selector{
+    padding:10px;
+    background:#faf6ef;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+  }
+
+  .month-selector label{
+    font-size:14px;
+    font-weight:600;
+    color:#7b1e1e;
+  }
+
+  .month-selector select{
+    padding:7px 12px;
+    border:none;
+    border-radius:6px;
+    font-size:13px;
+    font-weight:500;
+    background:white;
+    box-shadow:0 2px 5px rgba(0,0,0,0.08);
+    cursor:pointer;
+    outline:none;
+  }
+
+  .month-bar{
+    background:#f5f5f5;
+    padding:10px;
+    text-align:center;
+    font-size:22px;
+    font-weight:700;
+    color:#7b1e1e;
+    border-bottom:1px solid #ddd;
+  }
+
+  .weekdays{
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    background:#faf6ef;
+  }
+
+  .weekdays div{
+    padding:12px;
+    text-align:center;
+    font-weight:600;
+    font-size:13px;
+    color:#7b1e1e;
+    border-right:1px solid #e4e4e4;
+  }
+
+  .weekdays div:last-child{
+    border-right:none;
+  }
+
+  .calendar-grid{
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+  }
+
+  
+  .day{
+    min-height:75px;
+    border:1px solid #eee;
+    padding:6px;
+    transition:0.3s;
+    background:white;
+    position:relative;
+  }
+
+  .day:hover{
+    background:#fffaf2;
+    transform:scale(1.01);
+    z-index:2;
+    box-shadow:0 4px 10px rgba(0,0,0,0.08);
+  }
+
+  .empty{
+    background:#f9f9f9;
+  }
+
+  .date{
+    width:28px;
+    height:28px;
+    border-radius:50%;
+    background:#7b1e1e;
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:600;
+    margin-bottom:6px;
+    font-size:12px;
+  }
+
+  .event{
+    padding:5px 7px;
+    border-radius:5px;
+    margin-bottom:5px;
+    font-size:10px;
+    color:white;
+    font-weight:500;
+    line-height:1.2;
+    box-shadow:0 1px 3px rgba(0,0,0,0.1);
+  }
+
+  .festival{
+    background:linear-gradient(135deg,#ff9800,#ff5722);
+  }
+
+  .meeting{
+    background:linear-gradient(135deg,#00695c,#26a69a);
+  }
+
+  .celebration{
+    background:linear-gradient(135deg,#8e24aa,#ce93d8);
+  }
+
+  .special{
+    background:linear-gradient(135deg,#283593,#5c6bc0);
+  }
+
+  .holiday{
+    background:linear-gradient(135deg,#c62828,#ef5350);
+  }
+
+  .legend{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:12px;
+    padding:12px;
+    background:#fafafa;
+  }
+
+  .legend-item{
+    display:flex;
+    align-items:center;
+    gap:5px;
+    font-size:11px;
+    font-weight:500;
+  }
+
+  .legend-color{
+    width:12px;
+    height:12px;
+    border-radius:3px;
+  }
+
+  footer{
+    width:100%;
+    background:white;
+    color:black;
+    text-align:center;
+    padding:12px 8px;
+    font-size:13px;
+    margin-top:auto;
+  }
+
+  /* TABLET */
+  @media(max-width:900px){
+
+    .calendar-container{
+      max-width:95%;
+    }
+
+    .day{
+      min-height:85px;
+    }
+  }
+
+  /* MOBILE */
+  @media(max-width:600px){
+
+    .calendar-grid{
+      grid-template-columns:1fr;
+    }
+
+    .weekdays{
+      display:none;
+    }
+
+    .day{
+      min-height:80px;
+    }
+
+    .calendar-header h1{
+      font-size:18px;
+    }
+
+    .month-bar{
+      font-size:16px;
+    }
+
+    .event{
+      font-size:11px;
+    }
+
+    footer{
+      font-size:11px;
+    }
+  }
+
+</style>
+</head>
+
+<body>
+
+  <div class="main-content">
+
+    <div class="calendar-container">
+
+      <div class="calendar-header">
+        <h1>Konkiyazham Kudumbasangam</h1>
+        <p>2026 Family Event Calendar • Kerala Festivals • Gatherings</p>
+      </div>
+
+      <!-- MONTH SELECT -->
+
+      <div class="month-selector">
+        <label>Select Month:</label>
+
+        <select id="monthSelect" onchange="loadCalendar()">
+
+          <option value="January">January</option>
+          <option value="February">February</option>
+          <option value="March">March</option>
+          <option value="April">April</option>
+          <option value="May">May</option>
+          <option value="June">June</option>
+          <option value="July">July</option>
+          <option value="August" selected>August</option>
+          <option value="September">September</option>
+          <option value="October">October</option>
+          <option value="November">November</option>
+          <option value="December">December</option>
+
+        </select>
+      </div>
+
+      <div class="month-bar" id="monthTitle">
+        August 2026
+      </div>
+
+      <div class="weekdays">
+        <div>Sunday</div>
+        <div>Monday</div>
+        <div>Tuesday</div>
+        <div>Wednesday</div>
+        <div>Thursday</div>
+        <div>Friday</div>
+        <div>Saturday</div>
+      </div>
+
+      <div class="calendar-grid" id="calendarGrid"></div>
+
+      <div class="legend">
+
+        <div class="legend-item">
+          <div class="legend-color festival"></div>
+          Festivals
+        </div>
+
+        <div class="legend-item">
+          <div class="legend-color meeting"></div>
+          Meetings
+        </div>
+
+        <div class="legend-item">
+          <div class="legend-color celebration"></div>
+          Celebrations
+        </div>
+
+        <div class="legend-item">
+          <div class="legend-color special"></div>
+          Special Programs
+        </div>
+
+        <div class="legend-item">
+          <div class="legend-color holiday"></div>
+          Holidays
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+ 
+
+  <footer>
+    © 2026 Konkiyazham Kudumbasangam. All Rights Reserved.
+  </footer>
+
+<script>
+
+  const calendarData = {
+
+    "January": {
+      days:31,
+      startDay:4,
+      events:{
+        1:[{text:"New Year Celebration",type:"celebration"}],
+        14:[{text:"Makara Vilakku",type:"festival"}],
+        26:[{text:"Republic Day",type:"holiday"}]
+      }
+    },
+
+    "February": {
+      days:28,
+      startDay:0,
+      events:{
+        5:[{text:"Family Prayer Meeting",type:"special"}],
+        14:[{text:"Youth Gathering",type:"meeting"}]
+      }
+    },
+
+    "March": {
+      days:31,
+      startDay:0,
+      events:{
+        8:[{text:"Shivaratri",type:"festival"}],
+        29:[{text:"Community Picnic",type:"celebration"}]
+      }
+    },
+
+    "April": {
+      days:30,
+      startDay:3,
+      events:{
+        14:[{text:"Vishu Celebration",type:"festival"}],
+        18:[{text:"Annual Family Gathering",type:"meeting"}]
+      }
+    },
+
+    "May": {
+      days:31,
+      startDay:5,
+      events:{
+        1:[{text:"Labour Day",type:"holiday"}],
+        12:[{text:"Temple Festival",type:"celebration"}]
+      }
+    },
+
+    "June": {
+      days:30,
+      startDay:1,
+      events:{
+        21:[{text:"Reading Day Program",type:"special"}]
+      }
+    },
+
+    "July": {
+      days:31,
+      startDay:3,
+      events:{
+        20:[{text:"Karkidaka Vavu Bali",type:"festival"}]
+      }
+    },
+
+    "August": {
+      days:31,
+      startDay:6,
+      events:{
+        8:[{text:"Executive Committee Meeting",type:"meeting"}],
+        15:[{text:"Independence Day",type:"holiday"}],
+        19:[{text:"Sreekrishna Jayanthi",type:"festival"}],
+        24:[{text:"Atham - Onam Begins",type:"festival"}],
+        30:[{text:"Thiruvonam Celebration",type:"festival"}]
+      }
+    },
+
+    "September": {
+      days:30,
+      startDay:2,
+      events:{
+        5:[{text:"Teachers Day Celebration",type:"celebration"}],
+        17:[{text:"Family Charity Program",type:"special"}]
+      }
+    },
+
+    "October": {
+      days:31,
+      startDay:4,
+      events:{
+        2:[{text:"Gandhi Jayanthi",type:"holiday"}],
+        23:[{text:"Navaratri Celebration",type:"festival"}]
+      }
+    },
+
+    "November": {
+      days:30,
+      startDay:0,
+      events:{
+        1:[{text:"Kerala Piravi",type:"festival"}],
+        12:[{text:"Deepavali",type:"festival"}]
+      }
+    },
+
+    "December": {
+      days:31,
+      startDay:2,
+      events:{
+        25:[{text:"Christmas Celebration",type:"celebration"}],
+        31:[{text:"Year End Family Meet",type:"meeting"}]
+      }
+    }
+
+  };
+
+  function loadCalendar(){
+
+    const month = document.getElementById("monthSelect").value;
+
+    document.getElementById("monthTitle").innerHTML = month + " 2026";
+
+    const grid = document.getElementById("calendarGrid");
+
+    grid.innerHTML = "";
+
+    const monthData = calendarData[month];
+
+    for(let i=0;i<monthData.startDay;i++){
+
+      grid.innerHTML += `<div class="day empty"></div>`;
+
+    }
+
+    for(let day=1;day<=monthData.days;day++){
+
+      let eventsHTML = "";
+
+      if(monthData.events[day]){
+
+        monthData.events[day].forEach(event => {
+
+          eventsHTML += `
+            <div class="event ${event.type}">
+              ${event.text}
+            </div>
+          `;
+
+        });
+
+      }
+
+      grid.innerHTML += `
+
+        <div class="day">
+
+          <div class="date">${day}</div>
+
+          ${eventsHTML}
+
+        </div>
+
+      `;
+
+    }
+
+  }
+
+  const months = [
+    "January","February","March","April","May","June",
+    "July","August","September","October","November","December"
+  ];
+
+  const currentMonth = months[new Date().getMonth()];
+
+  document.getElementById("monthSelect").value = currentMonth;
+
+  loadCalendar();
+
+</script>
+
+</body>
+</html>
