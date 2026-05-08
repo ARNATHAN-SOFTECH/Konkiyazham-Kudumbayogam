@@ -1,0 +1,443 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+About Konkiyazham Kudumbayogam
+{% endblock %}
+
+{% block extra_css %}
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f6e9e0;
+    color: #000000; 
+    overflow-x: hidden;
+}
+
+
+.about-section {
+    width: 100%;
+    padding: 80px 8% 40px 8%; 
+}
+
+.about-container {
+    max-width: 1300px;
+    margin: auto;
+}
+
+.about-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 60px;
+    margin-bottom: 60px; 
+}
+
+.about-row:last-child {
+    margin-bottom: 0;
+}
+
+.about-row.reverse {
+    flex-direction: row-reverse;
+}
+
+
+.about-content {
+    flex: 1;
+}
+
+.about-content h1 {
+    font-size: 42px;
+    line-height: 1.2;
+    font-weight: 700;
+    color: #000000;
+    margin-bottom: 20px;
+}
+
+.about-content h3 {
+    font-size: 28px; 
+    font-weight: 700;
+    color: #000000;
+    margin-bottom: 15px;
+}
+
+.about-content p {
+    font-size: 16px;
+    line-height: 1.7;
+    color: #000000;
+    max-width: 600px;
+}
+
+
+.about-image {
+    flex: 1;
+}
+
+.about-image img {
+    width: 100%;
+    border-radius: 15px;
+    display: block;
+    object-fit: cover;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    transition: 0.5s ease;
+}
+
+.about-image img:hover {
+    transform: scale(1.03);
+}
+
+/* =========================
+   VALUES SECTION
+========================= */
+.values-section {
+    width: 100%;
+    padding: 60px 8% 100px 8%;
+    background: transparent;
+}
+
+.values-container {
+    max-width: 1300px;
+    margin: auto;
+    text-align: center;
+}
+
+.values-header h2 {
+    font-size: 48px;
+    color: #000000;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.values-header p {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #000000;
+    max-width: 800px;
+    margin: auto;
+}
+
+.values-grid {
+    margin-top: 60px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+}
+
+.value-card {
+    text-align: left;
+    padding: 30px;
+    background: #ffffff; 
+    border-radius: 12px;
+    transition: 0.4s ease;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.value-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+.value-card h3 {
+    font-size: 24px;
+    color: #000000;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.value-card p {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #000000;
+}
+
+ 
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+.hero-section {
+    position: relative;
+    height: 450px; 
+    width: 100%;
+    background-image: url("{% static 'assets/img/img7.jpg' %}");
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6); 
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    padding: 0 20px;
+}
+
+.hero-content h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    letter-spacing: -1px;
+}
+
+.hero-content p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    font-weight: 400;
+    opacity: 0.9;
+}
+
+/* Orange Button Styling */
+.btn-primary {
+    display: inline-block;
+    background-color: #f34713; 
+    color: white;
+    padding: 15px 35px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 600;
+    transition: background 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #e67e00;
+}
+
+
+.hero-section1 {
+  position: relative;
+  height: 60vh; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-color: #a8d09b; 
+  
+}
+
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.2); 
+  z-index: 1;
+}
+
+.content-container {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: #08182d; 
+  padding: 20px;
+  max-width: 800px;
+}
+
+
+.title {
+  font-family: 'Playfair Display', serif; 
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  opacity: 0;
+  animation: fadeInUp 1s ease forwards;
+}
+
+.divider {
+  width: 60px;
+  height: 3px;
+  background-color: #0c2340;
+  margin: 20px auto;
+  opacity: 0;
+  animation: fadeInUp 1s ease forwards 0.3s;
+}
+
+.tagline {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.25rem;
+  font-style: italic;
+  letter-spacing: 0.5px;
+  opacity: 0;
+  animation: fadeInUp 1s ease forwards 0.6s;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive design for mobile */
+@media (max-width: 768px) {
+  .title { font-size: 2.2rem; }
+  .tagline { font-size: 1rem; }
+  .hero-section { background-attachment: scroll; } 
+}
+
+
+
+@media(max-width:992px){
+    .about-row,
+    .about-row.reverse {
+        flex-direction: column;
+        text-align: center;
+        gap: 40px;
+        margin-bottom: 80px;
+    }
+    
+    .about-content p {
+        margin: auto;
+    }
+
+    .values-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+
+
+
+<section class="hero-section1">
+  <div class="overlay"></div>
+  <div class="content-container">
+    <h1 class="title">Our Legacy, Our Unity</h1>
+    <div class="divider"></div>
+    <p class="tagline">"Rooted in tradition, connected by values, and growing together as one community."</p>
+  </div>
+</section>
+<section class="about-section">
+  <div class="about-container">
+    
+    <!-- Row 1 -->
+    <div class="about-row">
+      <div class="about-content" data-aos="fade-up" data-aos-duration="1000">
+        <h1>The Story Behind Our Kudumbayogam</h1>
+        <p>
+          Our KonkiyazhikamKudumbayogam is more than just a gathering—it is a celebration of unity, tradition, and the strong bonds that connect us as one family. Rooted in our shared values and heritage, we come together to strengthen relationships, support one another, and preserve the legacy passed down through generations. Through our efforts, we not only build deeper connections within our family but also extend our support to society through meaningful charitable activities. Together, we continue to grow, celebrate, and create lasting memories.</p>
+      </div>
+      <div class="about-image" data-aos="zoom-in-left" data-aos-duration="1200">
+        <img src="{% static 'assets/img/img12.jpg' %}" alt="Kudumbayogam Heritage">
+      </div>
+    </div>
+
+    <!-- Row 2 -->
+    <div class="about-row reverse">
+      <div class="about-content" data-aos="fade-left" data-aos-duration="1000">
+        <h3>Rooted in Tradition, Growing Together</h3>
+        <p>
+          Deeply rooted in our heritage and traditions, our Kudumbasangam serves as a bridge connecting the past, present, and future generations. We take pride in preserving our cultural values while strengthening family ties and contributing to society through meaningful initiatives, ensuring our legacy continues to thrive.</p>
+      </div>
+      <div class="about-image" data-aos="zoom-in-right" data-aos-duration="1200">
+         <img src="{% static 'assets/img/img13.jpg' %}" alt="Tradition">
+      </div>
+    </div>
+
+    <!-- Row 3 -->
+    <div class="about-row">
+      <div class="about-content" data-aos="fade-right" data-aos-duration="1000">
+        <h3>Connecting Families, Creating Impact</h3>
+        <p>
+         Our Kudumbasangam is a modern community platform that focuses on building strong relationships among members while making a positive difference in society. From family connections to charitable contributions, we aim to create a supportive and impactful environment for everyone involved.</p>
+      </div>
+      <div class="about-image" data-aos="flip-up" data-aos-duration="1200">
+        <img src="{% static 'assets/img/img14.jpg' %}" alt="Community Impact">
+      </div>
+    </div>
+
+    <!-- Row 4 -->
+    <div class="about-row reverse">
+      <div class="about-content" data-aos="fade-left" data-aos-duration="1000">
+        <h3>A Legacy of Unity and Compassion</h3>
+        <p>
+          Our Kudumbasangam represents a legacy of unity, compassion, and shared responsibility. We are committed to strengthening family bonds, uplifting communities, and creating meaningful change through collective efforts. Together, we strive to build a future where connection, care, and contribution define who we are.</p>
+      </div>
+      <div class="about-image" data-aos="fade-right" data-aos-duration="1200">
+        <img src="{% static 'assets/img/img15.jpg' %}" alt="Legacy">
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="values-section">
+  <div class="values-container">
+    <div class="values-header" data-aos="fade-down" data-aos-duration="1000">
+      <h2>Our Core Values</h2>
+      <p>These principles guide our community efforts and define our commitment to fostering unity and connection among families.</p>
+    </div>
+
+    <div class="values-grid">
+      <div class="value-card" data-aos="fade-up" data-aos-delay="100">
+        <h3>Unity</h3>
+        <p>We believe in the strength that comes from unity, bringing families together to celebrate shared heritage and connections across generations.</p>
+      </div>
+      <div class="value-card" data-aos="fade-up" data-aos-delay="300">
+        <h3>Tradition</h3>
+        <p>Honoring our traditions is at the heart of what we do, as we strive to preserve essential customs and ceremonies that define our community.</p>
+      </div>
+      <div class="value-card" data-aos="fade-up" data-aos-delay="500">
+        <h3>Engagement</h3>
+        <p>We encourage active participation among family members, fostering engagement through events and activities that strengthen our bonds and community spirit.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="hero-section">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Join Our Family Today</h1>
+            <p>Become part of our growing family association. Connect with loved ones and help us preserve our cherished traditions.</p>
+            <a href="{% url 'contact' %}"class="btn-primary">Get Started</a>
+           
+        </div>
+    </section>
+    {% endblock %}
+
+{% block extra_js %}
+
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script>
+  AOS.init({
+      once: true,
+      offset: 100
+  });
+</script>
+{% endblock %}
