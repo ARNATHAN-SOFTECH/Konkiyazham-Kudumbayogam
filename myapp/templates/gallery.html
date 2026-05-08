@@ -1,323 +1,258 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Attingal - Konkiyazham Kudumbayogam</title>
 
-  <!-- Favicons -->
-  <link href="{% static 'assets/img/favicon.png' %}" rel="icon">
-  <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+{% block title %}
+Gallery - Konkiyazham Kudumbayogam
+{% endblock %}
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@400;600&family=Raleway:wght@400;600&display=swap" rel="stylesheet">
+{% block extra_css %}
 
-  <!-- Vendor CSS -->
-  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
-  <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
-  <link href="{% static 'assets/vendor/aos/aos.css' %}" rel="stylesheet">
-  <link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
-  <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
 
-  <!-- Main CSS -->
-  <link href="{% static 'assets/css/main.css' %}" rel="stylesheet">
-
-  <style>
-    html, body { height: 100%; margin: 0; }
-    body { display: flex; flex-direction: column; font-family: 'Poppins', sans-serif; }
-    main { flex: 1; }
-
-    /* Header */
-    .site-header { background: #c2b3d9; }
-    .header-inner { display: flex; align-items: center; justify-content: space-between; padding: 15px 30px; }
-    .nav-wrapper { flex: 1 1 auto; }
-    .nav-list { list-style: none; display: flex; justify-content: center; align-items: center; gap: 20px; margin:0; padding:0; }
-    .nav-list li { position: relative; }
-    .nav-list a { text-decoration: none; color: #000; font-weight:700; text-transform: uppercase; font-size:15px; padding:6px 0; }
-    .dropdown .drop-toggle { cursor: pointer; display:flex; align-items:center; gap:6px; }
-    .dropdown .caret { font-size:12px; }
-    .dropdown-menu { 
-      position:absolute; top: calc(100% + 8px); left:50%; transform:translateX(-50%);
-      display:none; min-width:190px; background:#fff; padding:6px 0; margin:0; border-radius:6px; box-shadow:0 8px 22px rgba(0,0,0,0.12); z-index:9999;
-    }
-    .dropdown-menu a { display:block; padding:10px 14px; color:#222; font-weight:600; text-decoration:none; white-space:nowrap; }
-    .dropdown-menu a:hover { background:#f3f3f3; color:#000; }
-    .dropdown:hover > .dropdown-menu, .dropdown:focus-within > .dropdown-menu { display:block; }
-/* Scroll Top */
-
-#scrollTopBtn{
-position:fixed;
-bottom:20px;
-right:20px;
-background:#ff6b00;
-color:white;
-border:none;
-padding:12px;
-border-radius:50%;
-display:none;
-cursor:pointer;
-font-size: 14px;
-
-width:45px;
-height:45px;
-
-text-decoration:none;
-transition:.3s;
-}
-    /* CTA */
-    .cta-button {
-      background-color: #ff6f00; font-size:13px; font-weight:bold; padding:6px 16px;
-      border:none; border-radius:0; cursor:pointer; color:white !important; transition:0.3s; white-space:nowrap; text-decoration: none;
-}
-    
-    .cta-button:hover { background-color: rgb(222, 125, 6); }
-
-    /* Footer */
-    footer { background:white; color:black; text-align:center; font-size:12px; padding:10px 0; }
-
-    :focus { outline:none; }
-
-    /* =========================
-   GALLERY PAGE
+/* =========================
+GALLERY PAGE
 ========================= */
 
-.gallery-page {
-    padding: 30px 20px;
+.gallery-page{
+    padding:30px 20px;
+    background:#fff2e9;
 }
 
-.gallery-container {
-    max-width: 1200px;
-    margin: auto;
+.gallery-container{
+    max-width:1200px;
+    margin:auto;
 }
 
-.gallery-header {
-    text-align: center;
-    margin-bottom: 20px;
+.gallery-header{
+    text-align:center;
+    margin-bottom:20px;
 }
 
 /* Heading */
-.gallery-header h1 {
-    font-size: 40px;
-    font-weight: 700;
-    margin-bottom: 10px;
-    color: #ff5e00;
-    text-transform: uppercase;
-    letter-spacing: 2px;
+
+.gallery-header h1{
+    font-size:40px;
+    font-weight:700;
+    margin-bottom:10px;
+    color:#ff5e00;
+    text-transform:uppercase;
+    letter-spacing:2px;
 }
 
-.gallery-header::after {
-    content: "";
-    display: block;
-    width: 80px;
-    height: 3px;
-    background: #ff7a00;
-    margin: 15px auto;
+.gallery-header::after{
+    content:"";
+    display:block;
+    width:80px;
+    height:3px;
+    background:#ff7a00;
+    margin:15px auto;
 }
 
 /* Paragraph */
-.gallery-header p {
-    color: #000000;   
-    font-size: 16px;
+
+.gallery-header p{
+    color:#000000;
+    font-size:16px;
 }
 
 /* =========================
-   MASONRY GALLERY
+MASONRY GALLERY
 ========================= */
-.gallery-grid {
-    column-count: 3;
-    column-gap: 15px;
+
+.gallery-grid{
+    column-count:3;
+    column-gap:15px;
 }
 
-.gallery-item {
-    break-inside: avoid;
-    margin-bottom: 20px;
-    background: #fff;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
-    overflow: hidden;
-    cursor: pointer;
-    position: relative;
+.gallery-item{
+    break-inside:avoid;
+    margin-bottom:20px;
+    background:#fff;
+    box-shadow:0 6px 18px rgba(0,0,0,0.12);
+    overflow:hidden;
+    cursor:pointer;
+    position:relative;
 }
 
-
-
-.gallery-item img {
-    width: 100%;
-    height: 260px;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.4s ease;
+.gallery-item img{
+    width:100%;
+    height:260px;
+    object-fit:cover;
+    display:block;
+    transition:transform 0.4s ease;
 }
 
-.gallery-item:hover img {
-    transform: scale(1.05);
+.gallery-item:hover img{
+    transform:scale(1.05);
 }
 
 /* =========================
-   LIGHTBOX
+LIGHTBOX
 ========================= */
-.lightbox {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.92);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-    backdrop-filter: blur(8px);
+
+.lightbox{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.92);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:9999;
+    backdrop-filter:blur(8px);
 }
 
-.lightbox.show {
-    display: flex;
+.lightbox.show{
+    display:flex;
 }
 
-.lightbox img {
-    max-width: 90%;
-    max-height: 80%;
-    border-radius: 8px;
+.lightbox img{
+    max-width:90%;
+    max-height:80%;
+    border-radius:8px;
 }
 
 /* CAPTION */
-.lightbox-caption {
-    position: absolute;
-    bottom: 30px;
-    color: #fff;
-    font-size: 14px;
-    letter-spacing: 0.5px;
+
+.lightbox-caption{
+    position:absolute;
+    bottom:30px;
+    color:#fff;
+    font-size:14px;
+    letter-spacing:0.5px;
 }
 
 /* CLOSE */
-.lightbox-close {
-    position: absolute;
-    top: 20px;
-    right: 30px;
-    font-size: 34px;
-    color: #fff;
-    cursor: pointer;
+
+.lightbox-close{
+    position:absolute;
+    top:20px;
+    right:30px;
+    font-size:34px;
+    color:#fff;
+    cursor:pointer;
 }
 
 /* ARROWS */
-.lightbox-nav {
-    position: absolute;
-    top: 50%;
-    font-size: 48px;
-    color: #fff;
-    cursor: pointer;
-    user-select: none;
-    transform: translateY(-50%);
+
+.lightbox-nav{
+    position:absolute;
+    top:50%;
+    font-size:48px;
+    color:#fff;
+    cursor:pointer;
+    user-select:none;
+    transform:translateY(-50%);
 }
 
-.lightbox-nav.prev { left: 20px; }
-.lightbox-nav.next { right: 20px; }
+.lightbox-nav.prev{
+    left:20px;
+}
 
-.lightbox-nav:hover {
-    color: #EB952D;
+.lightbox-nav.next{
+    right:20px;
+}
+
+.lightbox-nav:hover{
+    color:#EB952D;
 }
 
 /* RESPONSIVE */
-@media (max-width: 1024px) { .gallery-grid { column-count: 3; } }
-@media (max-width: 768px)  { .gallery-grid { column-count: 2; } }
-@media (max-width: 480px)  { .gallery-grid { column-count: 1; } }
 
-  </style>
-</head>
-<body>
+@media (max-width:1024px){
 
-  <!-- HEADER -->
-  <header id="header" class="site-header">
-    <div class="container-fluid header-inner">
-      <nav class="nav-wrapper" aria-label="Main navigation">
-        <ul class="nav-list">
-          <li><a href="{% url 'home' %}">HOME</a></li>
-          <li><a href="{% url 'donations' %}">DONATIONS</a></li>
-          {% comment %} <li><a href="{% url 'finance' %}">FINANCE</a></li> {% endcomment %}
-          <li><a href="{% url 'vision' %}">VISION</a></li>
-          <li><a href="{% url 'community-updates' %}">COMMUNITY UPDATES</a></li>
-          <li><a href="{% url 'contact' %}">CONTACT</a></li>
-          <li class="dropdown">
-            <a href="#" class="drop-toggle" aria-haspopup="true" aria-expanded="false">REGIONS <span class="caret">▾</span></a>
-            <ul class="dropdown-menu" role="menu">
-              <li><a href="{% url 'chathanoor' %}">CHATHANOOR</a></li>
-              <li><a href="{% url 'kollam' %}">KOLLAM</a></li>
-              <li><a href="{% url 'kottiyam' %}">KOTTIYAM</a></li>
-              <li><a href="{% url 'veliyam' %}">VELIYAM</a></li>
-              <li><a href="{% url 'attingal' %}">ATTINGAL</a></li>
-              <li><a href="{% url 'trivandrum' %}">TRIVANDRUM</a></li>
-              <li><a href="{% url 'bangalore' %}">BANGALORE</a></li>
-            </ul>
-          </li>
-          <li><a href="{% url 'familytree' %}">FAMILY TREE</a></li>
-          <li><a href="{% url 'register' %}">REGISTER</a></li>
-          <li><a href="{% url 'login' %}">LOGIN</a></li>
-        </ul>
-      </nav>
-      <a href="{% url 'contact' %}#contact-section" class="cta-button">CALL TO ACTION</a>
+    .gallery-grid{
+        column-count:3;
+    }
+
+}
+
+@media (max-width:768px){
+
+    .gallery-grid{
+        column-count:2;
+    }
+
+}
+
+@media (max-width:480px){
+
+    .gallery-grid{
+        column-count:1;
+    }
+
+}
+
+</style>
+
+{% endblock %}
+
+{% block content %}
+
+<section class="gallery-page">
+
+    <div class="gallery-container">
+
+        <div class="gallery-header">
+            <h1>Our Gallery</h1>
+            <p>Memories of our family moments</p>
+        </div>
+
+        <!-- GALLERY -->
+
+        <div class="gallery-grid">
+
+            <div class="gallery-item">
+                <img src="{% static 'assets/img/IMG1.png' %}" data-index="0">
+            </div>
+
+            <div class="gallery-item">
+                <img src="{% static 'assets/img/IMG2.png' %}" data-index="1">
+            </div>
+
+            <div class="gallery-item">
+                <img src="{% static 'assets/img/event-details.jpg' %}" data-index="2">
+            </div>
+
+            <div class="gallery-item">
+                <img src="{% static 'assets/img/heritage.jpg' %}" data-index="3">
+            </div>
+
+            <div class="gallery-item">
+                <img src="{% static 'assets/img/legacy.jpg' %}" data-index="4">
+            </div>
+
+            <div class="gallery-item">
+                <img src="{% static 'assets/img/family-gallery.jpg' %}" data-index="5">
+            </div>
+
+        </div>
+
     </div>
-  </header>
 
-  <!-- MAIN CONTENT -->
-  <main>
-    <section class="gallery-page">
-<div class="gallery-container">
-
-    <div class="gallery-header">
-        <h1>Our Gallery</h1>
-        <p>Memories of our family moments</p>
-    </div>
-
-    <!-- GALLERY -->
-    <div class="gallery-grid">
-
-        <div class="gallery-item">
-            <img src="{% static 'assets/img/IMG1.png' %}" data-index="0">
-        </div>
-
-        <div class="gallery-item">
-            <img src="{% static 'assets/img/IMG2.png' %}" data-index="1">
-        </div>
-
-        <div class="gallery-item">
-            <img src="{% static 'assets/img/event-details.jpg' %}" data-index="2">
-        </div>
-
-        <div class="gallery-item">
-            <img src="{% static 'assets/img/heritage.jpg' %}" data-index="3">
-        </div>
-
-        <div class="gallery-item">
-            <img src="{% static 'assets/img/legacy.jpg' %}" data-index="4">
-        </div>
-
-        <div class="gallery-item">
-            <img src="{% static 'assets/img/family-gallery.jpg' %}" data-index="5">
-        </div>
-    </div>
-</div>
 </section>
 
 <!-- ================= LIGHTBOX ================= -->
+
 <div class="lightbox" id="lightbox">
+
     <span class="lightbox-close">&times;</span>
+
     <span class="lightbox-nav prev">&#10094;</span>
 
     <img id="lightbox-img" src="">
+
     <div class="lightbox-caption" id="lightbox-caption"></div>
 
     <span class="lightbox-nav next">&#10095;</span>
+
 </div>
 
-  </main>
+{% endblock %}
 
-  <button id="scrollTopBtn" aria-label="Scroll to top">
-    <i class="fas fa-angles-up"></i></button>
-
-  <!-- FOOTER -->
-  <footer>
-    Copyright © 2025 konkiyazhikamkudumbayogam
-  </footer>
+{% block extra_js %}
 
 <script>
+
 document.addEventListener("DOMContentLoaded", () => {
 
     const images = document.querySelectorAll(".gallery-item img");
@@ -331,33 +266,45 @@ document.addEventListener("DOMContentLoaded", () => {
     let currentIndex = 0;
     const total = images.length;
 
-    function openLightbox(index) {
+    function openLightbox(index){
+
         currentIndex = index;
         updateLightbox();
         lightbox.classList.add("show");
+
     }
 
-    function closeLightbox() {
+    function closeLightbox(){
+
         lightbox.classList.remove("show");
+
     }
 
-    function updateLightbox() {
+    function updateLightbox(){
+
         lightboxImg.src = images[currentIndex].src;
         caption.textContent = `Image ${currentIndex + 1} / ${total}`;
+
     }
 
-    function nextImage() {
+    function nextImage(){
+
         currentIndex = (currentIndex + 1) % total;
         updateLightbox();
+
     }
 
-    function prevImage() {
+    function prevImage(){
+
         currentIndex = (currentIndex - 1 + total) % total;
         updateLightbox();
+
     }
 
     images.forEach((img, index) => {
+
         img.addEventListener("click", () => openLightbox(index));
+
     });
 
     closeBtn.onclick = closeLightbox;
@@ -365,70 +312,19 @@ document.addEventListener("DOMContentLoaded", () => {
     prevBtn.onclick = prevImage;
 
     document.addEventListener("keydown", e => {
+
         if (!lightbox.classList.contains("show")) return;
+
         if (e.key === "Escape") closeLightbox();
+
         if (e.key === "ArrowRight") nextImage();
+
         if (e.key === "ArrowLeft") prevImage();
+
     });
+
 });
+
 </script>
 
-  <!-- Dropdown JS -->
-  <script>
-    (function () {
-      document.querySelectorAll('.drop-toggle').forEach(function(btn){
-        btn.addEventListener('click', function(e){
-          e.preventDefault();
-          var menu = btn.nextElementSibling;
-          var isOpen = btn.getAttribute('aria-expanded') === 'true';
-          document.querySelectorAll('.dropdown .dropdown-menu').forEach(function(m){
-            if (m !== menu) { m.style.display='none'; m.previousElementSibling.setAttribute('aria-expanded','false'); }
-          });
-          if(!isOpen){ menu.style.display='block'; btn.setAttribute('aria-expanded','true'); } 
-          else { menu.style.display='none'; btn.setAttribute('aria-expanded','false'); }
-        });
-      });
-      document.addEventListener('click', function(e){
-        if(!e.target.closest('.dropdown')){
-          document.querySelectorAll('.dropdown .dropdown-menu').forEach(function(m){
-            m.style.display='none';
-            if(m.previousElementSibling) m.previousElementSibling.setAttribute('aria-expanded','false');
-          });
-        }
-      });
-      document.addEventListener('keydown', function(e){
-        if(e.key==='Escape'){
-          document.querySelectorAll('.dropdown .dropdown-menu').forEach(function(m){
-            m.style.display='none';
-            if(m.previousElementSibling) m.previousElementSibling.setAttribute('aria-expanded','false');
-          });
-        }
-      });
-    })();
-  </script>
-     <script>
-// ================================
-// SCROLL TO TOP
-// ================================
-
-document.addEventListener("DOMContentLoaded", () => {
-  const scrollBtn = document.getElementById('scrollTopBtn');
-
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 200) {
-      scrollBtn.style.display = 'block';
-    } else {
-      scrollBtn.style.display = 'none';
-    }
-  });
-
-  scrollBtn?.addEventListener('click', () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
-  });
-});
-</script>
-</body>
-</html>
+{% endblock %}

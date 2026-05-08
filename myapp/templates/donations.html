@@ -1,320 +1,445 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Donations - Konkiyazham Kudumbayogam</title>
-  <meta name="description" content="">
-  <meta name="keywords" content="">
+{% block title %}
+Donations - Konkiyazham Kudumbayogam
+{% endblock %}
 
-  <link href="{% static 'assets/img/favicon.png' %}" rel="icon">
-  <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+{% block extra_css %}
 
-  <link href="https://fonts.googleapis.com" rel="preconnect">
-  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@400;600&family=Raleway:wght@400;600&display=swap" rel="stylesheet">
+<style>
 
-  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
-  <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
-  <link href="{% static 'assets/vendor/aos/aos.css' %}" rel="stylesheet">
-  <link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
-  <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link href="{% static 'assets/css/main.css' %}" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  body{
+    background-color:#fff2e9;
+    font-family:Arial,sans-serif;
+  }
 
-  <style>
-    /* Header Styles */
-    .site-header { background: #c2b3d9; }
-    .header-inner { display: flex; align-items: center; justify-content: space-between; padding: 15px 30px; }
-    .nav-wrapper { flex: 1 1 auto; }
-    .nav-list { list-style: none; margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; gap: 20px; }
-    .nav-list li { position: relative; }
-    .nav-list a { display: inline-block; text-decoration: none; color: #000; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; font-size: 15px; padding: 6px 0; }
+  /* DONATION SECTION */
 
-    /* Dropdown Styles */
-    .dropdown .drop-toggle { cursor: pointer; display: flex; align-items: center; gap: 6px; }
-    .dropdown .caret { font-size: 12px; line-height: 1; }
-    .dropdown-menu { position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); display: none; min-width: 190px; background: #fff; padding: 6px 0; margin: 0; border-radius: 6px; box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12); z-index: 9999; }
-    .dropdown-menu li { margin: 0; }
-    .dropdown-menu a { display: block; padding: 10px 14px; color: #222; font-weight: 600; text-decoration: none; white-space: nowrap; }
-    .dropdown-menu a:hover, .dropdown-menu a:focus { background: #f3f3f3; color: #000; }
-    .dropdown:hover>.dropdown-menu, .dropdown:focus-within>.dropdown-menu { display: block; }
+  .donation-section{
+    background-color:#fff2e9;
+    padding:50px 5%;
+  }
 
-    /* Buttons and UI */
-    .cta-button { background: #ff6f00; font-size: 13px; font-weight: bold; padding: 6px 16px; text-decoration: none; border: none; border-radius: 0; cursor: pointer; transition: background-color 0.3s ease; white-space: nowrap; color: white !important; }
-    .cta-button:hover { background-color: rgb(222, 125, 6); }
-    :focus { outline: none; }
+  .donation-container{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:40px;
+    flex-wrap:wrap;
+    margin-bottom:50px;
+  }
 
-    /* Page Body and Layout */
-    body { background-color: #fff2e9; font-family: Arial, sans-serif; margin: 0; padding: 0; }
-    .donation-section { background-color: #fff2e9; padding: 50px 5%; }
-    .donation-container { display: flex; align-items: center; justify-content: space-between; gap: 40px; flex-wrap: wrap; margin-bottom: 50px; }
-    .donation-container.reverse { flex-direction: row-reverse; }
-    .donation-text { flex: 1; min-width: 300px; }
-    .donation-title { color: #4db6e6; font-size: 28px; font-weight: bold; margin-bottom: 10px; }
-    .donation-subtitle { color: #1a1a2e; font-size: 22px; font-weight: bold; margin-bottom: 15px; }
-    .donation-text p { color: #333; font-size: 16px; line-height: 1.6; }
-    .donation-image, .donation-image1 { flex: 1; text-align: center; }
-    .donation-image img, .donation-image1 img { width: 100%; max-width: 500px; border-radius: 5px; }
+  .donation-container.reverse{
+    flex-direction:row-reverse;
+  }
 
-    /* FAQ Section */
-    .faq-section { background: rgb(236, 232, 214); padding: 60px 20px; text-align: center; }
-    .faq-title { font-size: 40px; font-weight: 700; margin-bottom: 40px; color: #1a1a40; }
-    .faq-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; text-align: left; max-width: 1100px; margin: 0 auto; }
-    .faq-column { display: flex; flex-direction: column; gap: 20px; }
-    .faq-item { font-size: 18px; padding-bottom: 15px; border-bottom: 1px solid #ccc; color: #222; margin: 0; }
-/* Scroll Top */
+  .donation-text{
+    flex:1;
+    min-width:300px;
+  }
 
-#scrollTopBtn{
-position:fixed;
-bottom:20px;
-right:20px;
-background:#ff6b00;
-color:white;
-border:none;
-padding:12px;
-border-radius:50%;
-display:none;
-cursor:pointer;
-font-size: 14px;
+  .donation-title{
+    color:#4db6e6;
+    font-size:28px;
+    font-weight:bold;
+    margin-bottom:10px;
+  }
 
-width:45px;
-height:45px;
+  .donation-subtitle{
+    color:#1a1a2e;
+    font-size:22px;
+    font-weight:bold;
+    margin-bottom:15px;
+  }
 
-text-decoration:none;
-transition:.3s;
-}
-    /* CTA Section Inside Main */
-    .donation-cta { text-align: center; margin: 40px 0; }
-    .donation-cta h2 { font-size: 36px; font-weight: bold; color: #1a2a6c; margin-bottom: 15px; }
-    .donation-cta p { font-size: 16px; color: #555; margin-bottom: 30px; line-height: 1.6; }
-    .btn { display: inline-block; padding: 12px 30px; background-color: #3b82f6; color: #fff; text-decoration: none; border-radius: 30px; font-weight: bold; transition: background 0.3s; }
-    .btn:hover { background-color: rgba(59, 130, 246, 0.9); color: #fff; }
+  .donation-text p{
+    color:#333;
+    font-size:16px;
+    line-height:1.6;
+  }
 
-    /* Footer Styles */
-    .custom-footer { background-color: #fdeee2; padding: 20px 40px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; }
-    .footer-left img { width: 90px; height: 90px; border-radius: 50%; }
-    .custom-footer .info { flex: 1; text-align: center; font-size: 15px; color: #374151; line-height: 1.6; }
-    .custom-footer .info span { margin: 0 10px; color: #9ca3af; }
-    .social-icons { display: flex; gap: 20px; justify-content: flex-end; }
-    .social-icons a { font-size: 22px; color: #007bff; text-decoration: none; transition: color 0.3s ease; }
-    .social-icons a:hover { color: #6c757d; }
-    .copyright-footer { background-color: white; color: black; text-align: center; font-size: 12px; padding: 10px 0; }
-  </style>
-</head>
+  .donation-image,
+  .donation-image1{
+    flex:1;
+    text-align:center;
+  }
 
-<body class="about-page">
+  .donation-image img,
+  .donation-image1 img{
+    width:100%;
+    max-width:500px;
+    border-radius:5px;
+  }
 
-  <header id="header" class="site-header">
-    <div class="container-fluid header-inner">
-      <nav class="nav-wrapper" aria-label="Main navigation">
-        <ul class="nav-list">
-          <li><a href="{% url 'home' %}">HOME</a></li>
-          <li><a href="{% url 'donations' %}">DONATIONS</a></li>
-          {% comment %} <li><a href="{% url 'finance' %}">FINANCE</a></li> {% endcomment %}
-          <li><a href="{% url 'vision' %}">VISION</a></li>
-          <li><a href="{% url 'community-updates' %}">COMMUNITY UPDATES</a></li>
-          <li><a href="{% url 'contact' %}">CONTACT</a></li>
+  /* FAQ */
 
-          <li class="dropdown">
-            <a href="#" class="drop-toggle" aria-haspopup="true" aria-expanded="false">
-              REGIONS <span class="caret">▾</span>
-            </a>
-            <ul class="dropdown-menu" role="menu">
-              <li><a role="menuitem" href="{% url 'chathanoor' %}">CHATHANOOR</a></li>
-              <li><a role="menuitem" href="{% url 'kollam' %}">KOLLAM</a></li>
-              <li><a role="menuitem" href="{% url 'kottiyam' %}">KOTTIYAM</a></li>
-              <li><a role="menuitem" href="{% url 'veliyam' %}">VELIYAM</a></li>
-              <li><a role="menuitem" href="{% url 'attingal' %}">ATTINGAL</a></li>
-              <li><a role="menuitem" href="{% url 'trivandrum' %}">TRIVANDRUM</a></li>
-              <li><a role="menuitem" href="{% url 'bangalore' %}">BANGALORE</a></li>
-            </ul>
-          </li>
+  .faq-section{
+    background:rgb(236,232,214);
+    padding:60px 20px;
+    text-align:center;
+  }
 
-          <li><a href="{% url 'familytree' %}">FAMILY TREE</a></li>
-          <li><a href="{% url 'register' %}">REGISTER</a></li>
-          <li><a href="{% url 'login' %}">LOGIN</a></li>
-        </ul>
-      </nav>
-      <a href="{% url 'contact' %}#contact-section" class="cta-button">CALL TO ACTION</a>
-    </div>
-  </header>
+  .faq-title{
+    font-size:40px;
+    font-weight:700;
+    margin-bottom:40px;
+    color:#1a1a40;
+  }
 
-  <main class="main">
+  .faq-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:40px;
+    text-align:left;
+    max-width:1100px;
+    margin:0 auto;
+  }
 
-    <section class="donation-section">
-      <div class="donation-container">
-        <div class="donation-text">
-          <h2 class="donation-title">DONATIONS</h2>
-          <h3 class="donation-subtitle">Child Education</h3>
-          <p>
-            We believe that every child deserves a strong foundation for a bright future.
-            Our Child Education service focuses on nurturing curiosity, building core
-            academic skills, and encouraging moral values through structured learning
-            and cultural awareness. With personalized guidance, modern resources, and
-            a supportive environment, we help each child grow into a confident, capable,
-            and compassionate individual—ready to make a difference in the world.
-          </p>
-        </div>
-        <div class="donation-image">
-          <img src="{% static 'assets/img/img8.jpg' %}" alt="Child Education">
-        </div>
-      </div>
+  .faq-column{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+  }
 
-      <div class="donation-container reverse">
-        <div class="donation-text">
-          <h3 class="donation-subtitle">Forearm for Disabled</h3>
-          <p>
-            Our service provides specially designed forearm aids and prosthetics that empower
-            individuals with disabilities to regain independence and improve daily functionality.
-            With comfort, durability, and dignity at the core, we ensure every device is tailored
-            to meet personal needs—helping users live with greater confidence, mobility, and
-            self-reliance. Our mission is not just to support movement, but to uplift lives.
-          </p>
-        </div>
-        <div class="donation-image1">
-          <img src="{% static 'assets/img/img9.jpg' %}" alt="Forearm for Disabled">
-        </div>
-      </div>
+  .faq-item{
+    font-size:18px;
+    padding-bottom:15px;
+    border-bottom:1px solid #ccc;
+    color:#222;
+    margin:0;
+  }
 
-      <div class="donation-container">
-        <div class="donation-text">
-          <h3 class="donation-subtitle">General</h3>
-          <p>
-            Our wide range of family-oriented services—from child education to special assistance for the differently-abled—are thoughtfully designed to uplift every member of our community. Rooted in care, culture, and connection, we aim to provide practical support that improves lives while honoring our shared heritage. Whether it’s guiding the next generation or standing by those in need, we are here to grow together—with purpose, dignity, and heart.
-          </p>
-        </div>
-        <div class="donation-image">
-          <img src="{% static 'assets/img/img10.jpg' %}" alt="General Services">
-        </div>
-      </div>
-    </section>
+  /* CTA */
 
-    <section class="faq-section">
-      <div class="container">
-        <h2 class="faq-title">FAQ</h2>
-        <div class="faq-grid">
-          <div class="faq-column">
-            <p class="faq-item">Who Can Join The Reunion Or Register On The Website?</p>
-            <p class="faq-item">Is There Any Cost Or Contribution Involved In Attending The Event?</p>
-            <p class="faq-item">Can I Submit Photos Or Stories For The Gallery?</p>
-            <p class="faq-item">How Do I Add Or Update My Profile?</p>
-          </div>
-          <div class="faq-column">
-            <p class="faq-item">What Is The Purpose Of This Website?</p>
-            <p class="faq-item">Where Will The Reunion Take Place?</p>
-            <p class="faq-item">How Is My Personal Data Protected On This Site?</p>
-            <p class="faq-item">How Can I Help Or Volunteer In Organizing?</p>
-          </div>
-        </div>
-      </div>
-    </section>
+  .donation-cta{
+    text-align:center;
+    margin:40px 0;
+    padding:0 20px;
+  }
 
-    <section class="donation-cta">
-      <h2>Make a Donation</h2>
-      <p>Every rupee you give goes toward preserving our family<br>
-        values, history, and the well-being of future generations.</p>
-      <a href="{% url 'contact' %}" class="btn">GET STARTED</a>
-      
-    </section>
+  .donation-cta h2{
+    font-size:36px;
+    font-weight:bold;
+    color:#1a2a6c;
+    margin-bottom:15px;
+  }
 
-  <button id="scrollTopBtn" aria-label="Scroll to top">
-    <i class="fas fa-angles-up"></i></button>
+  .donation-cta p{
+    font-size:16px;
+    color:#555;
+    margin-bottom:30px;
+    line-height:1.6;
+  }
 
-    <div class="custom-footer">
-      <div class="footer-left">
-        <img src="{% static 'assets/img/logo.png' %}" alt="Logo">
-      </div>
-      <div class="info">
-        +91 XXXXXXXXXX <span>|</span>
-        T.C.17/3478, 1st Floor, Relcon Plaza, Opposite LIC, Pattom, Thiruvananthapuram, Kerala <span>|</span><br>
-        Mon–Fri 10:00AM - 5:00PM
-      </div>
-      <div class="social-icons">
-        <a href="#"><i class="fab fa-facebook-f"></i></a>
-        <a href="#"><i class="fab fa-youtube"></i></a>
-        <a href="#"><i class="fab fa-instagram"></i></a>
-        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-      </div>
-    </div>
+  .btn{
+    display:inline-block;
+    padding:12px 30px;
+    background-color:#3b82f6;
+    color:#fff;
+    text-decoration:none;
+    border-radius:30px;
+    font-weight:bold;
+    transition:0.3s;
+  }
 
+  .btn:hover{
+    background-color:rgba(59,130,246,0.9);
+    color:#fff;
+  }
 
-    <footer class="copyright-footer">
-      Copyright © 2025 konkiyazhikamkudumbayogam
-    </footer>
+  /* CUSTOM FOOTER */
 
-  </main>
+  .custom-footer{
+    background-color:#fdeee2;
+    padding:20px 40px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:20px;
+  }
 
-  <script>
-    (function () {
-      document.querySelectorAll('.drop-toggle').forEach(function (btn) {
-        btn.addEventListener('click', function (e) {
-          e.preventDefault();
-          var menu = btn.nextElementSibling;
-          var isOpen = btn.getAttribute('aria-expanded') === 'true';
+  .footer-left img{
+    width:90px;
+    height:90px;
+    border-radius:50%;
+  }
 
-          document.querySelectorAll('.dropdown .dropdown-menu').forEach(function (m) {
-            if (m !== menu) {
-              m.style.display = 'none';
-              m.previousElementSibling.setAttribute('aria-expanded', 'false');
-            }
-          });
+  .custom-footer .info{
+    flex:1;
+    text-align:center;
+    font-size:15px;
+    color:#374151;
+    line-height:1.6;
+  }
 
-          if (!isOpen) {
-            menu.style.display = 'block';
-            btn.setAttribute('aria-expanded', 'true');
-          } else {
-            menu.style.display = 'none';
-            btn.setAttribute('aria-expanded', 'false');
-          }
-        });
-      });
+  .custom-footer .info span{
+    margin:0 10px;
+    color:#9ca3af;
+  }
 
-      document.addEventListener('click', function (e) {
-        if (!e.target.closest('.dropdown')) {
-          document.querySelectorAll('.dropdown .dropdown-menu').forEach(function (m) {
-            m.style.display = 'none';
-            if (m.previousElementSibling) m.previousElementSibling.setAttribute('aria-expanded', 'false');
-          });
-        }
-      });
+  .social-icons{
+    display:flex;
+    gap:20px;
+    justify-content:flex-end;
+  }
 
-      document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape') {
-          document.querySelectorAll('.dropdown .dropdown-menu').forEach(function (m) {
-            m.style.display = 'none';
-            if (m.previousElementSibling) m.previousElementSibling.setAttribute('aria-expanded', 'false');
-          });
-        }
-      });
-    })();
-  </script>
-   <script>
-// ================================
-// SCROLL TO TOP
-// ================================
+  .social-icons a{
+    font-size:22px;
+    color:#007bff;
+    text-decoration:none;
+    transition:0.3s;
+  }
 
-document.addEventListener("DOMContentLoaded", () => {
-  const scrollBtn = document.getElementById('scrollTopBtn');
+  .social-icons a:hover{
+    color:#6c757d;
+  }
 
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 200) {
-      scrollBtn.style.display = 'block';
-    } else {
-      scrollBtn.style.display = 'none';
+  /* RESPONSIVE */
+
+  @media(max-width:768px){
+
+    .donation-container,
+    .donation-container.reverse{
+      flex-direction:column;
     }
-  });
 
-  scrollBtn?.addEventListener('click', () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
-  });
-});
-</script>
-</body>
-</html>
+    .faq-grid{
+      grid-template-columns:1fr;
+    }
+
+    .faq-title{
+      font-size:32px;
+    }
+
+    .donation-cta h2{
+      font-size:28px;
+    }
+
+    .custom-footer{
+      flex-direction:column;
+      text-align:center;
+    }
+
+    .social-icons{
+      justify-content:center;
+    }
+
+  }
+
+</style>
+
+{% endblock %}
+
+{% block content %}
+
+<section class="donation-section">
+
+  <div class="donation-container">
+
+    <div class="donation-text">
+
+      <h2 class="donation-title">DONATIONS</h2>
+
+      <h3 class="donation-subtitle">
+        Child Education
+      </h3>
+
+      <p>
+        We believe that every child deserves a strong foundation for a bright future.
+        Our Child Education service focuses on nurturing curiosity, building core
+        academic skills, and encouraging moral values through structured learning
+        and cultural awareness. With personalized guidance, modern resources, and
+        a supportive environment, we help each child grow into a confident, capable,
+        and compassionate individual—ready to make a difference in the world.
+      </p>
+
+    </div>
+
+    <div class="donation-image">
+
+      <img src="{% static 'assets/img/img8.jpg' %}"
+           alt="Child Education">
+
+    </div>
+
+  </div>
+
+  <div class="donation-container reverse">
+
+    <div class="donation-text">
+
+      <h3 class="donation-subtitle">
+        Forearm for Disabled
+      </h3>
+
+      <p>
+        Our service provides specially designed forearm aids and prosthetics that empower
+        individuals with disabilities to regain independence and improve daily functionality.
+        With comfort, durability, and dignity at the core, we ensure every device is tailored
+        to meet personal needs—helping users live with greater confidence, mobility, and
+        self-reliance. Our mission is not just to support movement, but to uplift lives.
+      </p>
+
+    </div>
+
+    <div class="donation-image1">
+
+      <img src="{% static 'assets/img/img9.jpg' %}"
+           alt="Forearm for Disabled">
+
+    </div>
+
+  </div>
+
+  <div class="donation-container">
+
+    <div class="donation-text">
+
+      <h3 class="donation-subtitle">
+        General
+      </h3>
+
+      <p>
+        Our wide range of family-oriented services—from child education to special assistance
+        for the differently-abled—are thoughtfully designed to uplift every member of our
+        community. Rooted in care, culture, and connection, we aim to provide practical
+        support that improves lives while honoring our shared heritage. Whether it’s guiding
+        the next generation or standing by those in need, we are here to grow together—with
+        purpose, dignity, and heart.
+      </p>
+
+    </div>
+
+    <div class="donation-image">
+
+      <img src="{% static 'assets/img/img10.jpg' %}"
+           alt="General Services">
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="faq-section">
+
+  <div class="container">
+
+    <h2 class="faq-title">
+      FAQ
+    </h2>
+
+    <div class="faq-grid">
+
+      <div class="faq-column">
+
+        <p class="faq-item">
+          Who Can Join The Reunion Or Register On The Website?
+        </p>
+
+        <p class="faq-item">
+          Is There Any Cost Or Contribution Involved In Attending The Event?
+        </p>
+
+        <p class="faq-item">
+          Can I Submit Photos Or Stories For The Gallery?
+        </p>
+
+        <p class="faq-item">
+          How Do I Add Or Update My Profile?
+        </p>
+
+      </div>
+
+      <div class="faq-column">
+
+        <p class="faq-item">
+          What Is The Purpose Of This Website?
+        </p>
+
+        <p class="faq-item">
+          Where Will The Reunion Take Place?
+        </p>
+
+        <p class="faq-item">
+          How Is My Personal Data Protected On This Site?
+        </p>
+
+        <p class="faq-item">
+          How Can I Help Or Volunteer In Organizing?
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="donation-cta">
+
+  <h2>
+    Make a Donation
+  </h2>
+
+  <p>
+    Every rupee you give goes toward preserving our family<br>
+    values, history, and the well-being of future generations.
+  </p>
+
+  <a href="{% url 'contact' %}"
+     class="btn">
+     GET STARTED
+  </a>
+
+</section>
+
+<div class="custom-footer">
+
+  <div class="footer-left">
+
+    <img src="{% static 'assets/img/logo.png' %}"
+         alt="Logo">
+
+  </div>
+
+  <div class="info">
+
+    +91 9645006212 <span>|</span>
+
+    T.C.17/3478, 1st Floor, Relcon Plaza,
+    Opposite LIC, Pattom,
+    Thiruvananthapuram, Kerala
+
+    <span>|</span><br>
+
+    Mon–Fri 10:00AM - 5:00PM
+
+  </div>
+
+  <div class="social-icons">
+
+    <a href="#">
+      <i class="fab fa-facebook-f"></i>
+    </a>
+
+    <a href="#">
+      <i class="fab fa-youtube"></i>
+    </a>
+
+    <a href="#">
+      <i class="fab fa-instagram"></i>
+    </a>
+
+    <a href="#">
+      <i class="fab fa-linkedin-in"></i>
+    </a>
+
+  </div>
+
+</div>
+
+{% endblock %}

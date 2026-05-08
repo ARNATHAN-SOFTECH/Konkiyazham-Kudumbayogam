@@ -1,163 +1,19 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Registration - Konkiyazham Kudumbayogam</title>
-  <meta name="description" content="">
-  <meta name="keywords" content="">
+{% block title %}
+Registration - Konkiyazham Kudumbayogam
+{% endblock %}
 
-  <!-- Favicons -->
-  <link href="{% static 'assets/img/favicon.png' %}" rel="icon">
-  <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+{% block extra_css %}
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com" rel="preconnect">
-  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@400;600&family=Raleway:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-  <!-- Vendor CSS Files -->
-  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
-  <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
-  <link href="{% static 'assets/vendor/aos/aos.css' %}" rel="stylesheet">
-  <link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
-  <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
-
-  <link href="{% static 'assets/css/main.css' %}" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-
-
-
 
   <style>
     
  
-  .site-header {
-    background: #c2b3d9;
-  }
-  .header-inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 15px 30px;
-  }
-
   
-  .nav-wrapper { flex: 1 1 auto; }
-  .nav-list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;        
-    align-items: center;
-    gap: 20px;                      
-  }
-  .nav-list li { position: relative; }
-  .nav-list a {
-    display: inline-block;
-    text-decoration: none;
-    color: #000;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.6px;
-    font-size: 15px;
-    padding: 6px 0;                 
-  }
-
-  /* Dropdown menu styling */
-  .dropdown .drop-toggle { cursor: pointer; display:flex; align-items:center; gap:6px; }
-  .dropdown .caret { font-size: 12px; line-height:1; }
-
-  .dropdown-menu {
-    position: absolute;
-    top: calc(100% + 8px);         
-    left: 50%;                     
-    transform: translateX(-50%);
-    display: none;
-    min-width: 190px;
-    background: #fff;
-    padding: 6px 0;
-    margin: 0;
-    border-radius: 6px;
-    box-shadow: 0 8px 22px rgba(0,0,0,0.12);
-    z-index: 9999;
-  }
-
-  .dropdown-menu li { margin: 0; }
-  .dropdown-menu a {
-    display: block;
-    padding: 10px 14px;
-    color: #222;
-    font-weight: 600;
-    text-decoration: none;
-    white-space: nowrap;
-  }
-  .dropdown-menu a:hover,
-  .dropdown-menu a:focus {
-    background: #f3f3f3;
-    color: #000;
-  }
-
-  
-  .dropdown:hover > .dropdown-menu,
-  .dropdown:focus-within > .dropdown-menu {
-    display: block;
-  }
-
-  
-  
-.cta-button {
-      background: #ff6600;
-      display: inline-block;
-      background-color: #ff6f00;   
-      font-size: 13px;
-      font-weight: bold;
-      padding: 6px 16px;
-      text-decoration: none;
-      border: none;
-      border-radius: 0;           
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-      white-space: nowrap;
-      color: white !important;
-}
-
-
- .header .cta-button:hover {
-      background-color: rgb(222, 125, 6);
-    }
-
- 
-  :focus { outline: none; }
-
-/* Scroll Top */
-
-#scrollTopBtn{
-position:fixed;
-bottom:20px;
-right:20px;
-background:#ff6b00;
-color:white;
-border:none;
-padding:12px;
-border-radius:50%;
-display:none;
-cursor:pointer;
-font-size: 14px;
-
-width:45px;
-height:45px;
-
-text-decoration:none;
-transition:.3s;
-}
-
-
   #ai-summary-sidebar {
     position: fixed;
     right: 20px;
@@ -233,59 +89,12 @@ transition:.3s;
     color: #777;
 }
 
-
-
 </style>
    
-</head>
+{% endblock %}
 
+{% block content %}
   
-
- <!-- HEADER -->
-<header id="header" class="site-header">
-  <div class="container-fluid header-inner">
-    <nav class="nav-wrapper" aria-label="Main navigation">
-      <ul class="nav-list">
-        <li><a href="{% url 'home' %}">HOME</a></li>
-        <li><a href="{% url 'donations' %}">DONATIONS</a></li>
-        {% comment %} <li><a href="{% url 'finance' %}">FINANCE</a></li> {% endcomment %}
-        <li><a href="{% url 'vision' %}">VISION</a></li>
-        <li><a href="{% url 'community-updates' %}">COMMUNITY UPDATES</a></li>
-        <li><a href="{% url 'contact' %}">CONTACT</a></li>
-
-        
-        <li class="dropdown">
-          <a href="#" class="drop-toggle" aria-haspopup="true" aria-expanded="false">
-            REGIONS <span class="caret">▾</span>
-          </a>
-
-          <ul class="dropdown-menu" role="menu">
-            <li><a role="menuitem" href="{% url 'chathanoor' %}">CHATHANOOR</a></li>
-            <li><a role="menuitem" href="{% url 'kollam' %}">KOLLAM</a></li>
-            <li><a role="menuitem" href="{% url 'kottiyam' %}">KOTTIYAM</a></li>
-            <li><a role="menuitem" href="{% url 'veliyam' %}">VELIYAM</a></li>
-            <li><a role="menuitem" href="{% url 'attingal' %}">ATTINGAL</a></li>
-            <li><a role="menuitem" href="{% url 'trivandrum' %}">TRIVANDRUM</a></li>
-            <li><a role="menuitem" href="{% url 'bangalore' %}">BANGALORE</a></li>
-          </ul>
-        </li>
-
-        <li><a href="{% url 'familytree' %}">FAMILY TREE</a></li>
-          <li><a href="{% url 'register' %}">REGISTER</a></li>
-          <li><a href="{% url 'login' %}">LOGIN</a></li>
-      </ul>
-    </nav>
-
-    <a href="{% url 'contact' %}#contact-section" class="cta-button">CALL TO ACTION</a>
-  </div>
-</header>
-
-
-
-
-
-<body>
-
 <main class="main" style="background-color:#fff2e9; ; min-height:100vh; padding:40px;">
 
   
@@ -626,7 +435,7 @@ transition:.3s;
 <div style="margin-bottom:20px;">
   <label for="parent" class="form-label"
          style="font-weight:500; display:block; margin-bottom:6px;">
-    Select Parent
+    Parent Name
   </label>
 
   <select class="form-control" id="parent" name="parent">
@@ -701,34 +510,7 @@ transition:.3s;
        
 </main>
 
-  <button id="scrollTopBtn" aria-label="Scroll to top">
-    <i class="fas fa-angles-up"></i></button>
-
-   <script>
-// ================================
-// SCROLL TO TOP
-// ================================
-
-document.addEventListener("DOMContentLoaded", () => {
-  const scrollBtn = document.getElementById('scrollTopBtn');
-
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 200) {
-      scrollBtn.style.display = 'block';
-    } else {
-      scrollBtn.style.display = 'none';
-    }
-  });
-
-  scrollBtn?.addEventListener('click', () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
-  });
-});
-</script>
-
+  
 <script>
 flatpickr("#dob", {
     dateFormat: "Y-m-d",
@@ -736,33 +518,8 @@ flatpickr("#dob", {
 });
 </script>
 
-<script>
-document.addEventListener("DOMContentLoaded", function () {
+{% endblock %}
 
-    const firstName   = document.getElementById("first_name");
-    const lastName    = document.getElementById("last_name");
-    const profession  = document.getElementById("profession");
-    const country     = document.getElementById("country");
-    const address     = document.getElementById("address");
-
-    const warningBox  = document.getElementById("duplicate-warning");
-    const submitBtn   = document.querySelector("button[type='submit']");
-
-
-});
-</script>
-
-
-
-
-</body>
- <!-- Footer -->
- <footer style="background-color: white; color: black; text-align: center; font-size: 12px; padding: 10px 0;">
-  Copyright © 2025 konkiyazhikamkudumbayogam
-</footer>
-</html>
- 
- 
 
 
 
