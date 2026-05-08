@@ -1,591 +1,351 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Contact - Konkiyazham Kudumbayogam</title>
-  <meta name="description" content="">
-  <meta name="keywords" content="">
+{% block title %}
+Contact - Konkiyazham Kudumbayogam
+{% endblock %}
 
-  <link href="{% static 'assets/img/favicon.png' %}" rel="icon">
-  <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+{% block extra_css %}
+<style>
 
-  <link href="https://fonts.googleapis.com" rel="preconnect">
-  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@400;600&family=Raleway:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  #hero {
+    position: relative;
+    text-align: center;
+    color: white;
+    height: 400px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: url("{% static 'assets/img/img6.jpg' %}") center/cover no-repeat;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+  }
 
-  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
-  <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
-  <link href="{% static 'assets/vendor/aos/aos.css' %}" rel="stylesheet">
-  <link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
-  <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  #hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.65);
+    z-index: 1;
+  }
 
-  <link href="{% static 'assets/css/main.css' %}" rel="stylesheet">
+  #hero .hero-text {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: #ffffff;
+    padding: 0 10px;
+  }
 
-  <style>
-    .site-header {
-      background: #c2b3d9;
-    }
+  #hero .hero-text h1 {
+    margin: 10px 0;
+    font-weight: 600;
+    line-height: 1.3;
+    color: #ffffff;
+  }
 
-    .header-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 15px 30px;
-    }
+  #hero .hero-text h1.en {
+    font-size: 2.5rem;
+  }
 
-    .nav-wrapper {
-      flex: 1 1 auto;
-    }
+  #hero .hero-text h1.ml {
+    font-size: 2rem;
+    font-weight: 500;
+  }
 
-    .nav-list {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 20px;
-    }
+  .contact-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 60px 10%;
+    background: #fff2e9;
+  }
 
-    .nav-list li {
-      position: relative;
-    }
+  .contact-info {
+    flex: 1 1 45%;
+    padding: 20px;
+  }
 
-    .nav-list a {
-      display: inline-block;
-      text-decoration: none;
-      color: #000;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.6px;
-      font-size: 15px;
-      padding: 6px 0;
-    }
+  .contact-info h2 {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
 
-    .dropdown .drop-toggle {
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-/* Scroll Top */
+  .contact-info p {
+    font-size: 16px;
+    margin-bottom: 15px;
+    line-height: 1.6;
+  }
 
-#scrollTopBtn{
-position:fixed;
-bottom:20px;
-right:20px;
-background:#ff6b00;
-color:white;
-border:none;
-padding:12px;
-border-radius:50%;
-display:none;
-cursor:pointer;
-font-size: 14px;
+  .contact-info .details {
+    margin-top: 20px;
+  }
 
-width:45px;
-height:45px;
+  .contact-info .details p {
+    margin: 5px 0;
+  }
 
-text-decoration:none;
-transition:.3s;
-}
-    .dropdown .caret {
-      font-size: 12px;
-      line-height: 1;
-    }
+  .social-icons {
+    margin-top: 20px;
+  }
 
-    .dropdown-menu {
-      position: absolute;
-      top: calc(100% + 8px);
-      left: 50%;
-      transform: translateX(-50%);
-      display: none;
-      min-width: 190px;
-      background: #fff;
-      padding: 6px 0;
-      margin: 0;
-      border-radius: 6px;
-      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12);
-      z-index: 9999;
-    }
+  .social-icons p {
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
 
-    .dropdown-menu li {
-      margin: 0;
-    }
+  .social-icons a {
+    display: inline-block;
+    margin-right: 15px;
+    font-size: 22px;
+    color: #000;
+    transition: color 0.3s ease;
+  }
 
-    .dropdown-menu a {
-      display: block;
-      padding: 10px 14px;
-      color: #222;
-      font-weight: 600;
-      text-decoration: none;
-      white-space: nowrap;
-    }
+  .social-icons a:hover {
+    color: #ff5500;
+  }
 
-    .dropdown-menu a:hover,
-    .dropdown-menu a:focus {
-      background: #f3f3f3;
-      color: #000;
-    }
+  .contact-form {
+    flex: 1 1 45%;
+    background: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    margin: 50px auto;
+  }
 
-    .dropdown:hover>.dropdown-menu,
-    .dropdown:focus-within>.dropdown-menu {
-      display: block;
-    }
+  .contact-form input,
+  .contact-form textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+  }
 
-    .cta-button {
-      background: #ff6600;
-      display: inline-block;
-      background-color: #ff6f00;
-      font-size: 13px;
-      font-weight: bold;
-      padding: 6px 16px;
-      text-decoration: none;
-      border: none;
-      border-radius: 0;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-      white-space: nowrap;
-      color: white !important;
-    }
+  .contact-form textarea {
+    resize: vertical;
+  }
 
-    .header .cta-button:hover {
-      background-color: rgb(222, 125, 6);
-    }
+  .submit-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #ff5500;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+  }
 
-    :focus {
-      outline: none;
-    }
+  .submit-btn:hover {
+    background-color: #e64a00;
+  }
+
+  .hero-container {
+    position: relative;
+    width: 100%;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    background: #fff2e9;
+  }
+
+  .hero-container img {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+    display: block;
+  }
+
+  .hero-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-align: center;
+  }
+
+  .hero-content h1 {
+    font-size: 40px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: white;
+  }
+
+  .hero-content p {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+
+  .hero-content .btn {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #ff4d00;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  .hero-content .btn:hover {
+    background-color: #e64a00;
+  }
+
+  @media (max-width: 768px) {
 
     #hero {
-      position: relative;
-      text-align: center;
-      color: white;
-      height: 400px;
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: url("{% static 'assets/img/img6.jpg' %}") center/cover no-repeat;
-      overflow: hidden;
-      margin: 0;
-      padding: 0;
-    }
-
-    #hero::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.65);
-      z-index: 1;
-    }
-
-    #hero .hero-text {
-      position: relative;
-      z-index: 2;
-      text-align: center;
-      color: #ffffff;
-      padding: 0 10px;
-    }
-
-    #hero .hero-text h1 {
-      margin: 10px 0;
-      font-weight: 600;
-      line-height: 1.3;
-      color: #ffffff;
+      height: 280px;
     }
 
     #hero .hero-text h1.en {
-      font-size: 2.5rem;
+      font-size: 1.8rem;
     }
 
     #hero .hero-text h1.ml {
-      font-size: 2rem;
-      font-weight: 500;
+      font-size: 1.4rem;
     }
 
     .contact-section {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      padding: 60px 10%;
-      background: #fff2e9;
-    }
-
-    .contact-info {
-      flex: 1 1 45%;
-      padding: 20px;
-    }
-
-    .contact-info h2 {
-      font-size: 28px;
-      font-weight: bold;
-      margin-bottom: 15px;
-    }
-
-    .contact-info p {
-      font-size: 16px;
-      margin-bottom: 15px;
-      line-height: 1.6;
-    }
-
-    .contact-info .details {
-      margin-top: 20px;
-    }
-
-    .contact-info .details p {
-      margin: 5px 0;
-    }
-
-    .social-icons {
-      margin-top: 20px;
-    }
-
-    .social-icons p {
-      margin-bottom: 10px;
-      font-weight: bold;
-    }
-
-    .social-icons a {
-      display: inline-block;
-      margin-right: 15px;
-      font-size: 22px;
-      color: #000;
-      transition: color 0.3s ease;
-    }
-
-    .social-icons a:hover {
-      color: #ff5500;
+      flex-direction: column;
+      padding: 40px 5%;
     }
 
     .contact-form {
-      flex: 1 1 45%;
-      background: #fff;
-      padding: 30px;
-      border-radius: 8px;
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-      width: 400px;
-      margin: 50px auto;
-    }
-
-    .input-field,
-    .textarea-field,
-    .contact-form input,
-    .contact-form textarea {
       width: 100%;
-      padding: 12px;
-      margin-bottom: 15px;
-      border: 1px solid #ddd;
-      border-radius: 6px;
-      font-size: 14px;
-    }
-
-    .textarea-field {
-      resize: vertical;
-    }
-
-    .submit-btn {
-      width: 100%;
-      padding: 12px;
-      background-color: #ff5500;
-      color: white;
-      font-weight: bold;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 16px;
-    }
-
-    .submit-btn:hover {
-      background-color: #e64a00;
-    }
-
-    .hero-container {
-      position: relative;
-      width: 100%;
-      text-align: center;
-      margin: 0;
-      padding: 0;
-      background: #fff2e9;
+      margin: 30px 0 0;
     }
 
     .hero-container img {
-      width: 100%;
-      height: 350px;
-      object-fit: cover;
-      display: block;
-    }
-
-    .hero-content {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      color: white;
-      text-align: center;
+      height: 250px;
     }
 
     .hero-content h1 {
-      font-size: 40px;
-      margin-bottom: 10px;
-      font-weight: bold;
-      color: white;
+      font-size: 28px;
     }
 
     .hero-content p {
-      font-size: 18px;
-      margin-bottom: 20px;
+      font-size: 16px;
+    }
+  }
+
+  @media (max-width: 480px) {
+
+    #hero {
+      height: 220px;
     }
 
-    .hero-content .btn {
-      display: inline-block;
-      padding: 12px 24px;
-      background-color: #ff4d00;
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
+    #hero .hero-text h1.en {
+      font-size: 1.4rem;
     }
 
-    .hero-content .btn:hover {
-      background-color: #e64a00;
+    #hero .hero-text h1.ml {
+      font-size: 1.2rem;
     }
 
-    @media (max-width: 768px) {
-      #hero {
-        height: 280px;
-      }
-
-      #hero .hero-text h1.en {
-        font-size: 1.8rem;
-      }
-
-      #hero .hero-text h1.ml {
-        font-size: 1.4rem;
-      }
-
-      .contact-section {
-        flex-direction: column;
-        padding: 40px 5%;
-      }
-
-      .hero-container img {
-        height: 250px;
-      }
-
-      .hero-content h1 {
-        font-size: 28px;
-      }
-
-      .hero-content p {
-        font-size: 16px;
-      }
+    .hero-container img {
+      height: 200px;
     }
 
-    @media (max-width: 480px) {
-      #hero {
-        height: 220px;
-      }
-
-      #hero .hero-text h1.en {
-        font-size: 1.4rem;
-      }
-
-      #hero .hero-text h1.ml {
-        font-size: 1.2rem;
-      }
-
-      .hero-container img {
-        height: 200px;
-      }
-
-      .hero-content h1 {
-        font-size: 22px;
-      }
-
-      .hero-content p {
-        font-size: 14px;
-      }
+    .hero-content h1 {
+      font-size: 22px;
     }
-  </style>
-</head>
 
-<body>
+    .hero-content p {
+      font-size: 14px;
+    }
+  }
 
-  <header id="header" class="site-header">
-    <div class="container-fluid header-inner">
-      <nav class="nav-wrapper" aria-label="Main navigation">
-        <ul class="nav-list">
-          <li><a href="{% url 'home' %}">HOME</a></li>
-          <li><a href="{% url 'donations' %}">DONATIONS</a></li>
-          {% comment %} <li><a href="{% url 'finance' %}">FINANCE</a></li> {% endcomment %}
-          <li><a href="{% url 'vision' %}">VISION</a></li>
-          <li><a href="{% url 'community-updates' %}">COMMUNITY UPDATES</a></li>
-          <li><a href="{% url 'contact' %}">CONTACT</a></li>
+</style>
+{% endblock %}
 
-          <li class="dropdown">
-            <a href="#" class="drop-toggle" aria-haspopup="true" aria-expanded="false">
-              REGIONS <span class="caret">▾</span>
-            </a>
-            <ul class="dropdown-menu" role="menu">
-              <li><a role="menuitem" href="{% url 'chathanoor' %}">CHATHANOOR</a></li>
-              <li><a role="menuitem" href="{% url 'kollam' %}">KOLLAM</a></li>
-              <li><a role="menuitem" href="{% url 'kottiyam' %}">KOTTIYAM</a></li>
-              <li><a role="menuitem" href="{% url 'veliyam' %}">VELIYAM</a></li>
-              <li><a role="menuitem" href="{% url 'attingal' %}">ATTINGAL</a></li>
-              <li><a role="menuitem" href="{% url 'trivandrum' %}">TRIVANDRUM</a></li>
-              <li><a role="menuitem" href="{% url 'bangalore' %}">BANGALORE</a></li>
-            </ul>
-          </li>
+{% block content %}
 
-          <li><a href="{% url 'familytree' %}">FAMILY TREE</a></li>
-          <li><a href="{% url 'register' %}">REGISTER</a></li>
-          <li><a href="{% url 'login' %}">LOGIN</a></li>
-        </ul>
-      </nav>
+<section id="hero">
+  <div class="hero-text">
+    <h1 class="en">“Family Connections Begin Here”</h1>
+    <h1 class="ml">“സമ്പർക്കത്തിൽ ഇരിക്കുക”</h1>
+  </div>
+</section>
 
-      <a href="{% url 'contact' %}#contact-section" class="cta-button">CALL TO ACTION</a>
+<section id="contact-section" class="contact-section">
+
+  <div class="contact-info">
+
+    <h2>Contact Us | ബന്ധപ്പെടൂ</h2>
+
+    <p>
+      <em>
+        (We are family — whether you have questions, need help,
+        or want to share memories, we’re here for you.)
+      </em>
+      <br>
+      “സംശയങ്ങളോർക്കോ, സഹായത്തിനോ, ഓർമ്മകൾ പങ്കുവെക്കാനോ,
+      ഇവിടെയാണ് നിങ്ങള്‍ക്ക് ഞങ്ങളെ കാണാൻ കഴിയുന്നത്.”
+    </p>
+
+    <div class="details">
+      <p><strong>A:</strong> 2360 Hood Avenue, San Diego, CA, 92123</p>
+      <p><strong>P:</strong> 202-555-0188</p>
+      <p><strong>E:</strong> contact@example.com</p>
     </div>
-  </header>
 
-  <main class="main">
-    <section id="hero">
-      <div class="hero-text">
-        <h1 class="en">“Family Connections Begin Here”</h1>
-        <h1 class="ml">“സമ്പർക്കത്തിൽ ഇരിക്കുക”</h1>
-      </div>
-    </section>
+    <div class="social-icons">
+      <p>Follow Us:</p>
 
-    <section id="contact-section" class="contact-section">
-      <div class="contact-info">
-        <h2>Contact Us | ബന്ധപ്പെടൂ</h2>
-        <p><em>(We are family — whether you have questions, need help, or want to share memories, we’re here for you.)</em><br>
-          “സംശയങ്ങളോർക്കോ, സഹായത്തിനോ, ഓർമ്മകൾ പങ്കുവെക്കാനോ, ഇവിടെയാണ് നിങ്ങള്‍ക്ക് ഞങ്ങളെ കാണാൻ കഴിയുന്നത്.”</p>
+      <a href="#"><i class="fab fa-facebook"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-twitter"></i></a>
+      <a href="#"><i class="fab fa-linkedin"></i></a>
+      <a href="#"><i class="fab fa-youtube"></i></a>
+    </div>
 
-        <div class="details">
-          <p><strong>A:</strong> 2360 Hood Avenue, San Diego, CA, 92123</p>
-          <p><strong>P:</strong> 202-555-0188</p>
-          <p><strong>E:</strong> contact@example.com</p>
-        </div>
+  </div>
 
-        <div class="social-icons">
-          <p>Follow Us:</p>
-          <a href="#"><i class="fab fa-facebook"></i></a>
-          <a href="#"><i class="fab fa-instagram"></i></a>
-          <a href="#"><i class="fab fa-twitter"></i></a>
-          <a href="#"><i class="fab fa-linkedin"></i></a>
-          <a href="#"><i class="fab fa-youtube"></i></a>
-        </div>
-      </div>
+  <div class="contact-form">
 
-      <div class="contact-form">
-        <form method="post" action="{% url 'contact' %}">
-          {% csrf_token %}
-          {{ form.name }}
-          {{ form.email }}
-          {{ form.message }}
-          <button type="submit" class="submit-btn">SUBMIT</button>
-        </form>
-      </div>
-    </section>
+    <form method="post" action="{% url 'contact' %}">
+      {% csrf_token %}
 
-    <section class="hero-container">
-      <img src="{% static 'assets/img/img7.png' %}" alt="Hero Image">
-      <div class="hero-content">
-        <h1>Get Involved Today</h1>
-        <p>"Join hands, share stories, and strengthen our family bond."</p>
-        <a href="{% url 'contact' %}#contact-section"  class="btn">CALL TO ACTION ➝</a>
-      </div>
-    </section>
-  </main>
-  
-  <button id="scrollTopBtn" aria-label="Scroll to top">
-    <i class="fas fa-angles-up"></i></button>
+      {{ form.name }}
+      {{ form.email }}
+      {{ form.message }}
 
-  <footer style="background-color: white; color: black; text-align: center; font-size: 12px; padding: 10px 0;">
-    Copyright © 2025 konkiyazhikamkudumbayogam
-  </footer>
+      <button type="submit" class="submit-btn">
+        SUBMIT
+      </button>
+    </form>
 
-  <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-  <script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
-  <script src="{% static 'assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
-  <script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+  </div>
 
-  <script>
-    (function() {
-      document.querySelectorAll('.drop-toggle').forEach(function(btn) {
-        btn.addEventListener('click', function(e) {
-          e.preventDefault();
-          var menu = btn.nextElementSibling;
-          var isOpen = btn.getAttribute('aria-expanded') === 'true';
+</section>
 
-          document.querySelectorAll('.dropdown .dropdown-menu').forEach(function(m) {
-            if (m !== menu) {
-              m.style.display = 'none';
-              m.previousElementSibling.setAttribute('aria-expanded', 'false');
-            }
-          });
+<section class="hero-container">
 
-          if (!isOpen) {
-            menu.style.display = 'block';
-            btn.setAttribute('aria-expanded', 'true');
-          } else {
-            menu.style.display = 'none';
-            btn.setAttribute('aria-expanded', 'false');
-          }
-        });
-      });
+  <img src="{% static 'assets/img/img7.png' %}" alt="Hero Image">
 
-      document.addEventListener('click', function(e) {
-        if (!e.target.closest('.dropdown')) {
-          document.querySelectorAll('.dropdown .dropdown-menu').forEach(function(m) {
-            m.style.display = 'none';
-            if (m.previousElementSibling) m.previousElementSibling.setAttribute('aria-expanded', 'false');
-          });
-        }
-      });
+  <div class="hero-content">
 
-      document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-          document.querySelectorAll('.dropdown .dropdown-menu').forEach(function(m) {
-            m.style.display = 'none';
-            if (m.previousElementSibling) m.previousElementSibling.setAttribute('aria-expanded', 'false');
-          });
-        }
-      });
-    })();
-  </script>
-     <script>
-// ================================
-// SCROLL TO TOP
-// ================================
+    <h1>Get Involved Today</h1>
 
-document.addEventListener("DOMContentLoaded", () => {
-  const scrollBtn = document.getElementById('scrollTopBtn');
+    <p>
+      "Join hands, share stories, and strengthen our family bond."
+    </p>
 
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 200) {
-      scrollBtn.style.display = 'block';
-    } else {
-      scrollBtn.style.display = 'none';
-    }
-  });
+    <a href="{% url 'contact' %}#contact-section"
+       class="btn">
+       CALL TO ACTION ➝
+    </a>
 
-  scrollBtn?.addEventListener('click', () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
-  });
-});
-</script>
-</body>
+  </div>
 
-</html>
+</section>
+
+{% endblock %}
