@@ -123,7 +123,7 @@ def announcement_view(request):
 
 def familytree(request):
     roots = FamilyMember.objects.filter(parent__isnull=True,     wife_units__isnull=True,
-)
+).exclude(note="Spouse")
 
     return render(request, "familytree.html", {
         "roots": roots

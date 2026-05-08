@@ -1,8 +1,18 @@
 <li class="tree-item">
     <div class="node couple">
+
         <span class="person">{{ unit.husband.name }}</span>
+
         <span class="and">&</span>
+
         <span class="person">{{ unit.wife.name }}</span>
+
+        {% if unit.children.all %}
+        <span class="arrow">
+            <i class="fas fa-chevron-down"></i>
+        </span>
+        {% endif %}
+
     </div>
 
     {% if unit.children.all %}

@@ -2,7 +2,15 @@
 
     <!-- 👤 PERSON -->
     <div class="node">
-        {{ person.name }}
+
+        <span>{{ person.name }}</span>
+
+        {% if person.children.exists %}
+        <span class="arrow">
+            <i class="fas fa-chevron-down"></i>
+        </span>
+        {% endif %}
+
     </div>
 
     <!-- 👇 CHILDREN -->
