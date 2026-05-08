@@ -6,7 +6,7 @@ from .forms import ContactForm
 from django.urls import path
 from . import views
 from .forms import RegisterForm
-from .models import FamilyMember, FamilyUnit
+from .models import FamilyMember, FamilyUnit, Announcement
 from django.contrib import messages
 
 def contact(request):
@@ -114,6 +114,12 @@ def success(request):
 def calendar(request):
     return render(request, 'calendar.html')
 
+def announcement_view(request):
+    announcement_view = Announcement.objects.all().order_by('-date')
+
+    return render(request, 'announcement.html', {
+        'announcements': announcement_view
+    })
 
 def familytree(request):
     roots = FamilyMember.objects.filter(parent__isnull=True,     wife_units__isnull=True,

@@ -1,6 +1,7 @@
 from django.contrib import admin
-from .models import FamilyMember, Register, FamilyUnit
+from .models import FamilyMember, Register, Announcement, FamilyUnit
 
+admin.site.register(Announcement)
 
 # -----------------------------
 # INLINE: CHILDREN UNDER MARRIAGE

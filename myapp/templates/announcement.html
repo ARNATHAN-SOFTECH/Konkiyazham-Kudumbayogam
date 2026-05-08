@@ -1,0 +1,165 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Announcements - Konkiyazham Kudumbayogam
+{% endblock %}
+
+{% block extra_css %}
+
+<style>
+
+  body{
+    background:linear-gradient(135deg,#f7f3ea,#efe6d5);
+  }
+
+  .announcement-wrapper{
+    padding:40px 15px;
+  }
+
+  .announcement-container{
+    max-width:1000px;
+    margin:auto;
+  }
+
+  .announcement-header{
+    background:#403d3d;
+    color:white;
+    padding:20px;
+    border-radius:12px 12px 0 0;
+    text-align:center;
+  }
+
+  .announcement-header h1{
+    margin:0;
+    font-size:28px;
+    font-weight:700;
+  }
+
+  .announcement-header p{
+    margin-top:6px;
+    font-size:14px;
+    opacity:0.9;
+  }
+
+  .announcement-card{
+    background:white;
+    padding:25px;
+    border-bottom:1px solid #eee;
+    transition:0.3s;
+  }
+
+  .announcement-card:hover{
+    background:#fffaf2;
+  }
+
+  .announcement-title{
+    color:#ff6b00;
+    font-size:22px;
+    font-weight:700;
+    margin-bottom:12px;
+  }
+
+  .announcement-message{
+    font-size:15px;
+    line-height:1.8;
+    color:#444;
+    margin-bottom:15px;
+  }
+
+  .announcement-meta{
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:10px;
+    font-size:14px;
+    color:#666;
+  }
+
+  .announcement-date{
+    background:#f3f3f3;
+    padding:6px 12px;
+    border-radius:6px;
+  }
+
+  .announcement-issued{
+    background:#fff3e0;
+    padding:6px 12px;
+    border-radius:6px;
+  }
+
+  @media(max-width:768px){
+
+    .announcement-header h1{
+      font-size:22px;
+    }
+
+    .announcement-title{
+      font-size:18px;
+    }
+
+    .announcement-card{
+      padding:18px;
+    }
+
+    .announcement-meta{
+      flex-direction:column;
+      align-items:flex-start;
+    }
+
+  }
+
+</style>
+
+{% endblock %}
+
+{% block content %}
+
+<div class="announcement-wrapper">
+
+  <div class="announcement-container">
+
+    <div class="announcement-header">
+      <h1>Community Announcements</h1>
+      <p>Konkiyazham Kudumbayogam Official Updates</p>
+    </div>
+
+    {% for announcement in announcements %}
+
+      <div class="announcement-card">
+
+        <div class="announcement-title">
+          📢 {{ announcement.title }}
+        </div>
+
+        <div class="announcement-message">
+          {{ announcement.message }}
+        </div>
+
+        <div class="announcement-meta">
+
+          <div class="announcement-date">
+            📅 {{ announcement.date }}
+          </div>
+
+          <div class="announcement-issued">
+            👤 {{ announcement.issued_by }}
+          </div>
+
+        </div>
+
+      </div>
+
+    {% empty %}
+
+      <div class="announcement-card">
+        No announcements available.
+      </div>
+
+    {% endfor %}
+
+  </div>
+
+</div>
+
+{% endblock %}
