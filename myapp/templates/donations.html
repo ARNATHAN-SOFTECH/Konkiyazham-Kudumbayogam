@@ -7,11 +7,14 @@ Donations - Konkiyazham Kudumbayogam
 
 {% block extra_css %}
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
 <style>
 
   body{
     background-color:#fff2e9;
     font-family:Arial,sans-serif;
+    overflow-x: hidden;
   }
 
   /* DONATION SECTION */
@@ -70,6 +73,14 @@ Donations - Konkiyazham Kudumbayogam
     width:100%;
     max-width:500px;
     border-radius:5px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    transition: transform 0.4s ease;
+  }
+  
+  /* Subtle interaction animation on images */
+  .donation-image img:hover,
+  .donation-image1 img:hover {
+    transform: scale(1.03);
   }
 
 /* FAQ */
@@ -106,6 +117,13 @@ Donations - Konkiyazham Kudumbayogam
   border-radius:10px;
   overflow:hidden;
   box-shadow:0 2px 8px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Subtle lifts for interactive components */
+.faq-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
 }
 
 .faq-question{
@@ -129,7 +147,7 @@ Donations - Konkiyazham Kudumbayogam
 .faq-answer{
   max-height:0;
   overflow:hidden;
-  transition:max-height .4s ease;
+  transition:max-height .4s ease, padding 0.4s ease;
   padding:0 20px;
   text-align:left;
   color:#555;
@@ -175,12 +193,18 @@ Donations - Konkiyazham Kudumbayogam
     text-decoration:none;
     border-radius:30px;
     font-weight:bold;
-    transition:0.3s;
+    transition: 0.3s ease;
   }
 
   .btn:hover{
     background-color:rgba(59,130,246,0.9);
     color:#fff;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(59, 130, 246, 0.4);
+  }
+  
+  .btn:active {
+    transform: translateY(-1px);
   }
 
   /* CUSTOM FOOTER */
@@ -224,11 +248,12 @@ Donations - Konkiyazham Kudumbayogam
     font-size:22px;
     color:#007bff;
     text-decoration:none;
-    transition:0.3s;
+    transition:0.3s ease;
   }
 
   .social-icons a:hover{
     color:#6c757d;
+    transform: scale(1.15);
   }
 
   /* RESPONSIVE */
@@ -271,7 +296,7 @@ Donations - Konkiyazham Kudumbayogam
 
 <section class="donation-section">
 
-  <div class="donation-container">
+  <div class="donation-container animate__animated animate__fadeInLeft">
 
     <div class="donation-text">
 
@@ -301,7 +326,7 @@ Donations - Konkiyazham Kudumbayogam
 
   </div>
 
-  <div class="donation-container reverse">
+  <div class="donation-container reverse animate__animated animate__fadeInRight">
 
     <div class="donation-text">
 
@@ -328,7 +353,7 @@ Donations - Konkiyazham Kudumbayogam
 
   </div>
 
-  <div class="donation-container">
+  <div class="donation-container animate__animated animate__fadeInLeft">
 
     <div class="donation-text">
 
@@ -358,7 +383,7 @@ Donations - Konkiyazham Kudumbayogam
 
 </section>
 
-<section class="faq-section">
+<section class="faq-section animate__animated animate__fadeIn">
 
   <div class="container">
 
@@ -552,9 +577,13 @@ Donations - Konkiyazham Kudumbayogam
     </div>
   </div>
 
+</div>
+</div>
+
 </section>
 
-<section class="donation-cta">
+
+<section class="donation-cta animate__animated animate__zoomIn">
 
   <h2>
     Make a Donation
