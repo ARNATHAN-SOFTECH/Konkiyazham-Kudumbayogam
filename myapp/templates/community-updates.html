@@ -18,7 +18,8 @@ Community Updates - Konkiyazham Kudumbayogam
 }
 
 .community-section {
-  background: url("{% static 'assets/img/bg1.png' %}") no-repeat center center;
+  /* Added a dark overlay via linear-gradient over the background image */
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("{% static 'assets/img/bg.jpg' %}") no-repeat center center;
   background-size: cover;
 
   width: 100%;
@@ -33,45 +34,74 @@ Community Updates - Konkiyazham Kudumbayogam
   border-radius: 0;
 
   text-align: center;
+  
+ 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.community-section,
-.community-section * {
-  color: #fff !important;
+
+.community-section h2,
+.community-section p {
+  color: #ffffff;
 }
 
 .community-section h2 {
   font-size: 30px;
   font-weight: bold;
   margin-bottom: 20px;
-  margin-top: 90px;
+  margin-top: 40px; 
 }
 
 .community-section p {
   max-width: 750px;
-  margin: 0 auto 40px;
+  margin: 0 auto 30px;
   font-size: 16px;
+  line-height: 1.6;
+}
+
+/* New Contact Button Styles */
+.community-contact-btn {
+  display: inline-block;
+  background-color: #ff6f00;
+  color: #ffffff !important;
+  font-weight: 700;
+  font-size: 15px;
+  text-decoration: none;
+  padding: 12px 35px;
+  border-radius: 4px;
+  transition: background 0.3s ease, transform 0.2s ease;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 15px rgba(255,106,0,0.3);
+}
+
+.community-contact-btn:hover {
+  background-color: #e65c00;
+  transform: translateY(-2px);
 }
 
 .community-boxes {
-  margin: 80px;
+  margin: 80px auto;
+  max-width: 1200px;
   justify-content: center;
   gap: 20px;
   flex-wrap: wrap;
-      display: flex;
+  display: flex;
 }
 
 .community-box {
   border: 1px solid #fff;
-  padding: 30px 20px;
+  padding: 0; 
   width: 280px;
-      background: var(--dark);
-    border-radius: 6px;
-    overflow: hidden;
-    box-shadow: 0 4px 15px rgba(255,106,0,0.15);
-    transition: transform 0.3s ease;
-    display: flex;
-    flex-direction: column;
+  background: #ffffff; 
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(255,106,0,0.15);
+  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
 }
 
 .community-box h3 {
@@ -81,13 +111,13 @@ Community Updates - Konkiyazham Kudumbayogam
 }
 
 .community-box a {
-    font-weight: 700;
-    font-size: 15px;
-    color: var(--white);
-    text-decoration: none; 
-    margin-top: auto;
+  font-weight: 700;
+  font-size: 15px;
+  text-decoration: none; 
+  margin-top: auto;
   padding: 6px 20px;
   color: #ff6f00;
+  text-align: center;
 }
 
 .community-box a:hover {
@@ -105,6 +135,7 @@ Community Updates - Konkiyazham Kudumbayogam
 
   .community-section h2{
     font-size: 22px;
+    margin-top: 20px;
   }
 
   .community-box{
@@ -112,9 +143,10 @@ Community Updates - Konkiyazham Kudumbayogam
     max-width: 350px;
   }
 
+  .community-boxes {
+    margin: 40px 20px;
+  }
 }
-
-
 
 .community-box:hover {
     transform: translateY(-5px);
@@ -137,23 +169,19 @@ Community Updates - Konkiyazham Kudumbayogam
 }
 
 .service-content h3 {
-    color: var(--primary);
+    color: var(--primary, #ff6f00); 
     font-size: 16px;
-    font-weight: 500;
+    font-weight: 700;
     margin-bottom: 15px;
     text-transform: uppercase;
 }
 
 .service-content p {
     font-size: 15px;
-    color: var(--gray);
+    color: #555555;
     line-height: 1.6;
     margin-bottom: 20px;
 }
-
-
-
-
 
 </style>
 
@@ -172,54 +200,51 @@ Community Updates - Konkiyazham Kudumbayogam
       From upcoming events and celebrations to important announcements and achievements, you’ll always find what’s happening in our community right here.
     </p>
 
+    <!-- Added Contact Button -->
+    <a href="{% url 'contact' %}" class="community-contact-btn">CONTACT US</a>
+
   </section>
-          <div class="community-boxes">
+  
+  <div class="community-boxes">
 
-            <div class="community-box">
-                <img src="{% static 'assets/img/c1.png' %}" alt="Calender">
-                <div class="service-content">
-                    <h3>EVENT CALENDAR</h3>
-                    <p>
-                        “Keep track of upcoming family gatherings,
-                        celebrations, and special occasions—all in one place.”
-                    </p>
-                    <a href="{% url 'calendar' %}">MORE</a>
-                </div>
-            </div>
-
-
-
-      <div class="community-box">
-        <img src="{% static 'assets/img/c2.png' %}" alt="Gallery">
+    <div class="community-box">
+        <img src="{% static 'assets/img/c1.png' %}" alt="Calendar">
         <div class="service-content">
-        <h3>OUR GALLERY</h3>
-
-        <p>
-          “Relive precious moments through photos and videos
-          that capture the spirit of our family.”
-        </p>
-
-        <a href="{% url 'gallery' %}">MORE</a>
+            <h3>EVENT CALENDAR</h3>
+            <p>
+                “Keep track of upcoming family gatherings,
+                celebrations, and special occasions—all in one place.”
+            </p>
+            <a href="{% url 'calendar' %}">MORE</a>
         </div>
-      </div>
-
-      <div class="community-box">
-        <img src="{% static 'assets/img/c3.png' %}" alt="Announcement">
-        <div class="service-content">
-        <h3>ANNOUNCEMENTS</h3>
-
-        <p>
-          “Stay informed with the latest updates, news,
-          and important notices from our Kudumbayogam.”
-        </p>
-
-        <a href="{% url 'announcement' %}">MORE</a>
-        </div>
-      </div>
-
     </div>
 
-</div>
+    <div class="community-box">
+        <img src="{% static 'assets/img/c2.png' %}" alt="Gallery">
+        <div class="service-content">
+            <h3>OUR GALLERY</h3>
+            <p>
+              “Relive precious moments through photos and videos
+              that capture the spirit of our family.”
+            </p>
+            <a href="{% url 'gallery' %}">MORE</a>
+        </div>
+    </div>
 
+    <div class="community-box">
+        <img src="{% static 'assets/img/c3.png' %}" alt="Announcement">
+        <div class="service-content">
+            <h3>ANNOUNCEMENTS</h3>
+            <p>
+              “Stay informed with the latest updates, news,
+              and important notices from our Kudumbayogam.”
+            </p>
+            <a href="{% url 'announcement' %}">MORE</a>
+        </div>
+    </div>
+
+  </div>
+
+</div>
 
 {% endblock %}
