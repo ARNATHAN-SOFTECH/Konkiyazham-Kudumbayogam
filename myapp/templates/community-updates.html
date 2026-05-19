@@ -26,7 +26,7 @@ Community Updates - Konkiyazham Kudumbayogam
 
   margin: 0;
 
-  min-height: 100vh;
+  min-height: 70vh;
 
   padding: 60px 20px;
 
@@ -41,46 +41,58 @@ Community Updates - Konkiyazham Kudumbayogam
 }
 
 .community-section h2 {
-  font-size: 26px;
+  font-size: 30px;
   font-weight: bold;
   margin-bottom: 20px;
+  margin-top: 90px;
 }
 
 .community-section p {
   max-width: 750px;
   margin: 0 auto 40px;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .community-boxes {
-  display: flex;
+  margin: 80px;
   justify-content: center;
   gap: 20px;
   flex-wrap: wrap;
+      display: flex;
 }
 
 .community-box {
   border: 1px solid #fff;
   padding: 30px 20px;
   width: 280px;
+      background: var(--dark);
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(255,106,0,0.15);
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
 }
 
 .community-box h3 {
   font-size: 16px;
   margin-bottom: 15px;
+  font-weight: 700;
 }
 
 .community-box a {
-  border: 1px solid #fff;
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--white);
+    text-decoration: none; 
+    margin-top: auto;
   padding: 6px 20px;
-  color: #fff;
-  text-decoration: none;
-  font-size: 12px;
+  color: #ff6f00;
 }
 
 .community-box a:hover {
-  background: #fff;
-  color: #000 !important;
+  background: #ff6f00;
+  color: white !important;
 }
 
 /* MOBILE */
@@ -102,6 +114,47 @@ Community Updates - Konkiyazham Kudumbayogam
 
 }
 
+
+
+.community-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(255,106,0,0.35);
+}
+
+.community-box img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+/* CONTENT */
+.service-content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    flex: 1;
+}
+
+.service-content h3 {
+    color: var(--primary);
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+.service-content p {
+    font-size: 15px;
+    color: var(--gray);
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+
+
+
+
 </style>
 
 {% endblock %}
@@ -119,20 +172,26 @@ Community Updates - Konkiyazham Kudumbayogam
       From upcoming events and celebrations to important announcements and achievements, you’ll always find what’s happening in our community right here.
     </p>
 
-    <div class="community-boxes">
+  </section>
+          <div class="community-boxes">
+
+            <div class="community-box">
+                <img src="{% static 'assets/img/c1.png' %}" alt="Calender">
+                <div class="service-content">
+                    <h3>EVENT CALENDAR</h3>
+                    <p>
+                        “Keep track of upcoming family gatherings,
+                        celebrations, and special occasions—all in one place.”
+                    </p>
+                    <a href="{% url 'calendar' %}">MORE</a>
+                </div>
+            </div>
+
+
 
       <div class="community-box">
-        <h3>EVENT CALENDAR</h3>
-
-        <p>
-          “Keep track of upcoming family gatherings,
-          celebrations, and special occasions—all in one place.”
-        </p>
-
-        <a href="{% url 'calendar' %}">MORE</a>
-      </div>
-
-      <div class="community-box">
+        <img src="{% static 'assets/img/c2.png' %}" alt="Gallery">
+        <div class="service-content">
         <h3>OUR GALLERY</h3>
 
         <p>
@@ -141,9 +200,12 @@ Community Updates - Konkiyazham Kudumbayogam
         </p>
 
         <a href="{% url 'gallery' %}">MORE</a>
+        </div>
       </div>
 
       <div class="community-box">
+        <img src="{% static 'assets/img/c3.png' %}" alt="Announcement">
+        <div class="service-content">
         <h3>ANNOUNCEMENTS</h3>
 
         <p>
@@ -152,12 +214,12 @@ Community Updates - Konkiyazham Kudumbayogam
         </p>
 
         <a href="{% url 'announcement' %}">MORE</a>
+        </div>
       </div>
 
     </div>
 
-  </section>
-
 </div>
+
 
 {% endblock %}
