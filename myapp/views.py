@@ -72,7 +72,15 @@ def about(request):
 def community_updates(request):
     return render(request,"community-updates.html")
 
+from meta.views import Meta
 def home(request):
+    meta = Meta(
+        title='Konkiyazham Kudumbasangam',
+        description='Official website of Konkiyazham Kudumbasangam with family tree, registrations, events and updates.',
+        keywords=['Kudumbasangam', 'Kerala family', 'family tree'],
+    )
+
+    return render(request, 'home.html', {'meta': meta})
     return render(request,"home.html")
 
 def donations(request):
@@ -282,3 +290,15 @@ Parent Name: {parent_member.name if parent_member else "Not Selected"}
 
 def register_success(request):
     return render(request, 'register_success.html')
+
+
+
+from django.http import HttpResponse
+
+def robots_txt(request):
+    lines = [
+        "User-Agent: *",
+        "Allow: /",
+        "Sitemap: https://www.konkiyazhikamkudumbayogam.com/.xml"
+    ]
+    return HttpResponse("\n".join(lines), content_type="text/plain")

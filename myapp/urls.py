@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.urls import path, include
 from . import views
+from .views import robots_txt
 
 urlpatterns = [
     path("announcement/", views.announcement_view, name="announcement"),
@@ -26,6 +27,7 @@ urlpatterns = [
     path('registersuccess/', views.register_success, name='register_success'), 
     path('familytree/', views.familytree, name='familytree'),
     path('calendar/', views.calendar, name='calendar'),
+    path("robots.txt", robots_txt),
    
 
     

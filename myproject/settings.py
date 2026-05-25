@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'myapp',
+    'meta',
+    'django.contrib.sitemaps',
 ]
 
 MIDDLEWARE = [
@@ -48,6 +50,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'myproject.urls'
@@ -140,5 +143,22 @@ EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+
+
+
+META_SITE_PROTOCOL = 'https'
+META_SITE_DOMAIN = 'konkiyazhikamkudumbayogam.com'   
+META_USE_SITES = False
+
+META_DEFAULT_KEYWORDS = [
+    'Kudumbasangam',
+    'Kerala family community',
+    'Kudumbayogam',
+    'Family tree',
+    'Community website',
+]
+
+META_DEFAULT_DESCRIPTION = 'Official Kudumbasangam website with family tree, community updates, events and registrations.'
 
 
