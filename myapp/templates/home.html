@@ -351,6 +351,251 @@ transition:.3s;
       font-size: 12px;
       padding: 10px 0;
     }
+
+/* ===============================
+   BIRTHDAY POPUP
+================================ */
+
+.birthday-toast{
+    position:fixed;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+
+    width:90%;
+    max-width:500px;
+
+    background:rgba(255,255,255,.95);
+
+    backdrop-filter:blur(12px);
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    box-shadow:0 20px 50px rgba(0,0,0,.3);
+
+    z-index:99999;
+
+    animation:popupShow .7s ease;
+}
+
+@keyframes popupShow{
+    from{
+        opacity:0;
+        transform:translate(-50%,-60%) scale(.8);
+    }
+
+    to{
+        opacity:1;
+        transform:translate(-50%,-50%) scale(1);
+    }
+}
+
+.birthday-header{
+    background:linear-gradient(
+        135deg,
+        #ff6b00,
+        #ffb347
+    );
+
+    color:white;
+
+    text-align:center;
+
+    padding:25px;
+}
+
+.cake{
+    font-size:60px;
+}
+
+.birthday-header h2{
+    margin:10px 0;
+}
+
+.birthday-body{
+    padding:25px;
+    color:#333;
+}
+
+.birthday-person{
+    background:#fff7f0;
+
+    padding:12px;
+
+    border-radius:10px;
+
+    margin-bottom:10px;
+
+    font-weight:600;
+}
+
+.birthday-message{
+    margin-top:20px;
+    text-align:center;
+}
+
+.birthday-btn{
+    display:block;
+
+    text-align:center;
+
+    background:#ff6b00;
+
+    color:white;
+
+    text-decoration:none;
+
+    padding:12px;
+
+    border-radius:10px;
+
+    margin-top:20px;
+
+    font-weight:600;
+}
+
+.birthday-btn:hover{
+    background:#e65c00;
+}
+
+.birthday-close{
+    position:absolute;
+
+    top:10px;
+    right:10px;
+
+    border:none;
+    background:white;
+
+    width:35px;
+    height:35px;
+
+    border-radius:50%;
+
+    cursor:pointer;
+
+    font-size:16px;
+}
+
+/* ===============================
+   BALLOONS
+================================ */
+
+.balloon{
+    position:fixed;
+
+    font-size:55px;
+
+    z-index:9990;
+
+    pointer-events:none;
+
+    animation:floatUp linear infinite;
+}
+
+.balloon1{
+    left:10%;
+    animation-duration:12s;
+}
+
+.balloon2{
+    left:50%;
+    animation-duration:15s;
+}
+
+.balloon3{
+    left:85%;
+    animation-duration:13s;
+}
+
+@keyframes floatUp{
+
+    0%{
+        transform:translateY(100vh);
+    }
+
+    100%{
+        transform:translateY(-120vh);
+    }
+}
+
+/* ===============================
+   CONFETTI
+================================ */
+
+.confetti-container{
+    position:fixed;
+
+    inset:0;
+
+    pointer-events:none;
+
+    z-index:9991;
+}
+
+.confetti{
+    position:absolute;
+
+    width:10px;
+    height:10px;
+
+    background:#ff6b00;
+
+    animation:confettiFall linear infinite;
+}
+
+.confetti:nth-child(1){
+    left:10%;
+    animation-duration:6s;
+}
+
+.confetti:nth-child(2){
+    left:30%;
+    background:#ffcc00;
+    animation-duration:8s;
+}
+
+.confetti:nth-child(3){
+    left:50%;
+    background:#ff4d6d;
+    animation-duration:7s;
+}
+
+.confetti:nth-child(4){
+    left:70%;
+    background:#00c896;
+    animation-duration:9s;
+}
+
+.confetti:nth-child(5){
+    left:85%;
+    background:#7b61ff;
+    animation-duration:6s;
+}
+
+.confetti:nth-child(6){
+    left:95%;
+    background:#ffb347;
+    animation-duration:8s;
+}
+
+@keyframes confettiFall{
+
+    0%{
+        transform:
+        translateY(-50px)
+        rotate(0deg);
+    }
+
+    100%{
+        transform:
+        translateY(110vh)
+        rotate(720deg);
+    }
+}
+
     </style>
 </head>
 <body>
@@ -471,6 +716,67 @@ transition:.3s;
         </div>
     </section>
 
+    {% if birthdays_today %}
+
+<div id="birthdayToast" class="birthday-toast">
+
+    <button class="birthday-close" onclick="closeBirthdayPopup()">
+        ✕
+    </button>
+
+    <div class="birthday-header">
+        <div class="cake">🎂</div>
+
+        <h2>Today's Birthdays</h2>
+
+        <p>
+            {{ birthdays_today|length }}
+            Family Member{{ birthdays_today|length|pluralize }}
+            Celebrating Today
+        </p>
+    </div>
+
+    <div class="birthday-body">
+
+        {% for member in birthdays_today %}
+        <div class="birthday-person">
+            🎉
+            {{ member.first_name }}
+            {% if member.last_name %}
+                {{ member.last_name }}
+            {% endif %}
+        </div>
+        {% endfor %}
+
+        <p class="birthday-message">
+            Wishing our beloved family members a joyful,
+            healthy and blessed year ahead.
+        </p>
+
+        <a href="{% url 'birthday-wish' %}" class="birthday-btn">
+            View Birthday Wishes →
+        </a>
+
+    </div>
+
+<div class="balloon balloon1">🎈</div>
+<div class="balloon balloon2">🎈</div>
+<div class="balloon balloon3">🎈</div>
+
+<div class="confetti-container">
+    <span class="confetti"></span>
+    <span class="confetti"></span>
+    <span class="confetti"></span>
+    <span class="confetti"></span>
+    <span class="confetti"></span>
+    <span class="confetti"></span>
+</div>
+</div>
+
+
+
+{% endif %}
+
   <button id="scrollTopBtn" aria-label="Scroll to top">
     <i class="fas fa-angles-up"></i></button>
 
@@ -478,6 +784,44 @@ transition:.3s;
       Copyright © {% now "Y" %}
       Konkiyazham Kudumbayogam
     </footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+
+    const popup = document.getElementById("birthdayToast");
+
+    if(!popup) return;
+
+    const today = new Date().toDateString();
+
+    if(localStorage.getItem("birthdaySeen") === today){
+        popup.remove();
+        return;
+    }
+
+    localStorage.setItem("birthdaySeen", today);
+
+    setTimeout(() => {
+        closeBirthdayPopup();
+    },15000);
+
+});
+
+function closeBirthdayPopup(){
+
+    const popup = document.getElementById("birthdayToast");
+
+    if(popup){
+        popup.style.transition = "0.5s";
+        popup.style.opacity = "0";
+
+        setTimeout(() => {
+            popup.remove();
+        },500);
+    }
+}
+</script>
+
    <script>
 
 document.addEventListener("DOMContentLoaded", () => {

@@ -5,6 +5,8 @@ from .views import robots_txt
 
 urlpatterns = [
     path("announcement/", views.announcement_view, name="announcement"),
+    path('birthday-wish/', views.birthday_wish, name='birthday-wish'),
+    path('test-birthday/', views.send_birthday_wishes, name='test-birthday'),
 
     path('donations/', views.donations, name='donations'),
     path('contact/', views.contact, name='contact'),

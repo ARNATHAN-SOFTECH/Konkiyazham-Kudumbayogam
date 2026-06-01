@@ -2,12 +2,15 @@ from django.shortcuts import render, redirect
 from django.core.mail import send_mail
 from django.conf import settings
 from .forms import ContactForm
-
+from django.http import JsonResponse
+from datetime import date
 from django.urls import path
 from . import views
 from .forms import RegisterForm
-from .models import FamilyMember, FamilyUnit, Announcement
+from .models import FamilyMember, Register, FamilyUnit, Announcement
 from django.contrib import messages
+from django.utils import timezone
+
 
 def contact(request):
     if request.method == 'POST':
@@ -74,14 +77,28 @@ def community_updates(request):
 
 from meta.views import Meta
 def home(request):
+
+    today = timezone.localdate()
+
+    birthdays_today = Register.objects.filter(
+        dob__month=today.month,
+        dob__day=today.day
+    )
+
     meta = Meta(
         title='Konkiyazham Kudumbasangam',
         description='Official website of Konkiyazham Kudumbasangam with family tree, registrations, events and updates.',
         keywords=['Kudumbasangam', 'Kerala family', 'family tree'],
     )
 
-    return render(request, 'home.html', {'meta': meta})
-    return render(request,"home.html")
+    return render(
+        request,
+        'home.html',
+        {
+            'meta': meta,
+            'birthdays_today': birthdays_today
+        }
+    )
 
 def donations(request):
     return render(request,"donations.html")
@@ -299,6 +316,107 @@ def robots_txt(request):
     lines = [
         "User-Agent: *",
         "Allow: /",
-        "Sitemap: https://www.konkiyazhikamkudumbayogam.com/.xml"
+        "Sitemap: https://www.konkiyazhikamkudumbayogam.com/sitemap.xml"
     ]
     return HttpResponse("\n".join(lines), content_type="text/plain")
+
+# ---------------------------------------------------------
+# DAILY BIRTHDAY WISH TRIGGER
+# ---------------------------------------------------------
+
+def send_birthday_wishes(request=None):
+
+    today = timezone.localdate()
+
+    members = Register.objects.filter(
+        dob__month=today.month,
+        dob__day=today.day
+    )
+
+    print("Birthdays found:", members.count())
+
+    sent_count = 0
+
+    for member in members:
+
+        print("Processing:", member.first_name)
+        print("Email:", member.email)
+
+        if member.email:
+
+            try:
+                send_mail(
+                    subject="🎂 Happy Birthday from Konkiyazhikam Kudumbayogam",
+                    message=(
+                        f"Dear {member.first_name},\n\n"
+                        "Wishing you a very Happy Birthday 🎂🎉\n"
+                        "May your day be filled with joy and blessings.\n\n"
+                        "- Konkiyazhikam Kudumbayogam Team\n\n"
+                        "🎁 View today's birthday celebrations:\n"
+                        "https://www.konkiyazhikamkudumbayogam.com/birthday-wish/\n"
+                    ),
+                    from_email=getattr(
+                        settings,
+                        "EMAIL_HOST_USER",
+                        "noreply@example.com"
+                    ),
+                    recipient_list=[member.email],
+                    fail_silently=False,
+                )
+
+                print(f"[EMAIL SENT] {member.email}")
+                sent_count += 1
+
+            except Exception as e:
+                print(f"[EMAIL FAILED] {member.email}")
+                print(e)
+
+    return JsonResponse({
+        "status": "success",
+        "sent": sent_count
+    })
+
+# ---------------------------------------------------------
+# SMS FUNCTION
+# ---------------------------------------------------------
+
+def send_birthday_sms(phone, name):
+
+    """
+    SMS gateway integration point
+    (Twilio / Fast2SMS / MSG91 etc.)
+    """
+
+    message = (
+        f"Happy Birthday {name}, "
+        "Here's to another trip around the sun!\n\n"
+        "– Konkiyazhikam Kudumbayogam Team"
+    )
+
+    print(f"[SMS SENT] {phone} -> {message}")
+
+
+# ---------------------------------------------------------
+# BIRTHDAY WISH PAGE
+# ---------------------------------------------------------
+
+def birthday_wish(request):
+
+    """
+    Show today's birthdays on the site.
+    """
+
+    today = timezone.localdate()
+
+    # USING REGISTER MODEL
+    birthdays_today = Register.objects.filter(
+        dob__month=today.month,
+        dob__day=today.day
+    )
+
+    context = {
+        "birthdays_today": birthdays_today,
+        "today": today
+    }
+
+    return render(request, "birthday_wish.html", context)
