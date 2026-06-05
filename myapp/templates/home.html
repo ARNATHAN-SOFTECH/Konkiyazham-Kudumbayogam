@@ -357,38 +357,35 @@ transition:.3s;
 ================================ */
 
 .birthday-toast{
-    position:fixed;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%);
+    position: fixed;
+    top: 20px;
+    right: 20px;
 
-    width:90%;
-    max-width:500px;
+    width: 350px;
+    max-width: calc(100% - 40px);
 
-    background:rgba(255,255,255,.95);
+    background: rgba(255,255,255,.95);
+    backdrop-filter: blur(12px);
 
-    backdrop-filter:blur(12px);
+    border-radius: 20px;
+    overflow: hidden;
 
-    border-radius:20px;
+    box-shadow: 0 20px 50px rgba(0,0,0,.3);
 
-    overflow:hidden;
+    z-index: 99999;
 
-    box-shadow:0 20px 50px rgba(0,0,0,.3);
-
-    z-index:99999;
-
-    animation:popupShow .7s ease;
+    animation: popupShow .7s ease;
 }
 
 @keyframes popupShow{
     from{
         opacity:0;
-        transform:translate(-50%,-60%) scale(.8);
+        transform:translateY(-20px) scale(.9);
     }
 
     to{
         opacity:1;
-        transform:translate(-50%,-50%) scale(1);
+        transform:translateY(0) scale(1);
     }
 }
 
