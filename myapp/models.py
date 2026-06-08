@@ -124,5 +124,10 @@ class Announcement(models.Model):
     date = models.DateField()
     issued_by = models.CharField(max_length=100)
 
+    send_notification = models.BooleanField(
+        default=False,
+        help_text="Tick this box to send announcement email to all members."
+    )
+    
     def __str__(self):
         return self.title
