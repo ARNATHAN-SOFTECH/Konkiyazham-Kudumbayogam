@@ -78,6 +78,11 @@ class Register(models.Model):
     blank=True,
     null=True)
     email = models.EmailField()
+    mobile = models.CharField(
+        max_length=15,
+        blank=True,
+        null=True
+    )
     dob = models.DateField()
     country = models.CharField(max_length=100)
     password = models.CharField(max_length=255)

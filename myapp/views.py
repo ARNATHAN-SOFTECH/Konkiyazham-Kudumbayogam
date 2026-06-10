@@ -267,14 +267,15 @@ def register(request):
             admin_subject = "New User Registration"
 
             admin_message = f"""
-New user registered:
+            New user registered:
 
-Name: {first_name} {last_name or ""}
-Email: {email}
-Country: {country}
-Profession: {profession}
-Parent Name: {parent_member.name if parent_member else "Not Selected"}
-"""
+            Name: {first_name} {last_name or ""}
+            Email: {email}
+            Mobile: {user.mobile or "Not Provided"}
+            Country: {country}
+            Profession: {profession}
+            Parent Name: {parent_member.name if parent_member else "Not Selected"}
+            """
 
             try:
 
