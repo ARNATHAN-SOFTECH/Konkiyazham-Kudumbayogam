@@ -1,27 +1,59 @@
+
 <li class="tree-item">
+
+    <!-- HUSBAND AND WIFE -->
     <div class="node couple">
 
-        <span class="person">{{ unit.husband.name }}</span>
+        {% if unit.husband %}
+            <span class="person">{{ unit.husband.name }}</span>
+        {% endif %}
 
-        <span class="and">&</span>
+        {% if unit.husband and unit.wife %}
+            <span class="and">&</span>
+        {% endif %}
 
-        <span class="person">{{ unit.wife.name }}</span>
+        {% if unit.wife %}
+            <span class="person">{{ unit.wife.name }}</span>
+        {% endif %}
 
-        {% if unit.children.all %}
-        <span class="arrow">
-            <i class="fas fa-chevron-down"></i>
-        </span>
+        {% if unit.children.exists %}
+            <span class="arrow">
+                <i class="fas fa-chevron-down"></i>
+            </span>
         {% endif %}
 
     </div>
 
-    {% if unit.children.all %}
-    <ul class="children">
-        {% for child in unit.children.all %}
-            <li class="tree-item">
-                {% include "tree_node.html" with person=child %}
-            </li>
-        {% endfor %}
-    </ul>
+    <!-- CHILDREN OF THIS FAMILY UNIT -->
+    {% if unit.children.exists %}
+
+        <ul class="children">
+
+            {% for child in unit.children.all %}
+
+                {% if child.husband_units.exists or child.wife_units.exists %}
+
+                    <!-- ALL MARRIAGES WHERE CHILD IS HUSBAND -->
+                    {% for child_unit in child.husband_units.all %}
+                        {% include "tree_unit.html" with unit=child_unit %}
+                    {% endfor %}
+
+                    <!-- ALL MARRIAGES WHERE CHILD IS WIFE -->
+                    {% for child_unit in child.wife_units.all %}
+                        {% include "tree_unit.html" with unit=child_unit %}
+                    {% endfor %}
+
+                {% else %}
+
+                    <!-- CHILD WITHOUT A SPOUSE -->
+                    {% include "tree_node.html" with person=child %}
+
+                {% endif %}
+
+            {% endfor %}
+
+        </ul>
+
     {% endif %}
+
 </li>

@@ -1,0 +1,102 @@
+
+<li class="tree-item">
+
+    <!-- MAIN ROOT PERSON -->
+    <div class="node">
+        <span>{{ person.name }}</span>
+
+        {% for unit in person.husband_units.all %}
+            {% if not unit.wife and unit.children.exists %}
+                <span class="arrow">
+                    <i class="fas fa-chevron-down"></i>
+                </span>
+            {% endif %}
+        {% endfor %}
+
+        {% for unit in person.wife_units.all %}
+            {% if not unit.husband and unit.children.exists %}
+                <span class="arrow">
+                    <i class="fas fa-chevron-down"></i>
+                </span>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    <!-- CHILDREN OF SINGLE ROOT -->
+    {% for unit in person.husband_units.all %}
+
+        {% if not unit.wife and unit.children.exists %}
+
+            <ul class="children">
+
+                {% for child in unit.children.all %}
+
+                    {% if child.mother or child.father %}
+
+                        {% if child.husband_units.exists %}
+
+                            {% for child_unit in child.husband_units.all %}
+                                {% include "tree_unit.html" with unit=child_unit %}
+                            {% endfor %}
+
+                        {% elif child.wife_units.exists %}
+
+                            {% for child_unit in child.wife_units.all %}
+                                {% include "tree_unit.html" with unit=child_unit %}
+                            {% endfor %}
+
+                        {% else %}
+
+                            {% include "tree_node.html" with person=child %}
+
+                        {% endif %}
+
+                    {% endif %}
+
+                {% endfor %}
+
+            </ul>
+
+        {% endif %}
+
+    {% endfor %}
+
+    {% for unit in person.wife_units.all %}
+
+        {% if not unit.husband and unit.children.exists %}
+
+            <ul class="children">
+
+                {% for child in unit.children.all %}
+
+                    {% if child.mother or child.father %}
+
+                        {% if child.husband_units.exists %}
+
+                            {% for child_unit in child.husband_units.all %}
+                                {% include "tree_unit.html" with unit=child_unit %}
+                            {% endfor %}
+
+                        {% elif child.wife_units.exists %}
+
+                            {% for child_unit in child.wife_units.all %}
+                                {% include "tree_unit.html" with unit=child_unit %}
+                            {% endfor %}
+
+                        {% else %}
+
+                            {% include "tree_node.html" with person=child %}
+
+                        {% endif %}
+
+                    {% endif %}
+
+                {% endfor %}
+
+            </ul>
+
+        {% endif %}
+
+    {% endfor %}
+
+</li>

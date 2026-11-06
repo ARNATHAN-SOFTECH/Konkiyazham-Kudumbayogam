@@ -253,17 +253,21 @@ RESPONSIVE
 
     <div class="tree-container">
 
-      <div class="tree">
+<div class="tree">
+    <ul>
 
-        <ul>
+        <!-- SINGLE ROOT PERSON -->
+        {% for person in root_members %}
+            {% include "tree_root_node.html" with person=person %}
+        {% endfor %}
 
-          {% for person in roots %}
-            {% include "tree_node.html" with person=person %}
-          {% endfor %}
+        <!-- ROOT COUPLES -->
+        {% for unit in roots %}
+            {% include "tree_unit.html" with unit=unit %}
+        {% endfor %}
 
-        </ul>
-
-      </div>
+    </ul>
+</div>
 
     </div>
 
@@ -277,25 +281,25 @@ RESPONSIVE
 
 <script>
 
-document.querySelectorAll(".node").forEach(function(node){
 
-  node.addEventListener("click", function(e){
+document.querySelectorAll(".tree .node").forEach(function(node) {
 
-    e.stopPropagation();
+    node.addEventListener("click", function(event) {
 
-    const li = this.closest("li");
+        event.stopPropagation();
 
-    // only toggle if children exist
+        const li = this.closest("li");
 
-    if(li.querySelector(":scope > ul")){
+        const childList = li.querySelector(":scope > ul");
 
-      li.classList.toggle("open");
+        if (childList) {
+            li.classList.toggle("open");
+        }
 
-    }
-
-  });
+    });
 
 });
+
 
 </script>
 

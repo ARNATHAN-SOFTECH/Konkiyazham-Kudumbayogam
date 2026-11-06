@@ -105,6 +105,12 @@ Registration - Konkiyazham Kudumbayogam
       <form method="post">
         {% csrf_token %}
 
+        {% if form.errors %}
+            <div class="alert alert-danger">
+                <strong>Registration failed. Please check:</strong>
+                {{ form.errors }}
+            </div>
+        {% endif %}
         
         <div style="margin-bottom:20px;">
           <label for="username" class="form-label" style="font-weight:500; display:block; margin-bottom:6px;">
@@ -130,19 +136,32 @@ Registration - Konkiyazham Kudumbayogam
         </div>
 
         
-        <div style="margin-bottom:20px;">
-          <label class="form-label" style="font-weight:500; display:block; margin-bottom:6px;">
-            Gender
-          </label>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="gender" id="male" value="Male">
-            <label class="form-check-label" for="male">Male</label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="gender" id="female" value="Female">
-            <label class="form-check-label" for="female">Female</label>
-          </div>
-        </div>
+<div style="margin-bottom:20px;">
+    <label class="form-label"
+           style="font-weight:500; display:block; margin-bottom:6px;">
+        Gender
+    </label>
+
+    <div class="form-check">
+        <input class="form-check-input"
+               type="radio"
+               name="gender"
+               id="male"
+               value="Male"
+               required>
+        <label class="form-check-label" for="male">Male</label>
+    </div>
+
+    <div class="form-check">
+        <input class="form-check-input"
+               type="radio"
+               name="gender"
+               id="female"
+               value="Female"
+               required>
+        <label class="form-check-label" for="female">Female</label>
+    </div>
+</div>
 
         
         <div style="margin-bottom:20px;">
@@ -179,6 +198,119 @@ Registration - Konkiyazham Kudumbayogam
     </div>
 
 
+
+<!-- ==========================================
+     MOTHER NAME
+========================================== -->
+
+<div style="margin-bottom:20px;">
+
+    <label for="mother" class="form-label"
+           style="font-weight:500; display:block; margin-bottom:6px;">
+
+        Mother Name <small>(Optional)</small>
+
+    </label>
+
+    <select class="form-control" id="mother" name="mother">
+
+        <option value="">-- Select Mother --</option>
+
+        {% for member in form.mother.field.queryset %}
+
+            <option value="{{ member.id }}"
+                {% if form.mother.value|stringformat:"s" == member.id|stringformat:"s" %}selected{% endif %}>
+
+                {{ member.name }}
+
+            </option>
+
+        {% endfor %}
+
+        <option value="__new__"
+            {% if form.mother.value == "__new__" %}selected{% endif %}>
+
+            Other / Add New
+
+        </option>
+
+    </select>
+
+    <div id="mother_new_box" style="display:none; margin-top:10px;">
+
+        <input
+            type="text"
+            class="form-control"
+            id="mother_new_name"
+            name="mother_new_name"
+            placeholder="Enter new mother's name"
+            value="{{ form.mother_new_name.value|default:'' }}"
+        >
+
+    </div>
+
+    {% for error in form.mother_new_name.errors %}
+        <small class="text-danger">{{ error }}</small>
+    {% endfor %}
+
+</div>
+
+
+<!-- ==========================================
+     FATHER NAME
+========================================== -->
+
+<div style="margin-bottom:20px;">
+
+    <label for="father" class="form-label"
+           style="font-weight:500; display:block; margin-bottom:6px;">
+
+        Father Name <small>(Optional)</small>
+
+    </label>
+
+    <select class="form-control" id="father" name="father">
+
+        <option value="">-- Select Father --</option>
+
+        {% for member in form.father.field.queryset %}
+
+            <option value="{{ member.id }}"
+                {% if form.father.value|stringformat:"s" == member.id|stringformat:"s" %}selected{% endif %}>
+
+                {{ member.name }}
+
+            </option>
+
+        {% endfor %}
+
+        <option value="__new__"
+            {% if form.father.value == "__new__" %}selected{% endif %}>
+
+            Other / Add New
+
+        </option>
+
+    </select>
+
+    <div id="father_new_box" style="display:none; margin-top:10px;">
+
+        <input
+            type="text"
+            class="form-control"
+            id="father_new_name"
+            name="father_new_name"
+            placeholder="Enter new father's name"
+            value="{{ form.father_new_name.value|default:'' }}"
+        >
+
+    </div>
+
+    {% for error in form.father_new_name.errors %}
+        <small class="text-danger">{{ error }}</small>
+    {% endfor %}
+
+</div>
 
         
 
@@ -442,25 +574,7 @@ Registration - Konkiyazham Kudumbayogam
           <input type="text" class="form-control" id="profession" name="profession" >
         </div>
 
-         
-<div style="margin-bottom:20px;">
-  <label for="parent" class="form-label"
-         style="font-weight:500; display:block; margin-bottom:6px;">
-    Parent Name    <small>(Optional)</small>
-  </label>
 
-  <select class="form-control" id="parent" name="parent">
-
-    <option value="">-- Select Parent --</option>
-
-    {% for member in form.parent.field.queryset %}
-      <option value="{{ member.id }}">
-        {{ member.name }}
-      </option>
-    {% endfor %}
-
-  </select>
-</div>
 
 
         <div style="margin-bottom:20px;">
@@ -471,12 +585,22 @@ Registration - Konkiyazham Kudumbayogam
         </div>
 
 
-        <div style="margin-bottom:20px;">
-          <label for="spouse_name" class="form-label" style="font-weight:500; display:block; margin-bottom:6px;">
-            Enter your spouse name (if any)?    <small>(Optional)</small>
-          </label>
-          <input type="text" class="form-control" id="spouse" name="spouse">
-        </div>
+<div style="margin-bottom:20px;">
+    <label for="spouse" class="form-label"
+           style="font-weight:500; display:block; margin-bottom:6px;">
+        Spouse Name <small>(Optional)</small>
+    </label>
+
+    <input type="text"
+           class="form-control"
+           id="spouse"
+           name="spouse"
+           placeholder="Enter spouse name">
+
+    <small class="text-muted">
+        Enter your spouse's name if married.
+    </small>
+</div>
 
 
         <div style="margin-bottom:20px;">
@@ -523,10 +647,57 @@ Registration - Konkiyazham Kudumbayogam
 
   
 <script>
+
 flatpickr("#dob", {
     dateFormat: "Y-m-d",
     maxDate: "today"
 });
+
+
+// ==========================================
+// SHOW / HIDE NEW PARENT INPUTS
+// ==========================================
+
+function setupParentDropdown(selectId, boxId, inputId) {
+
+    const select = document.getElementById(selectId);
+    const box = document.getElementById(boxId);
+    const input = document.getElementById(inputId);
+
+    function updateParentInput() {
+
+        const isNew = select.value === "__new__";
+
+        box.style.display = isNew ? "block" : "none";
+
+        input.required = isNew;
+
+        if (!isNew) {
+            input.value = "";
+        }
+    }
+
+    select.addEventListener("change", updateParentInput);
+
+    updateParentInput();
+}
+
+
+// Mother
+setupParentDropdown(
+    "mother",
+    "mother_new_box",
+    "mother_new_name"
+);
+
+
+// Father
+setupParentDropdown(
+    "father",
+    "father_new_box",
+    "father_new_name"
+);
+
 </script>
 
 {% endblock %}
